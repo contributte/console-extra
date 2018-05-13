@@ -21,7 +21,7 @@ class UtilsRandomCommand extends AbstractCommand
 	{
 		$this->setName('nette:utils:random');
 		$this->setDescription('Generates random string(s) using Nette Random');
-		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, NULL, 10);
+		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);
 	}
 
 	/**
