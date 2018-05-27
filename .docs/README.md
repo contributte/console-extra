@@ -121,7 +121,7 @@ diConsole:
 consoleBridge:
     di:
         purge: 
-            - %tempDir%/cache
+            - %tempDir%/cache/Nette.Configurator
             
     # Or you can disable this extension
     di: false
