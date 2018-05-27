@@ -37,13 +37,13 @@ exntesions:
 
 The ConsoleBridge registers all the extensions automatically, you just have to register the `ConsoleBridgeExtension`
 
-To use these commands we recommend to use an **[entrypoint](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint)** or you can use your `index.php`.
+To use these commands we recommend to use an **[bin/console entrypoint](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint)** or you can use your `index.php`.
 
-With [entrypoint](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint):
+With [bin/console](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint) entrypoint:
 ```bash
 ./bin/console <command>
 ```
-without [entrypoint](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint):
+with `index.php` entrypoint:
 ```bash
 php public/index.php <command>
 ```
