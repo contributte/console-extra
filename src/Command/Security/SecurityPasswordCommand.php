@@ -24,7 +24,7 @@ class SecurityPasswordCommand extends AbstractCommand
 		$this->setName('nette:security:password');
 		$this->setDescription('Generates password (s) using Nette Passwords');
 		$this->addArgument('password', InputArgument::OPTIONAL, 'Given password');
-		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, NULL, 10);
+		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);
 	}
 
 	/**
