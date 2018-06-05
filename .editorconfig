@@ -24,3 +24,8 @@ indent_size = 4
 [{composer.json,package.json,.travis.yml,bitbucket-pipelines.yml}]
 indent_style = space
 indent_size = 2
+
+# Markdowns
+[*.md]
+indent_style = space
+indent_size = 4

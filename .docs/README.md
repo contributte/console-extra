@@ -1,9 +1,8 @@
 # Console Bridge
 
 # Content
+
 - [Usage - how to use it](#usage)
-    - [Register one by one](#usage)
-    - [Register ConsoleBridge](#usage)
 - [Extensions - list of all extensions](#extension)
     - [Cache](#CacheConsole)
     - [Caching](#CachingConsole)
@@ -16,208 +15,130 @@
 ## Usage
 
 **Register commands one by one:**
+
 ```yaml
 extensions:
-    cacheConsole: Contributte\Console\Extra\DI\CacheConsoleExtension
-    cachingConsole: Contributte\Console\Extra\DI\CachingConsoleExtension
-    diConsole: Contributte\Console\Extra\DI\DIConsoleExtension
-    latteConsole: Contributte\Console\Extra\DI\LatteConsoleExtension
-    routerConsole: Contributte\Console\Extra\DI\RouterConsoleExtension
-    securityConsole: Contributte\Console\Extra\DI\SecurityConsoleExtension
-    utilsConsole: Contributte\Console\Extra\DI\UtilsConsoleExtension
+    console: Contributte\Console\DI\ConsoleExtension
+
+    # register all console bridges
+    console.extra: Contributte\Console\Extra\DI\ConsoleBridgesExtension
+
+consol.extra
+    # optionally disable these bridges
+    cache: false
+    caching: false
+    di: false
+    latte: false
+    router: false
+    security: false
+    utils: false
 ```
-You can install just one or multiple, but if you want all, we recommend **ConsoleBridge**.
 
+You can also register bridges one by one.
 
-**Register ConsoleBridge:**
 ```yaml
-exntesions:
-    consoleBridge: Contributte\Console\Extra\DI\consoleBridgeExtension
+extensions:
+    # register only bridges of your choice
+    console.cache: Contributte\Console\Extra\DI\CacheConsoleExtension
+    console.caching: Contributte\Console\Extra\DI\CachingConsoleExtension
+    console.di: Contributte\Console\Extra\DI\DIConsoleExtension
+    console.latte: Contributte\Console\Extra\DI\LatteConsoleExtension
+    console.router: Contributte\Console\Extra\DI\RouterConsoleExtension
+    console.security: Contributte\Console\Extra\DI\SecurityConsoleExtension
+    console.utils: Contributte\Console\Extra\DI\UtilsConsoleExtension
 ```
 
-The ConsoleBridge registers all the extensions automatically, you just have to register the `ConsoleBridgeExtension`
-
-To use these commands we recommend to use an **[bin/console entrypoint](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint)** or you can use your `index.php`.
-
-With [bin/console](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint) entrypoint:
-```bash
-./bin/console <command>
-```
-with `index.php` entrypoint:
-```bash
-php public/index.php <command>
-```
+To use these commands you gonna need to setu an **[bin/console entrypoint](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint)**.
 
 ## Extension
 
-**All extensions does not require any configuration, the values are the default ones except the RouterConsole and CachingConsole extensions, they get the services from DI container.**
+At this moment we have these bridges:
+
+- cache
+- caching
+- di
+- latte
+- router
+- security
+- utils
 
 ### CacheConsole
-**Standalone configuration:**
+
 ```yaml
-cacheConsole:
+cache.console:
     purge: 
         - %tempDir%/cache
-```
-**consoleBridge configuration:**
-```yaml
-consoleBridge:
-    cache:
-        purge: 
-            - %tempDir%/cache
-            
-    # Or you can disable this extension
-    cache: false
-```
-
-The command name is `nette:cache:purge`, and you can execute it like this:
-```bash
-./bin/console nette:cache:purge
-```
-
-
-### CachingConsole
-**Standalone configuration:**
-```yaml
-cachingConsole:
-    clear: @caching.storage
-```
-**consoleBridge configuration:**
-```yaml
-consoleBridge:
-    caching:
-        clear: @caching.storage
-        
-    # Or you can disable this extension
-    caching: false
-```
-
-The `clear` parameter accepts only classes that implement `Nette\Caching\IStorage` interface.
-
-The command name is `nette:caching:clear`, and you can execute it like this:
-```bash
-./bin/console nette:caching:clear
-```
-
-This command requires to specify the **cleaning strategy**. 
-
-
-The cleaning strategy options are:
-- `--all` or `-a` shortcut
-- `--tag <tag>` or `-t <tag>` shortcut
-- `--priority <priority>` or `-p <priority>` shortcut
-
-***NOTE:** Only one tag can be used at the time.*
-
-### DIConsole
-**Standalone configuration:**
-```yaml
-diConsole:
-    purge: 
-        - %tempDir%/cache/Nette.Configurator
-```
-**consoleBridge configuration:**
-```yaml
-consoleBridge:
-    di:
-        purge: 
-            - %tempDir%/cache/Nette.Configurator
-            
-    # Or you can disable this extension
-    di: false
 ```
 
 The `purge` parameter expects array of dirs.
 
-The command name is `nette:di:purge`, and you can execute it like this:
-```bash
-./bin/console nette:di:purge
+Available commands:
+
+- `nette:cache:purge`
+
+### CachingConsole
+
+Available commands:
+
+- `nette:caching:clear`
+
+    This command requires to specify the **cleaning strategy**. 
+
+    The cleaning strategy options are:
+
+    - `--all` or `-a` shortcut
+    - `--tag <tag>` or `-t <tag>` shortcut
+    - `--priority <priority>` or `-p <priority>` shortcut
+
+    ***NOTE:** Only one tag can be used at the time.*
+
+### DIConsole
+
+```yaml
+console.di:
+    purge: 
+        - %tempDir%/cache/Nette.Configurator
 ```
 
+The `purge` parameter expects array of dirs.
+
+Available commands:
+
+- `nette:di:purge`
+
 ### LatteConsole
-**Standalone configuration:**
+
 ```yaml
-latteConsole:
+console.latte:
     warmup: 
          - %tempDir%
     purge: 
          - %tempDir%/cache
 ```
-**consoleBridge configuration:**
-```yaml
-consoleBridge:
-    latte:
-        warmup: 
-            - %tempdir%
-        purge: 
-            - %tempDir%/cache
-            
-    # Or you can disable this extension
-    latte: false
-```
+
 The `warmup` and `purge` parameters are expecting array of dirs.
 
-The command name is `nette:latte:warmup` and `nette:latte:purge`, and you can execute it like this:
-```bash
-./bin/console nette:latte:warmup
-./bin/console nette:latte:purge
-```
+Available commands:
+
+- `nette:latte:warmup` 
+- `nette:latte:purge`
 
 ### RouterConsole
-**Standalone configuration:**
-```yaml
-routerConsole:
-    dump: @router
-```
-**consoleBridge configuration:**
-```yaml
-consoleBridge:
-    router:
-        dump: @router
-        
-    # Or you can disable this extension
-    router: false
-```
 
-The `dump` parameter accepts only classes that implement `Nette\Application\IRouter` interface.
+Available commands:
 
-The command name is `nette:router:dump`, and you can execute it like this:
-```bash
-./bin/console nette:router:dump
-```
+- `nette:router:dump`
 
 ### SecurityConsole
-**Standalone configuration:**
 
-_This extension has no configuration._
+Available commands:
 
-**consoleBridge configuration:**
-```yaml
-consoleBridge:
-    # You can disable this extension:
-    security: false
-```
-
-The command name is `nette:security:password`, and you can execute it like this:
-```bash
-./bin/console nette:security:password
-```
+- `nette:security:password`
 
 ### UtilsConsole
-**Standalone configuration:**
 
-_This extension has no configuration._
+Available commands:
 
-**consoleBridge configuration:**
-```yaml
-consoleBridge:
-    # You can disable this extension:
-    utils: false
-```
+- `nette:utils:random`
 
-The command name is `nette:utils:random`, and you can execute it like this:
-```bash
-./bin/console nette:utils:random
-```
-
-This command supports count parameter (`--count <count>` or `-c <count>` shortcut), to change the count of random strings. Default count is **10**.
+    This command supports count parameter (`--count <count>` or `-c <count>` shortcut), to change the count of random strings. Default count is **10**.
