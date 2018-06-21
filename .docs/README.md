@@ -4,13 +4,13 @@
 
 - [Usage - how to use it](#usage)
 - [Extensions - list of all extensions](#extension)
-    - [Cache](#CacheConsole)
-    - [Caching](#CachingConsole)
-    - [DI](#DIConsole)
-    - [Latte](#LatteConsole)
-    - [Router](#RouterConsole)
-    - [Security](#SecurityConsole)
-    - [Utils](#UtilsConsole)
+    - [Cache](#cacheconsole)
+    - [Caching](#cachingconsole)
+    - [DI](#diconsole)
+    - [Latte](#latteconsole)
+    - [Router](#routerconsole)
+    - [Security](#securityconsole)
+    - [Utils](#utilsconsole)
     
 ## Usage
 
