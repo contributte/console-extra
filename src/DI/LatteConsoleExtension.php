@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Console\Extra\DI;
 
@@ -20,10 +20,7 @@ final class LatteConsoleExtension extends CompilerExtension
 		],
 	];
 
-	/**
-	 * @return void
-	 */
-	public function loadConfiguration()
+	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
 

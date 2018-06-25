@@ -1,24 +1,21 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Console\Extra\Command\Caching;
 
-use Contributte\Console\Extra\Command\AbstractCommand;
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CachingClearCommand extends AbstractCommand
+class CachingClearCommand extends Command
 {
 
 	/** @var IStorage */
 	private $storage;
 
-	/**
-	 * @param IStorage $storage
-	 */
 	public function __construct(IStorage $storage)
 	{
 		parent::__construct();
@@ -26,36 +23,28 @@ class CachingClearCommand extends AbstractCommand
 	}
 
 
-	/**
-	 * @return void
-	 */
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->setName('nette:caching:clear');
 		$this->setDescription('Clear Nette Caching Storage');
-		$this->addOption('all', NULL, InputOption::VALUE_OPTIONAL, 'Clear whole storage', FALSE);
+		$this->addOption('all', null, InputOption::VALUE_OPTIONAL, 'Clear whole storage', false);
 		$this->addOption('tag', 't', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Clear by tag(s)', []);
 		$this->addOption('priority', 'p', InputOption::VALUE_OPTIONAL, 'Clear by priority');
 	}
 
-	/**
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 * @return void
-	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Caching Clear');
 
-		if ($input->getOption('all') === NULL) {
-			$this->storage->clean([Cache::ALL => TRUE]);
+		if ($input->getOption('all') === null) {
+			$this->storage->clean([Cache::ALL => true]);
 			$style->success('Clearing whole storage done.');
-		} else if ($input->getOption('tag')) {
+		} elseif ($input->getOption('tag')) {
 			$this->storage->clean([Cache::TAGS => $input->getOption('tag')]);
 			$style->listing($input->getOption('tag'));
 			$style->success('Clearing by tags done.');
-		} else if ($input->getOption('priority')) {
+		} elseif ($input->getOption('priority')) {
 			$this->storage->clean([Cache::PRIORITY => $input->getOption('priority')]);
 			$style->comment($input->getOption('priority'));
 			$style->success('Clearing by priority done.');

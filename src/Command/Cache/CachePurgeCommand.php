@@ -1,14 +1,14 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Console\Extra\Command\Cache;
 
-use Contributte\Console\Extra\Command\AbstractCommand;
 use Contributte\Console\Extra\Utils\Files;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class CachePurgeCommand extends AbstractCommand
+class CachePurgeCommand extends Command
 {
 
 	/** @var string[] */
@@ -23,21 +23,13 @@ class CachePurgeCommand extends AbstractCommand
 		$this->dirs = $dirs;
 	}
 
-	/**
-	 * @return void
-	 */
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->setName('nette:cache:purge');
 		$this->setDescription('Clear temp folders and others');
 	}
 
-	/**
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 * @return void
-	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Cache Purge');

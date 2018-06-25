@@ -1,14 +1,14 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Console\Extra\Command\Latte;
 
-use Contributte\Console\Extra\Command\AbstractCommand;
 use Contributte\Console\Extra\Utils\Files;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class LattePurgeCommand extends AbstractCommand
+class LattePurgeCommand extends Command
 {
 
 	/** @var string[] */
@@ -23,21 +23,13 @@ class LattePurgeCommand extends AbstractCommand
 		$this->dirs = $dirs;
 	}
 
-	/**
-	 * @return void
-	 */
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->setName('nette:latte:purge');
 		$this->setDescription('Clear temp/latte folder');
 	}
 
-	/**
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 * @return void
-	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Latte Purge');

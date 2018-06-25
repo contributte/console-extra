@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Console\Extra\DI;
 
@@ -8,10 +8,7 @@ use Nette\DI\CompilerExtension;
 final class SecurityConsoleExtension extends CompilerExtension
 {
 
-	/**
-	 * @return void
-	 */
-	public function loadConfiguration()
+	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
 

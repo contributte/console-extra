@@ -1,25 +1,22 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Console\Extra\Command\Router;
 
-use Contributte\Console\Extra\Command\AbstractCommand;
 use Nette\Application\IRouter;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
 use Nette\Application\Routers\SimpleRouter;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-final class RouterDumpCommand extends AbstractCommand
+final class RouterDumpCommand extends Command
 {
 
 	/** @var IRouter */
 	private $router;
 
-	/**
-	 * @param IRouter $router
-	 */
 	public function __construct(IRouter $router)
 	{
 		parent::__construct();
@@ -28,21 +25,14 @@ final class RouterDumpCommand extends AbstractCommand
 
 	/**
 	 * Configure command
-	 *
-	 * @return void
 	 */
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->setName('nette:router:dump');
 		$this->setDescription('Display all defined routes');
 	}
 
-	/**
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 * @return void
-	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
 		$table = new Table($output);
 		$table
@@ -53,19 +43,17 @@ final class RouterDumpCommand extends AbstractCommand
 	}
 
 	/**
-	 * @return array
+	 * @return mixed[]
 	 */
-	protected function createRows()
+	protected function createRows(): array
 	{
 		return $this->analyse($this->router);
 	}
 
 	/**
-	 * @param IRouter $router
-	 * @param null $module
-	 * @return array|object
+	 * @return mixed[]|object
 	 */
-	protected function analyse(IRouter $router, $module = NULL)
+	protected function analyse(IRouter $router, ?string $module = null)
 	{
 		if ($router instanceof RouteList) {
 			$routes = [];
@@ -81,19 +69,18 @@ final class RouterDumpCommand extends AbstractCommand
 			return $routes;
 		} else {
 			return (object) [
-				'mask' => $router instanceof Route ? $router->getMask() : NULL,
+				'mask' => $router instanceof Route ? $router->getMask() : null,
 				'module' => rtrim($module, ':'),
-				'defaults' => $router instanceof Route || $router instanceof SimpleRouter ? $this->analyseDefaults($router->getDefaults()) : NULL,
+				'defaults' => $router instanceof Route || $router instanceof SimpleRouter ? $this->analyseDefaults($router->getDefaults()) : null,
 				'class' => get_class($router),
 			];
 		}
 	}
 
 	/**
-	 * @param array $defaults
-	 * @return string
+	 * @param string[] $defaults
 	 */
-	protected function analyseDefaults(array $defaults)
+	protected function analyseDefaults(array $defaults): string
 	{
 		$primary = [];
 
@@ -117,7 +104,7 @@ final class RouterDumpCommand extends AbstractCommand
 			$secondary[] = sprintf('%s=>%s', $key, $value);
 		}
 
-		if ($secondary) {
+		if ($secondary !== []) {
 			return implode(':', $primary) . ' [' . implode(',', $secondary) . ']';
 		}
 

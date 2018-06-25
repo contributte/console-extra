@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 /**
  * Test: Utils\Files
@@ -9,7 +9,7 @@ use Tester\Assert;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-test(function () {
+test(function (): void {
 	file_put_contents(TEMP_DIR . '/foo.txt', 'foo');
 	file_put_contents(TEMP_DIR . '/bar.txt', 'bar');
 
