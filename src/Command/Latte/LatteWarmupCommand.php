@@ -1,29 +1,28 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Console\Extra\Command\Latte;
 
-use Contributte\Console\Extra\Command\AbstractCommand;
-use Exception;
 use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Finder;
 use SplFileInfo;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Throwable;
 
-class LatteWarmupCommand extends AbstractCommand
+class LatteWarmupCommand extends Command
 {
 
-	/** @var array */
+	/** @var string[] */
 	private $dirs;
 
 	/** @var ITemplateFactory */
 	private $templateFactory;
 
 	/**
-	 * @param array $dirs
-	 * @param ITemplateFactory $templateFactory
+	 * @param string[] $dirs
 	 */
 	public function __construct(array $dirs, ITemplateFactory $templateFactory)
 	{
@@ -32,21 +31,13 @@ class LatteWarmupCommand extends AbstractCommand
 		$this->templateFactory = $templateFactory;
 	}
 
-	/**
-	 * @return void
-	 */
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->setName('nette:latte:warmup');
 		$this->setDescription('Warmup Latte templates (*.latte)');
 	}
 
-	/**
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 * @return void
-	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Latte Warmup');
@@ -68,7 +59,7 @@ class LatteWarmupCommand extends AbstractCommand
 				if ($output->isVerbose()) {
 					$style->text(sprintf('Warmuping: %s', $file->getPathname()));
 				}
-			} catch (Exception $e) {
+			} catch (Throwable $e) {
 				$stats['error']++;
 
 				if ($output->isVerbose()) {

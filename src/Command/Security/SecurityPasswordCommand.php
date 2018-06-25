@@ -1,10 +1,10 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Console\Extra\Command\Security;
 
-use Contributte\Console\Extra\Command\AbstractCommand;
 use Nette\Security\Passwords;
 use Nette\Utils\Random;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
 use Symfony\Component\Console\Input\InputArgument;
@@ -13,13 +13,10 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
-class SecurityPasswordCommand extends AbstractCommand
+class SecurityPasswordCommand extends Command
 {
 
-	/**
-	 * @return void
-	 */
-	protected function configure()
+	protected function configure(): void
 	{
 		$this->setName('nette:security:password');
 		$this->setDescription('Generates password (s) using Nette Passwords');
@@ -27,12 +24,7 @@ class SecurityPasswordCommand extends AbstractCommand
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);
 	}
 
-	/**
-	 * @param InputInterface $input
-	 * @param OutputInterface $output
-	 * @return void
-	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
+	protected function execute(InputInterface $input, OutputInterface $output): void
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Security Password');
@@ -51,7 +43,7 @@ class SecurityPasswordCommand extends AbstractCommand
 			for ($i = 1; $i <= $input->getOption('count'); $i++) {
 				$table->addRow([$i, Passwords::hash(sha1(Random::generate(50) . time() . random_bytes(20)))]);
 
-				if ($i != $input->getOption('count')) {
+				if ($i !== $input->getOption('count')) {
 					$table->addRow(new TableSeparator());
 				}
 			}

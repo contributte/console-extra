@@ -1,7 +1,11 @@
 includes:
+	- temp/phpstan/vendor/phpstan/phpstan-strict-rules/rules.neon
 	- temp/phpstan/vendor/phpstan/phpstan-nette/extension.neon
 	- temp/phpstan/vendor/phpstan/phpstan-nette/rules.neon
 
 parameters:
 	ignoreErrors:
 		- '#Accessing property $arguments on possibly null value of type Nette\DI\Statement|null#'
+		- '#Only booleans are allowed in an elseif condition, mixed given.#'
+		- '#Only booleans are allowed in an if condition, mixed given.#'
+		- '#Method Contributte\Console\Extra\Command\Router\RouterDumpCommand::createRows() should return array but returns array|object.#'

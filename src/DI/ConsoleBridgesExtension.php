@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types = 1);
 
 namespace Contributte\Console\Extra\DI;
 
@@ -36,16 +36,14 @@ final class ConsoleBridgesExtension extends CompilerExtension
 
 	/**
 	 * Register services
-	 *
-	 * @return void
 	 */
-	public function loadConfiguration()
+	public function loadConfiguration(): void
 	{
 		$config = $this->validateConfig($this->defaults, $this->config);
 
 		foreach ($config as $bridge => $enabled) {
 			// Don't register sub extension
-			if ($enabled === FALSE) continue;
+			if ($enabled === false) continue;
 
 			// Security check
 			Validators::assertField($config, $bridge, 'array');
@@ -53,17 +51,15 @@ final class ConsoleBridgesExtension extends CompilerExtension
 			// Register sub extension a.k.a CompilerPass
 			$this->passes[$bridge] = new $this->map[$bridge]();
 			$this->passes[$bridge]->setCompiler($this->compiler, $this->prefix($bridge));
-			$this->passes[$bridge]->setConfig(isset($this->config[$bridge]) ? $this->config[$bridge] : []);
+			$this->passes[$bridge]->setConfig($this->config[$bridge] ?? []);
 			$this->passes[$bridge]->loadConfiguration();
 		}
 	}
 
 	/**
 	 * Decorate services
-	 *
-	 * @return void
 	 */
-	public function beforeCompile()
+	public function beforeCompile(): void
 	{
 		foreach ($this->passes as $pass) {
 			$pass->beforeCompile();
@@ -72,11 +68,8 @@ final class ConsoleBridgesExtension extends CompilerExtension
 
 	/**
 	 * Decorate initialize method
-	 *
-	 * @param ClassType $class
-	 * @return void
 	 */
-	public function afterCompile(ClassType $class)
+	public function afterCompile(ClassType $class): void
 	{
 		foreach ($this->passes as $pass) {
 			$pass->afterCompile($class);
