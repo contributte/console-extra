@@ -2,6 +2,8 @@
 
 :recycle: Nette-based console commands for latte, DIC, security, utils and many others.
 
+![Console screenshot](/.docs/assets/console-screenshot.png?raw=true)
+
 -----
 
 [![Build Status](https://img.shields.io/travis/contributte/console-extra.svg?style=flat-square)](https://travis-ci.org/contributte/console-extra)
