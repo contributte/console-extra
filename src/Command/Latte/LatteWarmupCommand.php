@@ -15,6 +15,7 @@ use Throwable;
 class LatteWarmupCommand extends Command
 {
 
+	/** @var string */
 	protected static $defaultName = 'nette:latte:warmup';
 
 	/** @var string[] */

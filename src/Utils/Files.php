@@ -10,6 +10,9 @@ use SplFileObject;
 class Files
 {
 
+	/**
+	 * @param string[] $ignored
+	 */
 	public static function purge(string $dir, array $ignored = []): void
 	{
 		if (!is_dir($dir) && !mkdir($dir)) {

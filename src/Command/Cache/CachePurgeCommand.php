@@ -11,6 +11,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CachePurgeCommand extends Command
 {
 
+	/** @var string */
 	protected static $defaultName = 'nette:cache:purge';
 
 	/** @var string[] */

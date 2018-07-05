@@ -14,6 +14,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class UtilsRandomCommand extends Command
 {
 
+	/** @var string */
 	protected static $defaultName = 'nette:utils:random';
 
 	protected function configure(): void
