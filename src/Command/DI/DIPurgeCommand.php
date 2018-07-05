@@ -11,6 +11,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class DIPurgeCommand extends Command
 {
 
+	protected static $defaultName = 'nette:di:purge';
+
 	/** @var string[] */
 	private $dirs;
 
