@@ -28,8 +28,8 @@ composer require contributte/console-extra
 
 | State       | Version  | Branch   | PHP      |
 |-------------|----------|----------|----------|
-| dev         | `^0.3`   | `master` | `>= 7.1` |
-| stable      | `^0.2`   | `master` | `>= 7.1` |
+| dev         | `^0.4`   | `master` | `>= 7.1` |
+| stable      | `^0.3`   | `master` | `>= 7.1` |
 | stable      | `^0.1`   | `master` | `>= 5.6` |
 
 ## Overview
@@ -38,6 +38,7 @@ composer require contributte/console-extra
     - [Register one by one](https://github.com/contributte/console-extra/blob/master/.docs/README.md#usage)
     - [Register ConsoleBridge](https://github.com/contributte/console-extra/blob/master/.docs/README.md#usage)
 - [Extensions - list of all extensions](https://github.com/contributte/console-extra/blob/master/.docs/README.md#extension)
+    - [AdvancedCache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#AdvancedCacheConsole)
     - [Cache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#CacheConsole)
     - [Caching](https://github.com/contributte/console-extra/blob/master/.docs/README.md#CachingConsole)
     - [DI](https://github.com/contributte/console-extra/blob/master/.docs/README.md#DIConsole)

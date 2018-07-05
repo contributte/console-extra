@@ -11,6 +11,7 @@ final class ConsoleBridgesExtension extends CompilerExtension
 
 	/** @var mixed[] */
 	private $defaults = [
+		'advancedCache' => [],
 		'cache' => [],
 		'caching' => [],
 		'di' => [],
@@ -22,6 +23,7 @@ final class ConsoleBridgesExtension extends CompilerExtension
 
 	/** @var string[] */
 	private $map = [
+		'advancedCache' => AdvancedCacheConsoleExtension::class,
 		'cache' => CacheConsoleExtension::class,
 		'caching' => CachingConsoleExtension::class,
 		'di' => DIConsoleExtension::class,

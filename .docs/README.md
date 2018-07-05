@@ -4,6 +4,7 @@
 
 - [Usage - how to use it](#usage)
 - [Extensions - list of all extensions](#extension)
+    - [Advanced cache](#advancedcacheconsole)
     - [Cache](#cacheconsole)
     - [Caching](#cachingconsole)
     - [DI](#diconsole)
@@ -11,7 +12,7 @@
     - [Router](#routerconsole)
     - [Security](#securityconsole)
     - [Utils](#utilsconsole)
-    
+
 ## Usage
 
 **Register commands one by one:**
@@ -23,8 +24,9 @@ extensions:
     # register all console bridges
     console.extra: Contributte\Console\Extra\DI\ConsoleBridgesExtension
 
-consol.extra
+console.extra
     # optionally disable these bridges
+    advancedCache: false
     cache: false
     caching: false
     di: false
@@ -39,6 +41,7 @@ You can also register bridges one by one.
 ```yaml
 extensions:
     # register only bridges of your choice
+    console.advancedCache: Contributte\Console\Extra\DI\AdvancedCacheConsoleExtension
     console.cache: Contributte\Console\Extra\DI\CacheConsoleExtension
     console.caching: Contributte\Console\Extra\DI\CachingConsoleExtension
     console.di: Contributte\Console\Extra\DI\DIConsoleExtension
@@ -54,6 +57,7 @@ To use these commands you gonna need to setu an **[bin/console entrypoint](https
 
 At this moment we have these bridges:
 
+- advanced cache
 - cache
 - caching
 - di
@@ -62,11 +66,175 @@ At this moment we have these bridges:
 - security
 - utils
 
+### AdvancedCacheConsole
+
+#### Generator
+
+Generate application cache with single command
+
+- `contributte:cache:generate`
+
+    `--list` show list of available generators
+
+    `--generator=GENERATOR` use only specified generator
+
+##### Register generators you want to use:
+
+```yaml
+console.advancedCache
+    generators:
+        latte: Contributte\Console\Extra\Generators\LatteTemplatesCacheGenerator(
+            [%appDir%],
+            @Nette\Bridges\ApplicationLatte\ILatteFactory::create()
+        )
+```
+
+##### Available generators:
+
+- Latte templates cache generator
+
+    ```yaml
+    Contributte\Console\Extra\Generators\LatteTemplatesCacheGenerator(
+        [%appDir%],
+        @Nette\Bridges\ApplicationLatte\ILatteFactory::create()
+    )
+    ```
+
+- DI containers generator
+
+    - This example is configured to generate 3 containers - 1 for production mode, 1 for debug mode and 1 for console (should be enough for every application)
+    - You don't need to add `productionMode` parameter for Nette BC, it is done automatically.
+
+    ```yaml
+    Contributte\Console\Extra\Generators\DiContainersCacheGenerator(
+        [
+            debug: [debugMode: true, consoleMode: false],
+            production: [debugMode: false, consoleMode: false],
+            console: [debugMode: true, consoleMode: true]
+        ],
+        "?->getService('configurator')"(@container)
+    )
+    ```
+
+    You will also need slightly modify `bootstrap.php` to get this generator work.
+
+    ```php
+    $configurator->addServices(['configurator' => $configurator]); // we need Configurator available as a service
+    $container = $configurator->createContainer();
+    return $container;
+    ```
+
+##### Implement your own generator:
+
+```php
+use Contributte\Console\Extra\Cache\Generators\IGenerator;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class YourGenerator implements IGenerator
+{
+
+    public function getDescription(): string
+    {
+        return 'description which is shown in console when you run `contributte:cache:generate --list`'
+    }
+
+    public function generate(InputInterface $input, OutputInterface $output): bool
+    {
+        // generate cache
+        // inform about it in console
+        // return true if generating was successful, false otherwise
+    }
+
+}
+```
+
+#### Cleaner
+
+Clean application cache with single command
+
+- `contributte:cache:clean`
+
+    `--list` show list of available cleaners
+
+    `--cleaner=CLEANER` use only specified cleaner
+
+##### Register cleaners you want to use:
+
+```yaml
+console.advancedCache
+    cleaners:
+        localFs: Contributte\Console\Extra\Cleaners\LocalFilesystemCleaner([%tempDir%])
+```
+
+##### Available cleaners:
+
+ - APC cleaner
+
+    ```yaml
+    Contributte\Console\Extra\Cache\Cleaners\ApcCleaner()
+    ```
+
+- APCu cleaner
+
+    ```yaml
+    Contributte\Console\Extra\Cache\Cleaners\ApcuCleaner()
+    ```
+
+- Local filesystem cleaner
+
+    ```yaml
+    Contributte\Console\Extra\Cache\Cleaners\LocalFilesystemCleaner([%tempDir%], [%tempDir%/ignored/])
+    ```
+
+- Memcache(d) cleaner
+
+    ```yaml
+    Contributte\Console\Extra\Cache\Cleaners\MemcachedCleaner([@memcache1, @memcache2])
+    ```
+
+- Nette\Caching\IStorage cleaner
+
+    ```yaml
+    Contributte\Console\Extra\Cache\Cleaners\NetteCachingStorageCleaner([@storage1, @storage2])
+    ```
+
+- Opcode cleaner
+
+    ```yaml
+    Contributte\Console\Extra\Cache\Cleaners\OpcodeCleaner()
+    ```
+
+##### Implement your own cleaner:
+
+```php
+use Contributte\Console\Extra\Cache\Cleaners\ICleaner;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class YourCleaner implements ICleaner
+{
+
+    public function getDescription(): string
+    {
+        return 'description which is shown in console when you run `contributte:cache:clean --list`'
+    }
+
+    public function clean(InputInterface $input, OutputInterface $output): bool
+    {
+        // clean cache
+        // inform about it in console
+        // return true if cleaning was successful, false otherwise
+    }
+
+}
+```
+
 ### CacheConsole
 
 ```yaml
 cache.console:
-    purge: 
+    purge:
         - %tempDir%/cache
 ```
 
@@ -82,7 +250,7 @@ Available commands:
 
 - `nette:caching:clear`
 
-    This command requires to specify the **cleaning strategy**. 
+    This command requires to specify the **cleaning strategy**.
 
     The cleaning strategy options are:
 
@@ -96,7 +264,7 @@ Available commands:
 
 ```yaml
 console.di:
-    purge: 
+    purge:
         - %tempDir%/cache/Nette.Configurator
 ```
 
@@ -110,9 +278,9 @@ Available commands:
 
 ```yaml
 console.latte:
-    warmup: 
+    warmup:
          - %tempDir%
-    purge: 
+    purge:
          - %tempDir%/cache
 ```
 
@@ -120,7 +288,7 @@ The `warmup` and `purge` parameters are expecting array of dirs.
 
 Available commands:
 
-- `nette:latte:warmup` 
+- `nette:latte:warmup`
 - `nette:latte:purge`
 
 ### RouterConsole
