@@ -14,6 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class RouterDumpCommand extends Command
 {
 
+	/** @var string */
 	protected static $defaultName = 'nette:router:dump';
 
 	/** @var IRouter */

@@ -16,6 +16,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class SecurityPasswordCommand extends Command
 {
 
+	/** @var string */
 	protected static $defaultName = 'nette:security:password';
 
 	protected function configure(): void

@@ -13,6 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CachingClearCommand extends Command
 {
 
+	/** @var string */
 	protected static $defaultName = 'nette:caching:clear';
 
 	/** @var IStorage */
