@@ -11,6 +11,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class LattePurgeCommand extends Command
 {
 
+	protected static $defaultName = 'nette:latte:purge';
+
 	/** @var string[] */
 	private $dirs;
 
@@ -25,7 +27,6 @@ class LattePurgeCommand extends Command
 
 	protected function configure(): void
 	{
-		$this->setName('nette:latte:purge');
 		$this->setDescription('Clear temp/latte folder');
 	}
 

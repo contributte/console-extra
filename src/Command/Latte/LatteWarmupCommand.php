@@ -15,6 +15,8 @@ use Throwable;
 class LatteWarmupCommand extends Command
 {
 
+	protected static $defaultName = 'nette:latte:warmup';
+
 	/** @var string[] */
 	private $dirs;
 
@@ -33,7 +35,6 @@ class LatteWarmupCommand extends Command
 
 	protected function configure(): void
 	{
-		$this->setName('nette:latte:warmup');
 		$this->setDescription('Warmup Latte templates (*.latte)');
 	}
 

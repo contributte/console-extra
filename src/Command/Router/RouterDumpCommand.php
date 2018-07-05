@@ -14,6 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class RouterDumpCommand extends Command
 {
 
+	protected static $defaultName = 'nette:router:dump';
+
 	/** @var IRouter */
 	private $router;
 
@@ -28,7 +30,6 @@ final class RouterDumpCommand extends Command
 	 */
 	protected function configure(): void
 	{
-		$this->setName('nette:router:dump');
 		$this->setDescription('Display all defined routes');
 	}
 
