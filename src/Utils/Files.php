@@ -10,7 +10,7 @@ use SplFileObject;
 class Files
 {
 
-	public static function purge(string $dir): void
+	public static function purge(string $dir, array $ignored = []): void
 	{
 		if (!is_dir($dir) && !mkdir($dir)) {
 			throw new RuntimeException(sprintf('Directory "%s" was not created', $dir));
@@ -23,10 +23,12 @@ class Files
 
 		/** @var SplFileObject $entry */
 		foreach ($iterator as $entry) {
-			if ($entry->isDir()) {
-				rmdir($entry->getRealPath());
-			} else {
-				unlink($entry->getRealPath());
+			if (!in_array(str_replace('\\', '/', $entry->getRealPath()), $ignored, true)) {
+				if ($entry->isDir()) {
+					rmdir($entry->getRealPath());
+				} else {
+					unlink($entry->getRealPath());
+				}
 			}
 		}
 	}
