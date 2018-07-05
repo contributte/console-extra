@@ -14,9 +14,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class UtilsRandomCommand extends Command
 {
 
+	protected static $defaultName = 'nette:utils:random';
+
 	protected function configure(): void
 	{
-		$this->setName('nette:utils:random');
 		$this->setDescription('Generates random string(s) using Nette Random');
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);
 	}

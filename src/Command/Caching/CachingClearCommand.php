@@ -13,6 +13,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CachingClearCommand extends Command
 {
 
+	protected static $defaultName = 'nette:caching:clear';
+
 	/** @var IStorage */
 	private $storage;
 
@@ -22,10 +24,8 @@ class CachingClearCommand extends Command
 		$this->storage = $storage;
 	}
 
-
 	protected function configure(): void
 	{
-		$this->setName('nette:caching:clear');
 		$this->setDescription('Clear Nette Caching Storage');
 		$this->addOption('all', null, InputOption::VALUE_OPTIONAL, 'Clear whole storage', false);
 		$this->addOption('tag', 't', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Clear by tag(s)', []);

@@ -16,9 +16,10 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class SecurityPasswordCommand extends Command
 {
 
+	protected static $defaultName = 'nette:security:password';
+
 	protected function configure(): void
 	{
-		$this->setName('nette:security:password');
 		$this->setDescription('Generates password (s) using Nette Passwords');
 		$this->addArgument('password', InputArgument::OPTIONAL, 'Given password');
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);

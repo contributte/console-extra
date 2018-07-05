@@ -11,6 +11,8 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CachePurgeCommand extends Command
 {
 
+	protected static $defaultName = 'nette:cache:purge';
+
 	/** @var string[] */
 	private $dirs;
 
@@ -25,7 +27,6 @@ class CachePurgeCommand extends Command
 
 	protected function configure(): void
 	{
-		$this->setName('nette:cache:purge');
 		$this->setDescription('Clear temp folders and others');
 	}
 
