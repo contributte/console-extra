@@ -38,14 +38,14 @@ composer require contributte/console-extra
     - [Register one by one](https://github.com/contributte/console-extra/blob/master/.docs/README.md#usage)
     - [Register ConsoleBridge](https://github.com/contributte/console-extra/blob/master/.docs/README.md#usage)
 - [Extensions - list of all extensions](https://github.com/contributte/console-extra/blob/master/.docs/README.md#extension)
-    - [Cache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#CacheConsole)
-    - [Caching](https://github.com/contributte/console-extra/blob/master/.docs/README.md#CachingConsole)
-    - [DI](https://github.com/contributte/console-extra/blob/master/.docs/README.md#DIConsole)
-    - [Latte](https://github.com/contributte/console-extra/blob/master/.docs/README.md#LatteConsole)
-    - [Router](https://github.com/contributte/console-extra/blob/master/.docs/README.md#RouterConsole)
-    - [Security](https://github.com/contributte/console-extra/blob/master/.docs/README.md#SecurityConsole)
-    - [Utils](https://github.com/contributte/console-extra/blob/master/.docs/README.md#UtilsConsole)
-    - [AdvancedCache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#AdvancedCacheConsole)
+    - [Cache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#cacheconsole)
+    - [Caching](https://github.com/contributte/console-extra/blob/master/.docs/README.md#cachingconsole)
+    - [DI](https://github.com/contributte/console-extra/blob/master/.docs/README.md#diconsole)
+    - [Latte](https://github.com/contributte/console-extra/blob/master/.docs/README.md#latteconsole)
+    - [Router](https://github.com/contributte/console-extra/blob/master/.docs/README.md#routerconsole)
+    - [Security](https://github.com/contributte/console-extra/blob/master/.docs/README.md#securityconsole)
+    - [Utils](https://github.com/contributte/console-extra/blob/master/.docs/README.md#utilsconsole)
+    - [AdvancedCache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#advancedcacheconsole)
 
 ## Maintainers
 
