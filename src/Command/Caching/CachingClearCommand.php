@@ -27,6 +27,7 @@ class CachingClearCommand extends Command
 
 	protected function configure(): void
 	{
+		$this->setName(static::$defaultName);
 		$this->setDescription('Clear Nette Caching Storage');
 		$this->addOption('all', null, InputOption::VALUE_OPTIONAL, 'Clear whole storage', false);
 		$this->addOption('tag', 't', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Clear by tag(s)', []);

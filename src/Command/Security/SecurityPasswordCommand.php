@@ -21,6 +21,7 @@ class SecurityPasswordCommand extends Command
 
 	protected function configure(): void
 	{
+		$this->setName(static::$defaultName);
 		$this->setDescription('Generates password (s) using Nette Passwords');
 		$this->addArgument('password', InputArgument::OPTIONAL, 'Given password');
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);

@@ -19,6 +19,7 @@ class UtilsRandomCommand extends Command
 
 	protected function configure(): void
 	{
+		$this->setName(static::$defaultName);
 		$this->setDescription('Generates random string(s) using Nette Random');
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);
 	}

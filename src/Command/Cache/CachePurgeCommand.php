@@ -28,6 +28,7 @@ class CachePurgeCommand extends Command
 
 	protected function configure(): void
 	{
+		$this->setName(static::$defaultName);
 		$this->setDescription('Clear temp folders and others');
 	}
 

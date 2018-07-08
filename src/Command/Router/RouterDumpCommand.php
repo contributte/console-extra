@@ -31,6 +31,7 @@ final class RouterDumpCommand extends Command
 	 */
 	protected function configure(): void
 	{
+		$this->setName(static::$defaultName);
 		$this->setDescription('Display all defined routes');
 	}
 
