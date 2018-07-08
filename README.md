@@ -38,7 +38,6 @@ composer require contributte/console-extra
     - [Register one by one](https://github.com/contributte/console-extra/blob/master/.docs/README.md#usage)
     - [Register ConsoleBridge](https://github.com/contributte/console-extra/blob/master/.docs/README.md#usage)
 - [Extensions - list of all extensions](https://github.com/contributte/console-extra/blob/master/.docs/README.md#extension)
-    - [AdvancedCache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#AdvancedCacheConsole)
     - [Cache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#CacheConsole)
     - [Caching](https://github.com/contributte/console-extra/blob/master/.docs/README.md#CachingConsole)
     - [DI](https://github.com/contributte/console-extra/blob/master/.docs/README.md#DIConsole)
@@ -46,6 +45,7 @@ composer require contributte/console-extra
     - [Router](https://github.com/contributte/console-extra/blob/master/.docs/README.md#RouterConsole)
     - [Security](https://github.com/contributte/console-extra/blob/master/.docs/README.md#SecurityConsole)
     - [Utils](https://github.com/contributte/console-extra/blob/master/.docs/README.md#UtilsConsole)
+    - [AdvancedCache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#AdvancedCacheConsole)
 
 ## Maintainers
 
