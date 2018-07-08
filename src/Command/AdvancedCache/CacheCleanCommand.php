@@ -31,6 +31,7 @@ class CacheCleanCommand extends Command
 
 	protected function configure(): void
 	{
+		$this->setName(static::$defaultName);
 		$this->setDescription('Clean cache');
 		$this->addOption('list', 'l', InputOption::VALUE_NONE, 'List all available cleaners');
 		$this->addOption('cleaner', 'c', InputOption::VALUE_REQUIRED, 'Use only one cleaner');

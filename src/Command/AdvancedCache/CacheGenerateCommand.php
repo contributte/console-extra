@@ -31,6 +31,7 @@ class CacheGenerateCommand extends Command
 
 	protected function configure(): void
 	{
+		$this->setName(static::$defaultName);
 		$this->setDescription('Generate cache');
 		$this->addOption('list', 'l', InputOption::VALUE_NONE, 'List all available generators');
 		$this->addOption('generator', 'g', InputOption::VALUE_REQUIRED, 'Use only one generator');

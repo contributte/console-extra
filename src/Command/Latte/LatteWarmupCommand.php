@@ -36,6 +36,7 @@ class LatteWarmupCommand extends Command
 
 	protected function configure(): void
 	{
+		$this->setName(static::$defaultName);
 		$this->setDescription('Warmup Latte templates (*.latte)');
 	}
 

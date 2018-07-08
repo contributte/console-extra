@@ -28,7 +28,7 @@ class DIPurgeCommand extends Command
 
 	protected function configure(): void
 	{
-		$this->setName('nette:di:purge');
+		$this->setName(static::$defaultName);
 		$this->setDescription('Clear temp/cache/Nette.Configurator folder');
 	}
 
