@@ -164,7 +164,7 @@ Generate application cache with single command
 ```yaml
 console.advancedCache
     generators:
-        latte: Contributte\Console\Extra\Generators\LatteTemplatesCacheGenerator(
+        latte: Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
             [%appDir%],
             @Nette\Bridges\ApplicationLatte\ILatteFactory::create()
         )
@@ -175,7 +175,7 @@ console.advancedCache
 - Latte templates cache generator
 
     ```yaml
-    Contributte\Console\Extra\Generators\LatteTemplatesCacheGenerator(
+    Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
         [%appDir%],
         @Nette\Bridges\ApplicationLatte\ILatteFactory::create()
     )
@@ -187,7 +187,7 @@ console.advancedCache
     - You don't need to add `productionMode` parameter for Nette BC, it is done automatically.
 
     ```yaml
-    Contributte\Console\Extra\Generators\DiContainersCacheGenerator(
+    Contributte\Console\Extra\Cache\Generators\DiContainersCacheGenerator(
         [
             debug: [debugMode: true, consoleMode: false],
             production: [debugMode: false, consoleMode: false],
@@ -245,7 +245,7 @@ Clean application cache with single command
 ```yaml
 console.advancedCache
     cleaners:
-        localFs: Contributte\Console\Extra\Cleaners\LocalFilesystemCleaner([%tempDir%])
+        localFs: Contributte\Console\Extra\Cache\Cleaners\LocalFilesystemCleaner([%tempDir%])
 ```
 
 ##### Available cleaners:
