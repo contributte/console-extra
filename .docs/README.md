@@ -24,7 +24,7 @@ extensions:
     # register all console bridges
     console.extra: Contributte\Console\Extra\DI\ConsoleBridgesExtension
 
-console.extra
+console.extra:
     # optionally disable these bridges
     cache: false
     caching: false
@@ -162,7 +162,7 @@ Generate application cache with a single command
 ##### Register generators you want to use:
 
 ```yaml
-console.advancedCache
+console.advancedCache:
     generators:
         latte: Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
             [%appDir%],
@@ -243,7 +243,7 @@ Clean application cache with a single command
 ##### Register cleaners you want to use:
 
 ```yaml
-console.advancedCache
+console.advancedCache:
     cleaners:
         localFs: Contributte\Console\Extra\Cache\Cleaners\LocalFilesystemCleaner([%tempDir%])
 ```
