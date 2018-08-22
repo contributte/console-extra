@@ -51,11 +51,11 @@ extensions:
     console.advancedCache: Contributte\Console\Extra\DI\AdvancedCacheConsoleExtension
 ```
 
-To use these commands you gonna need to setu an **[bin/console entrypoint](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint)**.
+To use these commands you need to setup a **[bin/console entrypoint](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint)**.
 
 ## Extension
 
-At this moment we have these bridges:
+At this moment, these bridges are available:
 
 - cache
 - caching
@@ -74,7 +74,7 @@ cache.console:
         - %tempDir%/cache
 ```
 
-The `purge` parameter expects array of dirs.
+The `purge` parameter expects an array of dirs.
 
 Available commands:
 
@@ -104,7 +104,7 @@ console.di:
         - %tempDir%/cache/Nette.Configurator
 ```
 
-The `purge` parameter expects array of dirs.
+The `purge` parameter expects an array of dirs.
 
 Available commands:
 
@@ -120,7 +120,7 @@ console.latte:
          - %tempDir%/cache
 ```
 
-The `warmup` and `purge` parameters are expecting array of dirs.
+The `warmup` and `purge` parameters are expecting an array of dirs.
 
 Available commands:
 
@@ -151,7 +151,7 @@ Available commands:
 
 #### Generator
 
-Generate application cache with single command
+Generate application cache with a single command
 
 - `contributte:cache:generate`
 
@@ -184,7 +184,7 @@ console.advancedCache
 - DI containers generator
 
     - This example is configured to generate 3 containers - 1 for production mode, 1 for debug mode and 1 for console (should be enough for every application)
-    - You don't need to add `productionMode` parameter for Nette BC, it is done automatically.
+    - You don't need to add the `productionMode` parameter for Nette BC, it is done automatically.
 
     ```yaml
     Contributte\Console\Extra\Cache\Generators\DiContainersCacheGenerator(
@@ -232,7 +232,7 @@ class YourGenerator implements IGenerator
 
 #### Cleaner
 
-Clean application cache with single command
+Clean application cache with a single command
 
 - `contributte:cache:clean`
 
