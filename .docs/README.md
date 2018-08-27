@@ -12,6 +12,7 @@
     - [Security](#securityconsole)
     - [Utils](#utilsconsole)
     - [Advanced cache](#advancedcacheconsole)
+- [Kdyby/Console compatibiĺity](#kdybyconsole-compatibility)
 
 ## Usage
 
@@ -309,4 +310,36 @@ class YourCleaner implements ICleaner
     }
 
 }
+```
+
+## Kdyby/Console compatibility
+
+`Kdyby` packages use the `kdyby.console.command` tag to mark its `Command` classes in order to find them. So it won't recognize commands from other packages which don't tag them this way. 
+
+This is where the docorator extension comes into play:
+
+``` yaml
+decorator:
+	Symfony\Component\Console\Command\Command:
+		tags: [kdyby.console.command]
+```
+
+Now `kdyby.console` will be able to recognize all available commands added by this extension:
+
+```
+Available commands:
+  help                               Displays help for a command
+  list                               Lists commands
+ contributte
+  contributte:cache:clean            Clean cache
+  contributte:cache:generate         Generate cache
+ nette
+  nette:cache:purge                  Clear temp folders and others
+  nette:caching:clear                Clear Nette Caching Storage
+  nette:di:purge                     Clear temp/cache/Nette.Configurator folder
+  nette:latte:purge                  Clear temp/latte folder
+  nette:latte:warmup                 Warmup Latte templates (*.latte)
+  nette:router:dump                  Display all defined routes
+  nette:security:password            Generates password (s) using Nette Passwords
+  nette:utils:random                 Generates random string(s) using Nette Random
 ```
