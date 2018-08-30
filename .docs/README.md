@@ -328,22 +328,4 @@ decorator:
         tags: [kdyby.console.command]
 ```
 
-Now `kdyby.console` will be able to recognize all available commands added by this extension:
-
-```
-Available commands:
-  help                               Displays help for a command
-  list                               Lists commands
- contributte
-  contributte:cache:clean            Clean cache
-  contributte:cache:generate         Generate cache
- nette
-  nette:cache:purge                  Clear temp folders and others
-  nette:caching:clear                Clear Nette Caching Storage
-  nette:di:purge                     Clear temp/cache/Nette.Configurator folder
-  nette:latte:purge                  Clear temp/latte folder
-  nette:latte:warmup                 Warmup Latte templates (*.latte)
-  nette:router:dump                  Display all defined routes
-  nette:security:password            Generates password (s) using Nette Passwords
-  nette:utils:random                 Generates random string(s) using Nette Random
-```
+Now `kdyby.console` will be able to recognize all available commands added by this extension.
