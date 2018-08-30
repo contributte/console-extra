@@ -12,7 +12,8 @@
     - [Security](#securityconsole)
     - [Utils](#utilsconsole)
     - [Advanced cache](#advancedcacheconsole)
-- [Kdyby/Console compatibiĺity](#kdybyconsole-compatibility)
+- [Compatibility](#compatibility)
+    - [Kdyby/Console](#kdybyconsole)
 
 ## Usage
 
@@ -311,8 +312,11 @@ class YourCleaner implements ICleaner
 
 }
 ```
+## Compatibility
 
-## Kdyby/Console compatibility
+How to make this extension work with other Symfony/Console implementations.
+
+### Kdyby/Console
 
 `Kdyby` packages use the `kdyby.console.command` tag to mark its `Command` classes in order to find them. So it won't recognize commands from other packages which don't tag them this way. 
 
