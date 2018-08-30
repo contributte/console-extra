@@ -12,6 +12,8 @@
     - [Security](#securityconsole)
     - [Utils](#utilsconsole)
     - [Advanced cache](#advancedcacheconsole)
+- [Compatibility](#compatibility)
+    - [Kdyby/Console](#kdybyconsole)
 
 ## Usage
 
@@ -310,3 +312,20 @@ class YourCleaner implements ICleaner
 
 }
 ```
+## Compatibility
+
+How to make this extension work with other Symfony/Console implementations.
+
+### Kdyby/Console
+
+`Kdyby` packages use the `kdyby.console.command` tag to mark its `Command` classes in order to find them. So it won't recognize commands from other packages which don't tag them this way. 
+
+This is where the decorator extension comes into play:
+
+``` yaml
+decorator:
+    Symfony\Component\Console\Command\Command:
+        tags: [kdyby.console.command]
+```
+
+Now `kdyby.console` will be able to recognize all available commands added by this extension.
