@@ -316,12 +316,12 @@ class YourCleaner implements ICleaner
 
 `Kdyby` packages use the `kdyby.console.command` tag to mark its `Command` classes in order to find them. So it won't recognize commands from other packages which don't tag them this way. 
 
-This is where the docorator extension comes into play:
+This is where the decorator extension comes into play:
 
 ``` yaml
 decorator:
-	Symfony\Component\Console\Command\Command:
-		tags: [kdyby.console.command]
+    Symfony\Component\Console\Command\Command:
+        tags: [kdyby.console.command]
 ```
 
 Now `kdyby.console` will be able to recognize all available commands added by this extension:
