@@ -16,7 +16,7 @@ final class LatteConsoleExtension extends CompilerExtension
 			'%appDir%',
 		],
 		'purge' => [
-			'%tempDir%/latte',
+			'%tempDir%/cache/latte',
 		],
 	];
 
