@@ -18,20 +18,25 @@ class LatteWarmupCommand extends Command
 	/** @var string */
 	protected static $defaultName = 'nette:latte:warmup';
 
-	/** @var string[] */
-	private $dirs;
-
 	/** @var ITemplateFactory */
 	private $templateFactory;
 
+	/** @var string[] */
+	private $dirs;
+
+	/** @var string[] */
+	private $excludeDirs;
+
 	/**
 	 * @param string[] $dirs
+	 * @param string[] $excludeDirs
 	 */
-	public function __construct(array $dirs, ITemplateFactory $templateFactory)
+	public function __construct(ITemplateFactory $templateFactory, array $dirs, array $excludeDirs = [])
 	{
 		parent::__construct();
-		$this->dirs = $dirs;
 		$this->templateFactory = $templateFactory;
+		$this->dirs = $dirs;
+		$this->excludeDirs = $excludeDirs;
 	}
 
 	protected function configure(): void
@@ -50,6 +55,8 @@ class LatteWarmupCommand extends Command
 		$latte = $template->getLatte();
 
 		$finder = Finder::findFiles('*.latte')->from($this->dirs);
+		if ($this->excludeDirs !== []) $finder->exclude($this->excludeDirs);
+
 		$stats = ['ok' => 0, 'error' => 0];
 
 		/** @var SplFileInfo $file */

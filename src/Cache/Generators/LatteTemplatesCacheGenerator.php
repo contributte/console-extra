@@ -11,19 +11,24 @@ use Throwable;
 class LatteTemplatesCacheGenerator implements IGenerator
 {
 
-	/** @var string[] */
-	private $dirs;
-
 	/** @var Engine */
 	private $latte;
 
+	/** @var string[] */
+	private $dirs;
+
+	/** @var string[] */
+	private $excludeDirs;
+
 	/**
 	 * @param string[] $dirs
+	 * @param string[] $excludeDirs
 	 */
-	public function __construct(array $dirs, Engine $latte)
+	public function __construct(Engine $latte, array $dirs, array $excludeDirs = [])
 	{
-		$this->dirs = $dirs;
 		$this->latte = $latte;
+		$this->dirs = $dirs;
+		$this->excludeDirs = $excludeDirs;
 	}
 
 	public function getDescription(): string
@@ -40,9 +45,12 @@ class LatteTemplatesCacheGenerator implements IGenerator
 
 		$output->writeln('Compiling Latte templates...');
 
+		$finder = Finder::findFiles('*.latte')->from($this->dirs);
+		if ($this->excludeDirs !== []) $finder->exclude($this->excludeDirs);
+
 		$successes = 0;
 		$fails = 0;
-		foreach (Finder::findFiles('*.latte')->from($this->dirs) as $path => $file) {
+		foreach ($finder as $path => $file) {
 			$path = realpath($path);
 
 			$output->writeln(sprintf('Compiling %s...', $path), OutputInterface::VERBOSITY_VERBOSE);

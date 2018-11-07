@@ -15,6 +15,7 @@ final class LatteConsoleExtension extends CompilerExtension
 		'warmup' => [
 			'%appDir%',
 		],
+		'warmupExclude' => [],
 		'purge' => [
 			'%tempDir%/cache/latte',
 		],
@@ -25,14 +26,19 @@ final class LatteConsoleExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		// Don't use predefined default values, if user provide it
-		if (isset($this->config['warmup'])) $this->defaults['warmup'] = [];
-		if (isset($this->config['purge'])) $this->defaults['purge'] = [];
+		if (isset($this->config['warmup']))
+			$this->defaults['warmup'] = [];
+		if (isset($this->config['purge']))
+			$this->defaults['purge'] = [];
 
 		$config = $this->validateConfig($this->defaults);
 		$config = Helpers::expand($config, $builder->parameters);
 
 		$builder->addDefinition($this->prefix('warmup'))
-			->setFactory(LatteWarmupCommand::class, [$config['warmup']]);
+			->setFactory(LatteWarmupCommand::class, [
+				1 => $config['warmup'],
+				2 => $config['warmupExclude'],
+			]);
 
 		$builder->addDefinition($this->prefix('purge'))
 			->setFactory(LattePurgeCommand::class, [$config['purge']]);
