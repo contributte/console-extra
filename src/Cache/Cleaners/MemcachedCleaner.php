@@ -33,10 +33,10 @@ class MemcachedCleaner implements ICleaner
 			return false;
 		}
 
-		$output->writeln('Cleaning Memcache(d)...');
+		$output->writeln('<comment>Cleaning Memcache(d)</comment>');
 
 		foreach ($this->memcaches as $name => $memcache) {
-			$output->writeln(sprintf('Cleaning Memcache(d) instance %s...', (string) $name), OutputInterface::VERBOSITY_VERBOSE);
+			$output->writeln(sprintf('Cleaning Memcache(d) instance %s', (string) $name), OutputInterface::VERBOSITY_VERBOSE);
 			$memcache->flush();
 		}
 

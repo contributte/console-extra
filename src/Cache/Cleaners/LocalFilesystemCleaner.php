@@ -37,10 +37,10 @@ class LocalFilesystemCleaner implements ICleaner
 			return false;
 		}
 
-		$output->writeln('Cleaning local filesystem cache...');
+		$output->writeln('<comment>Cleaning local filesystem cache</comment>');
 
 		foreach ($this->directories as $directory) {
-			$output->writeln(sprintf('Cleaning directory %s...', $directory), OutputInterface::VERBOSITY_VERBOSE);
+			$output->writeln(sprintf('Cleaning directory %s', $directory), OutputInterface::VERBOSITY_VERBOSE);
 			Files::purge($directory, $this->ignored);
 		}
 

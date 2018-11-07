@@ -33,10 +33,10 @@ class NetteCachingStorageCleaner implements ICleaner
 			return false;
 		}
 
-		$output->writeln(sprintf('Cleaning %s...', IStorage::class));
+		$output->writeln(sprintf('<comment>Cleaning %s</comment>', IStorage::class));
 
 		foreach ($this->storages as $name => $storage) {
-			$output->writeln(sprintf('Cleaning storage instance %s...', (string) $name), OutputInterface::VERBOSITY_VERBOSE);
+			$output->writeln(sprintf('Cleaning storage instance %s', (string) $name), OutputInterface::VERBOSITY_VERBOSE);
 			$storage->clean([
 				Cache::ALL => true,
 			]);

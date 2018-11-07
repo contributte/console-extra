@@ -36,7 +36,7 @@ class DiContainersCacheGenerator implements IGenerator
 			return false;
 		}
 
-		$output->writeln('Compiling DI containers...');
+		$output->writeln('<comment>Compiling DI containers</comment>');
 
 		foreach ($this->config as $container => $parameters) {
 			if (isset($parameters['debugMode'])) { // Nette BC
@@ -44,7 +44,7 @@ class DiContainersCacheGenerator implements IGenerator
 			}
 
 			$output->writeln(sprintf(
-				'Compiling container `%s`...',
+				'Compiling container `%s`',
 				(string) $container
 			));
 

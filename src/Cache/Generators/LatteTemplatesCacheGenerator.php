@@ -49,7 +49,7 @@ class LatteTemplatesCacheGenerator implements IGenerator
 			return false;
 		}
 
-		$output->writeln('Compiling Latte templates...');
+		$output->writeln('<comment>Compiling Latte templates</comment>');
 
 		/** @var Template $template */
 		$template = $this->templateFactory->createTemplate();
@@ -66,7 +66,7 @@ class LatteTemplatesCacheGenerator implements IGenerator
 				? substr($path, mb_strlen($this->rootDir))
 				: $path;
 
-			$output->writeln(sprintf('Compiling %s...', $outputPath), OutputInterface::VERBOSITY_VERBOSE);
+			$output->writeln(sprintf('Compiling %s', $outputPath), OutputInterface::VERBOSITY_VERBOSE);
 
 			try {
 				$latte->warmupCache($path);
