@@ -50,7 +50,7 @@ class DiContainersCacheGenerator implements IGenerator
 
 			$configurator = clone $this->configurator;
 			$configurator->addParameters($parameters);
-			$configurator->createContainer();
+			$configurator->loadContainer();
 		}
 
 		$output->writeln('<info>All containers successfully generated.</info>');
