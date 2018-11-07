@@ -170,7 +170,8 @@ console.advancedCache:
         latte: Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
             @Nette\Application\UI\ITemplateFactory,
             [%appDir%],
-            []
+            [],
+            ::realpath(%appDir%/..)
         )
 ```
 

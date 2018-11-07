@@ -5,6 +5,7 @@ namespace Contributte\Console\Extra\Cache\Generators;
 use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Finder;
+use Nette\Utils\Strings;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
@@ -21,15 +22,19 @@ class LatteTemplatesCacheGenerator implements IGenerator
 	/** @var string[] */
 	private $excludeDirs;
 
+	/** @var string|null */
+	private $rootDir;
+
 	/**
 	 * @param string[] $dirs
 	 * @param string[] $excludeDirs
 	 */
-	public function __construct(ITemplateFactory $templateFactory, array $dirs, array $excludeDirs = [])
+	public function __construct(ITemplateFactory $templateFactory, array $dirs, array $excludeDirs = [], ?string $rootDir = null)
 	{
 		$this->templateFactory = $templateFactory;
 		$this->dirs = $dirs;
 		$this->excludeDirs = $excludeDirs;
+		$this->rootDir = $rootDir;
 	}
 
 	public function getDescription(): string
@@ -56,15 +61,18 @@ class LatteTemplatesCacheGenerator implements IGenerator
 		$successes = 0;
 		$fails = 0;
 		foreach ($finder as $path => $file) {
-			$path = realpath($path);
+			$path = (string) realpath($path);
+			$outputPath = $this->rootDir !== null && Strings::startsWith($path, $this->rootDir)
+				? substr($path, mb_strlen($this->rootDir))
+				: $path;
 
-			$output->writeln(sprintf('Compiling %s...', $path), OutputInterface::VERBOSITY_VERBOSE);
+			$output->writeln(sprintf('Compiling %s...', $outputPath), OutputInterface::VERBOSITY_VERBOSE);
 
 			try {
 				$latte->warmupCache($path);
 				$successes++;
 			} catch (Throwable $e) {
-				$output->writeln(sprintf('<error>Failed %s compilation.</error>', $path), OutputInterface::VERBOSITY_VERBOSE);
+				$output->writeln(sprintf('<error>Failed %s compilation.</error>', $outputPath), OutputInterface::VERBOSITY_VERBOSE);
 				$fails++;
 			}
 		}
