@@ -5,7 +5,6 @@ namespace Contributte\Console\Extra\Cache\Generators;
 use Nette\Configurator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use function sprintf;
 
 class DiContainersCacheGenerator implements IGenerator
 {

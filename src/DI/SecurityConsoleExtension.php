@@ -13,7 +13,7 @@ final class SecurityConsoleExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('password'))
-			->setClass(SecurityPasswordCommand::class);
+			->setFactory(SecurityPasswordCommand::class);
 	}
 
 }

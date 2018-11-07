@@ -13,7 +13,7 @@ final class RouterConsoleExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('dump'))
-			->setClass(RouterDumpCommand::class);
+			->setFactory(RouterDumpCommand::class);
 	}
 
 }

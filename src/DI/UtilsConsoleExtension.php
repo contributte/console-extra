@@ -13,7 +13,7 @@ final class UtilsConsoleExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('random'))
-			->setClass(UtilsRandomCommand::class);
+			->setFactory(UtilsRandomCommand::class);
 	}
 
 }

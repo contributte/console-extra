@@ -27,7 +27,7 @@ final class CacheConsoleExtension extends CompilerExtension
 		$config = Helpers::expand($config, $builder->parameters);
 
 		$builder->addDefinition($this->prefix('purge'))
-			->setClass(CachePurgeCommand::class, [$config['purge']]);
+			->setFactory(CachePurgeCommand::class, [$config['purge']]);
 	}
 
 }
