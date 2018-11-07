@@ -168,7 +168,7 @@ Generate application cache with a single command
 console.advancedCache:
     generators:
         latte: Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
-            @Nette\Bridges\ApplicationLatte\ILatteFactory::create()
+            @Nette\Application\UI\ITemplateFactory,
             [%appDir%],
             []
         )
