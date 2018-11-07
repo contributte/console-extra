@@ -40,6 +40,7 @@ class LatteTemplatesCacheGenerator implements IGenerator
 
 		$output->writeln('Compiling Latte templates...');
 
+		$successes = 0;
 		$fails = 0;
 		foreach (Finder::findFiles('*.latte')->from($this->dirs) as $path => $file) {
 			$path = realpath($path);
@@ -48,6 +49,7 @@ class LatteTemplatesCacheGenerator implements IGenerator
 
 			try {
 				$this->latte->warmupCache($path);
+				$successes++;
 			} catch (Throwable $e) {
 				$output->writeln(sprintf('<error>Failed %s compilation.</error>', $path), OutputInterface::VERBOSITY_VERBOSE);
 				$fails++;
@@ -55,7 +57,7 @@ class LatteTemplatesCacheGenerator implements IGenerator
 		}
 
 		if ($fails !== 0) {
-			$output->writeln(sprintf('<info>Templates compiled,</info> <error>compilation of %d files failed.</error>', $fails));
+			$output->writeln(sprintf('<info>%d templates compiled,</info> <error>compilation of %d files failed.</error>', $successes, $fails));
 			return false;
 		} else {
 			$output->writeln('<info>All templates successfully compiled.</info>');
