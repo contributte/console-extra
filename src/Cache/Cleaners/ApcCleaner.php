@@ -20,12 +20,12 @@ class ApcCleaner implements ICleaner
 			return false;
 		}
 
-		$output->writeln('Cleaning APC cache...');
+		$output->writeln('<comment>Cleaning APC cache</comment>');
 
-		$output->writeln('Cleaning APC system cache...', OutputInterface::VERBOSITY_VERBOSE);
+		$output->writeln('Cleaning APC system cache', OutputInterface::VERBOSITY_VERBOSE);
 		apc_clear_cache();
 
-		$output->writeln('Cleaning APC user cache...', OutputInterface::VERBOSITY_VERBOSE);
+		$output->writeln('Cleaning APC user cache', OutputInterface::VERBOSITY_VERBOSE);
 		apc_clear_cache('user');
 
 		$output->writeln('<info>APC cache successfully cleaned.</info>');

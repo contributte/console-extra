@@ -20,7 +20,7 @@ class ApcuCleaner implements ICleaner
 			return false;
 		}
 
-		$output->writeln('Cleaning APCu cache...');
+		$output->writeln('<comment>Cleaning APCu cache</comment>');
 
 		apcu_clear_cache();
 

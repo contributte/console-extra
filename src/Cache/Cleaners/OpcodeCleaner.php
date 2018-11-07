@@ -20,7 +20,7 @@ class OpcodeCleaner implements ICleaner
 			return false;
 		}
 
-		$output->writeln('Cleaning opcode cache cache...');
+		$output->writeln('<comment>Cleaning opcode cache cache</comment>');
 		$success = @opcache_reset();
 
 		if ($success) {
