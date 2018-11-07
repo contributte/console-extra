@@ -32,10 +32,10 @@ final class LatteConsoleExtension extends CompilerExtension
 		$config = Helpers::expand($config, $builder->parameters);
 
 		$builder->addDefinition($this->prefix('warmup'))
-			->setClass(LatteWarmupCommand::class, [$config['warmup']]);
+			->setFactory(LatteWarmupCommand::class, [$config['warmup']]);
 
 		$builder->addDefinition($this->prefix('purge'))
-			->setClass(LattePurgeCommand::class, [$config['purge']]);
+			->setFactory(LattePurgeCommand::class, [$config['purge']]);
 	}
 
 }

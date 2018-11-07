@@ -26,11 +26,11 @@ class Files
 
 		/** @var SplFileObject $entry */
 		foreach ($iterator as $entry) {
-			if (!in_array(str_replace('\\', '/', $entry->getRealPath()), $ignored, true)) {
+			if (!in_array(str_replace('\\', '/', (string) $entry->getRealPath()), $ignored, true)) {
 				if ($entry->isDir()) {
-					rmdir($entry->getRealPath());
+					rmdir((string) $entry->getRealPath());
 				} else {
-					unlink($entry->getRealPath());
+					unlink((string) $entry->getRealPath());
 				}
 			}
 		}

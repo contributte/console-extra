@@ -13,7 +13,7 @@ final class CachingConsoleExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('clear'))
-			->setClass(CachingClearCommand::class);
+			->setFactory(CachingClearCommand::class);
 	}
 
 }

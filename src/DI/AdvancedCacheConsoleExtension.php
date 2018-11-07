@@ -21,11 +21,11 @@ class AdvancedCacheConsoleExtension extends CompilerExtension
 		$config = $this->validateConfig($this->defaults);
 
 		$builder->addDefinition($this->prefix('generatorCommand'))
-			->setType(CacheGenerateCommand::class)
+			->setFactory(CacheGenerateCommand::class)
 			->setArguments([$config['generators']]);
 
 		$builder->addDefinition($this->prefix('cleanCommand'))
-			->setType(CacheCleanCommand::class)
+			->setFactory(CacheCleanCommand::class)
 			->setArguments([$config['cleaners']]);
 	}
 

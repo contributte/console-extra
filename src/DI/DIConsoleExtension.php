@@ -27,7 +27,7 @@ final class DIConsoleExtension extends CompilerExtension
 		$config = Helpers::expand($config, $builder->parameters);
 
 		$builder->addDefinition($this->prefix('purge'))
-			->setClass(DIPurgeCommand::class, [$config['purge']]);
+			->setFactory(DIPurgeCommand::class, [$config['purge']]);
 	}
 
 }
