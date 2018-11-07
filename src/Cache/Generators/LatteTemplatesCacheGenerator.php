@@ -2,7 +2,8 @@
 
 namespace Contributte\Console\Extra\Cache\Generators;
 
-use Latte\Engine;
+use Nette\Application\UI\ITemplateFactory;
+use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Utils\Finder;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -11,8 +12,8 @@ use Throwable;
 class LatteTemplatesCacheGenerator implements IGenerator
 {
 
-	/** @var Engine */
-	private $latte;
+	/** @var ITemplateFactory */
+	private $templateFactory;
 
 	/** @var string[] */
 	private $dirs;
@@ -24,9 +25,9 @@ class LatteTemplatesCacheGenerator implements IGenerator
 	 * @param string[] $dirs
 	 * @param string[] $excludeDirs
 	 */
-	public function __construct(Engine $latte, array $dirs, array $excludeDirs = [])
+	public function __construct(ITemplateFactory $templateFactory, array $dirs, array $excludeDirs = [])
 	{
-		$this->latte = $latte;
+		$this->templateFactory = $templateFactory;
 		$this->dirs = $dirs;
 		$this->excludeDirs = $excludeDirs;
 	}
@@ -45,6 +46,10 @@ class LatteTemplatesCacheGenerator implements IGenerator
 
 		$output->writeln('Compiling Latte templates...');
 
+		/** @var Template $template */
+		$template = $this->templateFactory->createTemplate();
+		$latte = $template->getLatte();
+
 		$finder = Finder::findFiles('*.latte')->from($this->dirs);
 		if ($this->excludeDirs !== []) $finder->exclude($this->excludeDirs);
 
@@ -56,7 +61,7 @@ class LatteTemplatesCacheGenerator implements IGenerator
 			$output->writeln(sprintf('Compiling %s...', $path), OutputInterface::VERBOSITY_VERBOSE);
 
 			try {
-				$this->latte->warmupCache($path);
+				$latte->warmupCache($path);
 				$successes++;
 			} catch (Throwable $e) {
 				$output->writeln(sprintf('<error>Failed %s compilation.</error>', $path), OutputInterface::VERBOSITY_VERBOSE);
