@@ -117,12 +117,13 @@ Available commands:
 ```yaml
 console.latte:
     warmup:
-         - %tempDir%
+         - %appDir%
+    warmupExclude: []
     purge:
-         - %tempDir%/cache
+         - %tempDir%/cache/latte
 ```
 
-The `warmup` and `purge` parameters are expecting an array of dirs.
+The `warmup`, `warmupExclude` and `purge` parameters are expecting an array of dirs.
 
 Available commands:
 
@@ -159,7 +160,7 @@ Generate application cache with a single command
 
     `--list` show list of available generators
 
-    `--generator=GENERATOR` use only specified generator
+    `--generator GENERATOR` use only specified generator
 
 ##### Register generators you want to use:
 
@@ -167,8 +168,9 @@ Generate application cache with a single command
 console.advancedCache:
     generators:
         latte: Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
-            [%appDir%],
             @Nette\Bridges\ApplicationLatte\ILatteFactory::create()
+            [%appDir%],
+            []
         )
 ```
 
@@ -240,7 +242,7 @@ Clean application cache with a single command
 
     `--list` show list of available cleaners
 
-    `--cleaner=CLEANER` use only specified cleaner
+    `--cleaner CLEANER` use only specified cleaner
 
 ##### Register cleaners you want to use:
 
