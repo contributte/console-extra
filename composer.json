@@ -21,17 +21,17 @@
   ],
   "require": {
     "php": ">= 7.1",
-    "nette/di": "~2.4.11",
+    "nette/di": "~3.0.0",
     "symfony/console": "^4.0.0"
   },
   "require-dev": {
     "ninjify/qa": "^0.8.0",
     "ninjify/nunjuck": "^0.2.0",
-    "nette/application": "~2.4.9",
-    "nette/bootstrap": "~2.4.6",
-    "nette/security": "~2.4.3",
-    "nette/utils": "~2.5.1",
-    "latte/latte": "~2.4.7"
+    "nette/application": "~3.0.0",
+    "nette/bootstrap": "~3.0.0",
+    "nette/security": "~3.0.0",
+    "nette/utils": "~3.0.0",
+    "latte/latte": "~3.0.0"
   },
   "suggest": {
     "contributte/console": "Symfony\\Console for Nette"
