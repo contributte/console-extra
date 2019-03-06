@@ -21,7 +21,7 @@
 
 ```yaml
 extensions:
-    console: Contributte\Console\DI\ConsoleExtension
+    console: Contributte\Console\DI\DIConsoleExtension
 
     # register all console bridges
     console.extra: Contributte\Console\Extra\DI\ConsoleBridgesExtension
