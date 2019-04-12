@@ -55,11 +55,11 @@ class CacheGenerateCommand extends Command
 			return 0;
 		}
 
-		if (($generator = $input->getOption('generator')) !== null) {
-			if (!isset($this->generators[$generator])) {
-				throw new InvalidArgumentException(sprintf('Cannot run undefined generator "%s"', $generator));
+		if (($generatorName = $input->getOption('generator')) !== null) {
+			if (!is_string($generatorName) || !isset($this->generators[$generatorName])) {
+				throw new InvalidArgumentException(sprintf('Cannot run undefined generator "%s"', $generatorName));
 			}
-			$this->generators[$generator]->generate($input, $output);
+			$this->generators[$generatorName]->generate($input, $output);
 			return 0;
 		}
 

@@ -19,6 +19,15 @@ class SecurityPasswordCommand extends Command
 	/** @var string */
 	protected static $defaultName = 'nette:security:password';
 
+	/** @var Passwords */
+	private $passwords;
+
+	public function __construct(Passwords $passwords)
+	{
+		parent::__construct();
+		$this->passwords = $passwords;
+	}
+
 	protected function configure(): void
 	{
 		$this->setName(static::$defaultName);
@@ -36,7 +45,7 @@ class SecurityPasswordCommand extends Command
 			// Generate one password
 			$password = $input->getArgument('password');
 			$style->comment('Password given');
-			$encrypted = Passwords::hash($password);
+			$encrypted = $this->passwords->hash($password);
 			$style->success(sprintf('Hashed password: %s', $encrypted));
 		} else {
 			// Generate more passwords
@@ -44,7 +53,7 @@ class SecurityPasswordCommand extends Command
 			$table->setHeaders(['ID', 'Generated random password']);
 
 			for ($i = 1; $i <= $input->getOption('count'); $i++) {
-				$table->addRow([$i, Passwords::hash(sha1(Random::generate(50) . time() . random_bytes(20)))]);
+				$table->addRow([$i, $this->passwords->hash(sha1(Random::generate(50) . time() . random_bytes(20)))]);
 
 				if ($i !== $input->getOption('count')) {
 					$table->addRow(new TableSeparator());

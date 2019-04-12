@@ -14,5 +14,4 @@ parameters:
 		- '#Parameter \$memcaches of method Contributte\\Console\\Extra\\Cache\\Cleaners\\MemcachedCleaner::__construct\(\) has invalid typehint type Memcached\.#'
 		- '#Call to method flush\(\) on an unknown class Memcache\.#'
 		- '#Call to method flush\(\) on an unknown class Memcached\.#'
-		- '#Function apc_clear_cache not found.#'
-		- '#Function apcu_clear_cache not found.#'
+		- '~^Call to deprecated method validateConfig\(\) of class Nette\\DI\\CompilerExtension\.$~'
