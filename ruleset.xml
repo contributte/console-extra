@@ -1,17 +1,14 @@
 <?xml version="1.0"?>
-<ruleset name="Contributte">
-	<!-- Contributte Coding Standard -->
+<ruleset>
 	<rule ref="./vendor/ninjify/coding-standard/contributte.xml"/>
 
-	<!-- Specific rules -->
+	<!-- Package specific rules -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
         <properties>
             <property name="rootNamespaces" type="array" value="
-                src=>Contributte\Console\Extra
+                src=>Contributte\Console\Extra,
+                tests=>Tests\Contributte\Console\Extra,
             "/>
         </properties>
     </rule>
-
-    <!-- Exclude folders -->
-    <exclude-pattern>/tests/tmp</exclude-pattern>
 </ruleset>

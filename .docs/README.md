@@ -1,23 +1,14 @@
 # Console Extra
 
-# Content
+## Setup
 
-- [Usage - how to use it](#usage)
-- [Extensions - list of all extensions](#extension)
-    - [Cache](#cacheconsole)
-    - [Caching](#cachingconsole)
-    - [DI](#diconsole)
-    - [Latte](#latteconsole)
-    - [Router](#routerconsole)
-    - [Security](#securityconsole)
-    - [Utils](#utilsconsole)
-    - [Advanced cache](#advancedcacheconsole)
-- [Compatibility](#compatibility)
-    - [Kdyby/Console](#kdybyconsole)
+Install package
 
-## Usage
+```bash
+composer require contributte/console-extra
+```
 
-**Register commands one by one:**
+Register all commands
 
 ```yaml
 extensions:
@@ -38,7 +29,7 @@ console.extra:
     advancedCache: false
 ```
 
-You can also register bridges one by one.
+You can also register bridges one by one
 
 ```yaml
 extensions:

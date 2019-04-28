@@ -21,18 +21,22 @@
   ],
   "require": {
     "php": ">= 7.1",
-    "nette/di": "~2.4.11|^3.0",
+    "nette/di": "~2.4.11|~3.0",
     "symfony/console": "^4.0.0"
   },
   "require-dev": {
-    "ninjify/qa": "^0.8.0",
+    "latte/latte": "~2.4.7|~2.6",
     "ninjify/nunjuck": "^0.2.0",
-    "nette/application": "~2.4.9|3.0",
-    "nette/bootstrap": "~2.4.6|^3.0",
-    "nette/caching": "^3.0",
-    "nette/security": "~2.4.3|^3.0",
-    "nette/utils": "~2.5.1|^3.0",
-    "latte/latte": "~2.4.7|^2.6"
+    "ninjify/qa": "^0.9.0",
+    "nette/application": "~2.4.9|~3.0",
+    "nette/bootstrap": "~2.4.6|~3.0",
+    "nette/caching": "~3.0",
+    "nette/security": "~2.4.3|~3.0",
+    "nette/utils": "~2.5.1|~3.0",
+    "phpstan/phpstan-deprecation-rules": "^0.11",
+    "phpstan/phpstan-nette": "^0.11",
+    "phpstan/phpstan-shim": "^0.11",
+    "phpstan/phpstan-strict-rules": "^0.11"
   },
   "suggest": {
     "contributte/console": "Symfony\\Console for Nette"
@@ -42,29 +46,15 @@
       "Contributte\\Console\\Extra\\": "src"
     }
   },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\Contributte\\Console\\Extra\\": "tests"
+    }
+  },
   "minimum-stability": "dev",
   "prefer-stable": true,
-  "scripts": {
-    "qa": [
-      "linter src tests",
-      "codesniffer src tests"
-    ],
-    "tests": [
-      "tester -s -p php --colors 1 -C tests/cases"
-    ],
-    "coverage": [
-      "tester -s -p phpdbg --colors 1 -C --coverage ./coverage.xml --coverage-src ./src tests/cases"
-    ],
-    "phpstan-install": [
-      "mkdir -p temp/phpstan",
-      "composer require -d temp/phpstan phpstan/phpstan:^0.11",
-      "composer require -d temp/phpstan phpstan/phpstan-deprecation-rules:^0.11",
-      "composer require -d temp/phpstan phpstan/phpstan-nette:^0.11",
-      "composer require -d temp/phpstan phpstan/phpstan-strict-rules:^0.11"
-    ],
-    "phpstan": [
-      "temp/phpstan/vendor/bin/phpstan analyse -l max -c phpstan.neon src"
-    ]
+  "config": {
+    "sort-packages": true
   },
   "extra": {
     "branch-alias": {

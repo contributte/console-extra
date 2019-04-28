@@ -1,10 +1,8 @@
-# Console Bridge
+# Console Extra
 
 :recycle: Nette-based console commands for latte, DIC, security, utils and many others.
 
 ![Console screenshot](/.docs/assets/console-screenshot.png?raw=true)
-
------
 
 [![Build Status](https://img.shields.io/travis/contributte/console-extra.svg?style=flat-square)](https://travis-ci.org/contributte/console-extra)
 [![Code coverage](https://img.shields.io/coveralls/contributte/console-extra.svg?style=flat-square)](https://coveralls.io/r/contributte/console-extra)
@@ -12,17 +10,22 @@
 [![Downloads this Month](https://img.shields.io/packagist/dm/contributte/console-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/console-extra)
 [![Downloads total](https://img.shields.io/packagist/dt/contributte/console-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/console-extra)
 [![Latest stable](https://img.shields.io/packagist/v/contributte/console-extra.svg?style=flat-square)](https://packagist.org/packages/contributte/console-extra)
-[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat)](https://github.com/phpstan/phpstan)
+[![PHPStan](https://img.shields.io/badge/PHPStan-enabled-brightgreen.svg?style=flat-square)](https://github.com/phpstan/phpstan)
 
-## Discussion / Help
+## Documentation
 
-[![Join the chat](https://img.shields.io/gitter/room/contributte/contributte.svg?style=flat-square)](http://bit.ly/ctteg)
-
-## Install
-
-```
-composer require contributte/console-extra
-```
+- [Setup](.docs/README.md#usage)
+- [Extensions](.docs/README.md#extension)
+    - [Cache](.docs/README.md#cacheconsole)
+    - [Caching](.docs/README.md#cachingconsole)
+    - [DI](.docs/README.md#diconsole)
+    - [Latte](.docs/README.md#latteconsole)
+    - [Router](.docs/README.md#routerconsole)
+    - [Security](.docs/README.md#securityconsole)
+    - [Utils](.docs/README.md#utilsconsole)
+    - [AdvancedCache](.docs/README.md#advancedcacheconsole)
+- [Compatibility](.docs/README.md#compatibility)
+    - [Kdyby/Console](.docs/README.md#kdybyconsole)
 
 ## Versions
 
@@ -32,20 +35,9 @@ composer require contributte/console-extra
 | stable      | `^0.4`   | `master` | `>= 7.1` |
 | stable      | `^0.1`   | `master` | `>= 5.6` |
 
-## Overview
+## Looking for more?
 
-- [Usage - how to use it](https://github.com/contributte/console-extra/blob/master/.docs/README.md#usage)
-    - [Register one by one](https://github.com/contributte/console-extra/blob/master/.docs/README.md#usage)
-    - [Register ConsoleBridge](https://github.com/contributte/console-extra/blob/master/.docs/README.md#usage)
-- [Extensions - list of all extensions](https://github.com/contributte/console-extra/blob/master/.docs/README.md#extension)
-    - [Cache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#cacheconsole)
-    - [Caching](https://github.com/contributte/console-extra/blob/master/.docs/README.md#cachingconsole)
-    - [DI](https://github.com/contributte/console-extra/blob/master/.docs/README.md#diconsole)
-    - [Latte](https://github.com/contributte/console-extra/blob/master/.docs/README.md#latteconsole)
-    - [Router](https://github.com/contributte/console-extra/blob/master/.docs/README.md#routerconsole)
-    - [Security](https://github.com/contributte/console-extra/blob/master/.docs/README.md#securityconsole)
-    - [Utils](https://github.com/contributte/console-extra/blob/master/.docs/README.md#utilsconsole)
-    - [AdvancedCache](https://github.com/contributte/console-extra/blob/master/.docs/README.md#advancedcacheconsole)
+Overview of our packages, examples, release notes, contacts at the developers and more could be found on the website [contributte.org](https://contributte.org).
 
 ## Maintainers
 
@@ -69,7 +61,3 @@ composer require contributte/console-extra
     </tr>
   </tbody>
 </table>
-
------
-
-Thank you for testing, reporting and contributing.
