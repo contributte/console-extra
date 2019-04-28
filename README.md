@@ -23,6 +23,7 @@
     - [Router](.docs/README.md#routerconsole)
     - [Security](.docs/README.md#securityconsole)
     - [Utils](.docs/README.md#utilsconsole)
+    - [Database](.docs/README.md#database)
     - [AdvancedCache](.docs/README.md#advancedcacheconsole)
 - [Compatibility](.docs/README.md#compatibility)
     - [Kdyby/Console](.docs/README.md#kdybyconsole)

@@ -141,6 +141,32 @@ Available commands:
 
     This command supports count parameter (`--count <count>` or `-c <count>` shortcut), to change the count of random strings. Default count is **10**.
 
+### Database
+
+```yaml
+extensions:
+    databaseBackup: Contributte\Console\Extra\Database\DI\DatabaseBackupConsoleExtension
+
+databaseBackup:
+    backupPath: %appDir%/../backups/database
+    consoleMode: %consoleMode%
+```
+
+Backup database
+
+`contributte:database:backup mysql 127.0.0.1 3306 username password database path/to file.sql`
+
+- Path could be omitted (if defined in configuration)
+- Filename could be omitted (will be generated)
+- `--no-gzip` (`-g`) - disables gzip compression
+- `--bin-path` (`-b`) - path to mysql/psql binary
+
+Load database from backup
+
+`contributte:database:load mysql 127.0.0.1 3306 username password database path/to/file.sql`
+
+- `--bin-path` (`-b`) - path to mysql/psql binary
+
 ### AdvancedCacheConsole
 
 #### Generator
