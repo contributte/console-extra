@@ -30,6 +30,7 @@ class MemcachedCleaner implements ICleaner
 	{
 		if ($this->memcaches === []) {
 			$output->writeln('<comment>Skipped Memcache(d) cleaning, no Memcache(d) services defined.</comment>');
+
 			return false;
 		}
 
@@ -41,6 +42,7 @@ class MemcachedCleaner implements ICleaner
 		}
 
 		$output->writeln('<info>Memcache(d) successfully cleaned.</info>');
+
 		return true;
 	}
 

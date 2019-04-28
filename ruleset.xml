@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <ruleset>
-	<rule ref="./vendor/ninjify/coding-standard/contributte.xml"/>
+	<rule ref="./vendor/ninjify/coding-standard/contributte.xml">
+		<exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator"/>
+	</rule>
 
 	<!-- Package specific rules -->
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
@@ -9,6 +11,7 @@
                 src=>Contributte\Console\Extra,
                 tests=>Tests\Contributte\Console\Extra,
             "/>
+			<property name="extensions" type="array" value="php, phpt"/>
         </properties>
     </rule>
 </ruleset>

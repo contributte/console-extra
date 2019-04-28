@@ -55,13 +55,15 @@ class LatteWarmupCommand extends Command
 		$latte = $template->getLatte();
 
 		$finder = Finder::findFiles('*.latte')->from($this->dirs);
-		if ($this->excludeDirs !== []) $finder->exclude($this->excludeDirs);
+
+		if ($this->excludeDirs !== []) {
+			$finder->exclude($this->excludeDirs);
+		}
 
 		$stats = ['ok' => 0, 'error' => 0];
 
 		/** @var SplFileInfo $file */
 		foreach ($finder as $path => $file) {
-
 			try {
 				$latte->warmupCache($file->getPathname());
 				$stats['ok']++;

@@ -26,10 +26,13 @@ final class LatteConsoleExtension extends CompilerExtension
 		$builder = $this->getContainerBuilder();
 
 		// Don't use predefined default values, if user provide it
-		if (isset($this->config['warmup']))
+		if (isset($this->config['warmup'])) {
 			$this->defaults['warmup'] = [];
-		if (isset($this->config['purge']))
+		}
+
+		if (isset($this->config['purge'])) {
 			$this->defaults['purge'] = [];
+		}
 
 		$config = $this->validateConfig($this->defaults);
 		$config = Helpers::expand($config, $builder->parameters);

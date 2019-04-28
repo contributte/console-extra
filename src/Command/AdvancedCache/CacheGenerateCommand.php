@@ -47,11 +47,14 @@ class CacheGenerateCommand extends Command
 			$table->setStyle('box');
 			$table->setHeaders(['Name', 'Description']);
 			$rows = [];
+
 			foreach ($this->generators as $name => $generator) {
 				$rows[] = [$name, $generator->getDescription()];
 			}
+
 			$table->setRows($rows);
 			$table->render();
+
 			return 0;
 		}
 
@@ -59,12 +62,15 @@ class CacheGenerateCommand extends Command
 			if (!is_string($generatorName) || !isset($this->generators[$generatorName])) {
 				throw new InvalidArgumentException(sprintf('Cannot run undefined generator "%s"', $generatorName));
 			}
+
 			$this->generators[$generatorName]->generate($input, $output);
+
 			return 0;
 		}
 
 		if ($this->generators === []) {
 			$style->error('Cache generating skipped, no generators defined.');
+
 			return 0;
 		}
 
@@ -72,6 +78,7 @@ class CacheGenerateCommand extends Command
 
 		foreach ($this->generators as $name => $generator) {
 			$success = $generator->generate($input, $output);
+
 			if ($success) {
 				$stats['ok'][] = $name;
 			} else {

@@ -30,6 +30,7 @@ class NetteCachingStorageCleaner implements ICleaner
 	{
 		if ($this->storages === []) {
 			$output->writeln(sprintf('<comment>Skipped %s cleaning, no IStorage services defined.</comment>', IStorage::class));
+
 			return false;
 		}
 
@@ -43,6 +44,7 @@ class NetteCachingStorageCleaner implements ICleaner
 		}
 
 		$output->writeln(sprintf('<info>%s successfully cleaned.</info>', IStorage::class));
+
 		return true;
 	}
 

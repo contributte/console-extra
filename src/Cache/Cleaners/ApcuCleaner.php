@@ -17,6 +17,7 @@ class ApcuCleaner implements ICleaner
 	{
 		if (!function_exists('apcu_clear_cache')) {
 			$output->writeln('<comment>Skipped APCu cache cleaning, apcu_clear_cache function is not available.</comment>');
+
 			return false;
 		}
 
@@ -25,6 +26,7 @@ class ApcuCleaner implements ICleaner
 		apcu_clear_cache();
 
 		$output->writeln('<info>APCu cache successfully cleaned.</info>');
+
 		return true;
 	}
 

@@ -17,6 +17,7 @@ class ApcCleaner implements ICleaner
 	{
 		if (!function_exists('apc_clear_cache')) {
 			$output->writeln('<comment>Skipped APC cache cleaning, apc_clear_cache function is not available.</comment>');
+
 			return false;
 		}
 
@@ -29,6 +30,7 @@ class ApcCleaner implements ICleaner
 		apc_clear_cache('user');
 
 		$output->writeln('<info>APC cache successfully cleaned.</info>');
+
 		return true;
 	}
 

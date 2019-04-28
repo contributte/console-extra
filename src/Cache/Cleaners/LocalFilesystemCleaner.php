@@ -34,6 +34,7 @@ class LocalFilesystemCleaner implements ICleaner
 	{
 		if ($this->directories === []) {
 			$output->writeln('<comment>Skipped local filesystem cache cleaning, no directories defined.</comment>');
+
 			return false;
 		}
 
@@ -45,6 +46,7 @@ class LocalFilesystemCleaner implements ICleaner
 		}
 
 		$output->writeln('<info>Local filesystem cache successfully cleaned.</info>');
+
 		return true;
 	}
 

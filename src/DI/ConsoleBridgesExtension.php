@@ -45,7 +45,9 @@ final class ConsoleBridgesExtension extends CompilerExtension
 
 		foreach ($config as $bridge => $enabled) {
 			// Don't register sub extension
-			if ($enabled === false) continue;
+			if ($enabled === false) {
+				continue;
+			}
 
 			// Security check
 			Validators::assertField($config, $bridge, 'array');

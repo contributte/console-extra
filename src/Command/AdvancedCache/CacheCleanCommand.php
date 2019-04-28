@@ -46,11 +46,14 @@ class CacheCleanCommand extends Command
 			$table->setStyle('box');
 			$table->setHeaders(['Name', 'Description']);
 			$rows = [];
+
 			foreach ($this->cleaners as $name => $cleaner) {
 				$rows[] = [$name, $cleaner->getDescription()];
 			}
+
 			$table->setRows($rows);
 			$table->render();
+
 			return 0;
 		}
 
@@ -58,12 +61,15 @@ class CacheCleanCommand extends Command
 			if (!is_string($cleanerName) || !isset($this->cleaners[$cleanerName])) {
 				throw new InvalidArgumentException(sprintf('Cannot run undefined cleaner "%s"', $cleanerName));
 			}
+
 			$this->cleaners[$cleanerName]->clean($input, $output);
+
 			return 0;
 		}
 
 		if ($this->cleaners === []) {
 			$style->error('Cache cleaning skipped, no cleaners defined.');
+
 			return 0;
 		}
 
@@ -71,6 +77,7 @@ class CacheCleanCommand extends Command
 
 		foreach ($this->cleaners as $name => $cleaner) {
 			$success = $cleaner->clean($input, $output);
+
 			if ($success) {
 				$stats['ok'][] = $name;
 			} else {

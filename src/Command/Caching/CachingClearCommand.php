@@ -52,6 +52,7 @@ class CachingClearCommand extends Command
 			$style->success('Clearing by priority done.');
 		} else {
 			$style->warning('Specify clearing strategy.');
+
 			return;
 		}
 	}

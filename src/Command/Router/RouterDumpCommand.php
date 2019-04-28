@@ -31,7 +31,7 @@ final class RouterDumpCommand extends Command
 	 */
 	protected function configure(): void
 	{
-		$this->setName(static::$defaultName);
+		$this->setName(self::$defaultName);
 		$this->setDescription('Display all defined routes');
 	}
 
@@ -60,8 +60,10 @@ final class RouterDumpCommand extends Command
 	{
 		if ($router instanceof RouteList) {
 			$routes = [];
+
 			foreach ($router as $subRouter) {
 				$route = $this->analyse($subRouter, $module . $router->getModule());
+
 				if (is_array($route)) {
 					$routes = array_merge($routes, $route);
 				} else {
@@ -103,6 +105,7 @@ final class RouterDumpCommand extends Command
 		}
 
 		$secondary = [];
+
 		foreach ($defaults as $key => $value) {
 			$secondary[] = sprintf('%s=>%s', $key, $value);
 		}

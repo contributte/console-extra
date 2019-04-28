@@ -46,6 +46,7 @@ class LatteTemplatesCacheGenerator implements IGenerator
 	{
 		if ($this->dirs === []) {
 			$output->writeln('<comment>Latte templates compilation skipped, no directories defined.</comment>');
+
 			return false;
 		}
 
@@ -56,10 +57,14 @@ class LatteTemplatesCacheGenerator implements IGenerator
 		$latte = $template->getLatte();
 
 		$finder = Finder::findFiles('*.latte')->from($this->dirs);
-		if ($this->excludeDirs !== []) $finder->exclude($this->excludeDirs);
+
+		if ($this->excludeDirs !== []) {
+			$finder->exclude($this->excludeDirs);
+		}
 
 		$successes = 0;
 		$fails = 0;
+
 		foreach ($finder as $path => $file) {
 			$path = (string) realpath($path);
 			$outputPath = $this->rootDir !== null && Strings::startsWith($path, $this->rootDir)
@@ -79,9 +84,11 @@ class LatteTemplatesCacheGenerator implements IGenerator
 
 		if ($fails !== 0) {
 			$output->writeln(sprintf('<info>%d templates compiled,</info> <error>compilation of %d files failed.</error>', $successes, $fails));
+
 			return false;
 		} else {
 			$output->writeln('<info>All templates successfully compiled.</info>');
+
 			return true;
 		}
 	}

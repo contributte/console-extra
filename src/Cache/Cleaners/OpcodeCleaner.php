@@ -17,6 +17,7 @@ class OpcodeCleaner implements ICleaner
 	{
 		if (!function_exists('opcache_reset')) {
 			$output->writeln('<comment>Skipped opcode cache cleaning, opcache_reset function is not available.</comment>');
+
 			return false;
 		}
 
@@ -25,9 +26,11 @@ class OpcodeCleaner implements ICleaner
 
 		if ($success) {
 			$output->writeln('<info>opcode cache successfully cleaned.</info>');
+
 			return true;
 		} else {
 			$output->writeln('<error>opcode cache cannot be cleaned. It is probably restricted by "restrict_api" directive of OPcache API.</error>');
+
 			return false;
 		}
 	}
