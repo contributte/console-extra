@@ -54,11 +54,11 @@ class CacheCleanCommand extends Command
 			return 0;
 		}
 
-		if (($cleaner = $input->getOption('cleaner')) !== null) {
-			if (!isset($this->cleaners[$cleaner])) {
-				throw new InvalidArgumentException(sprintf('Cannot run undefined cleaner "%s"', $cleaner));
+		if (($cleanerName = $input->getOption('cleaner')) !== null) {
+			if (!is_string($cleanerName) || !isset($this->cleaners[$cleanerName])) {
+				throw new InvalidArgumentException(sprintf('Cannot run undefined cleaner "%s"', $cleanerName));
 			}
-			$this->cleaners[$cleaner]->clean($input, $output);
+			$this->cleaners[$cleanerName]->clean($input, $output);
 			return 0;
 		}
 
