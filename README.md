@@ -1,6 +1,6 @@
-# Console Extra
+# Contributte Console Extra
 
-:recycle: Nette-based console commands for latte, DIC, security, utils and many others.
+Nette-based console commands for latte, DIC, security, utils and many others.
 
 ![Console screenshot](/.docs/assets/console-screenshot.png?raw=true)
 
@@ -35,10 +35,6 @@
 | dev         | `^0.5`   | `master` | `>= 7.1` |
 | stable      | `^0.4`   | `master` | `>= 7.1` |
 | stable      | `^0.1`   | `master` | `>= 5.6` |
-
-## Looking for more?
-
-Overview of our packages, examples, release notes, contacts at the developers and more could be found on the website [contributte.org](https://contributte.org).
 
 ## Maintainers
 
