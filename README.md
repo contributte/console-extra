@@ -30,11 +30,12 @@ Nette-based console commands for latte, DIC, security, utils and many others.
 
 ## Versions
 
-| State       | Version  | Branch   | PHP      |
-|-------------|----------|----------|----------|
-| dev         | `^0.5`   | `master` | `>= 7.1` |
-| stable      | `^0.4`   | `master` | `>= 7.1` |
-| stable      | `^0.1`   | `master` | `>= 5.6` |
+| State       | Version | Branch   | Nette | PHP     |
+|-------------|---------|----------|-------|---------|
+| dev         | `^0.6`  | `master` | 3.0+  | `^7.2`  |
+| stable      | `^0.5`  | `master` | 3.0+  | `^7.2`  |
+| stable      | `^0.4`  | `master` | 2.4   | `>=7.1` |
+| stable      | `^0.1`  | `master` | 2.4   | `>=5.6` |
 
 ## Maintainers
 

@@ -4,22 +4,28 @@ namespace Contributte\Console\Extra\DI;
 
 use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\ClassType;
-use Nette\Utils\Validators;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
 
+/**
+ * @property-read mixed[] $config
+ */
 final class ConsoleBridgesExtension extends CompilerExtension
 {
 
-	/** @var mixed[] */
-	private $defaults = [
-		'advancedCache' => [],
-		'cache' => [],
-		'caching' => [],
-		'di' => [],
-		'latte' => [],
-		'router' => [],
-		'security' => [],
-		'utils' => [],
-	];
+	public function getConfigSchema(): Schema
+	{
+		return Expect::structure([
+			'advancedCache' => Expect::anyOf(false, AdvancedCacheConsoleExtension::createSchema())->default([]),
+			'cache' => Expect::anyOf(false, CacheConsoleExtension::createSchema())->default([]),
+			'caching' => Expect::anyOf(false)->default([]),
+			'di' => Expect::anyOf(false, DIConsoleExtension::createSchema())->default([]),
+			'latte' => Expect::anyOf(false, LatteConsoleExtension::createSchema())->default([]),
+			'router' => Expect::anyOf(false)->default([]),
+			'security' => Expect::anyOf(false)->default([]),
+			'utils' => Expect::anyOf(false)->default([]),
+		])->castTo('array');
+	}
 
 	/** @var string[] */
 	private $map = [
@@ -36,33 +42,24 @@ final class ConsoleBridgesExtension extends CompilerExtension
 	/** @var CompilerExtension[] */
 	private $passes = [];
 
-	/**
-	 * Register services
-	 */
 	public function loadConfiguration(): void
 	{
-		$config = $this->validateConfig($this->defaults, $this->config);
+		$config = $this->config;
 
-		foreach ($config as $bridge => $enabled) {
+		foreach ($config as $bridge => $bridgeConfig) {
 			// Don't register sub extension
-			if ($enabled === false) {
+			if ($bridgeConfig === false) {
 				continue;
 			}
-
-			// Security check
-			Validators::assertField($config, $bridge, 'array');
 
 			// Register sub extension a.k.a CompilerPass
 			$this->passes[$bridge] = new $this->map[$bridge]();
 			$this->passes[$bridge]->setCompiler($this->compiler, $this->prefix($bridge));
-			$this->passes[$bridge]->setConfig($this->config[$bridge] ?? []);
+			$this->passes[$bridge]->setConfig($bridgeConfig);
 			$this->passes[$bridge]->loadConfiguration();
 		}
 	}
 
-	/**
-	 * Decorate services
-	 */
 	public function beforeCompile(): void
 	{
 		foreach ($this->passes as $pass) {
@@ -70,9 +67,6 @@ final class ConsoleBridgesExtension extends CompilerExtension
 		}
 	}
 
-	/**
-	 * Decorate initialize method
-	 */
 	public function afterCompile(ClassType $class): void
 	{
 		foreach ($this->passes as $pass) {

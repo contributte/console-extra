@@ -6,45 +6,52 @@ use Contributte\Console\Extra\Command\Latte\LattePurgeCommand;
 use Contributte\Console\Extra\Command\Latte\LatteWarmupCommand;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Helpers;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
+use stdClass;
 
+/**
+ * @property-read stdClass $config
+ */
 final class LatteConsoleExtension extends CompilerExtension
 {
 
-	/** @var mixed[] */
-	private $defaults = [
-		'warmup' => [
-			'%appDir%',
-		],
-		'warmupExclude' => [],
-		'purge' => [
-			'%tempDir%/cache/latte',
-		],
-	];
+	public static function createSchema(): Schema
+	{
+		return Expect::structure([
+			'warmup' => Expect::listOf('string'),
+			'warmupExclude' => Expect::listOf('string'),
+			'purge' => Expect::listOf('string'),
+		]);
+	}
+
+	public function getConfigSchema(): Schema
+	{
+		return self::createSchema();
+	}
 
 	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
+		$config = $this->config;
 
-		// Don't use predefined default values, if user provide it
-		if (isset($this->config['warmup'])) {
-			$this->defaults['warmup'] = [];
+		// Default values cannot be in schema, arrays are merged by keys
+		if ($config->warmup === []) {
+			$config->warmup = Helpers::expand(['%appDir%'], $builder->parameters);
 		}
 
-		if (isset($this->config['purge'])) {
-			$this->defaults['purge'] = [];
+		if ($config->purge === []) {
+			$config->purge = Helpers::expand(['%tempDir%/cache/latte'], $builder->parameters);
 		}
-
-		$config = $this->validateConfig($this->defaults);
-		$config = Helpers::expand($config, $builder->parameters);
 
 		$builder->addDefinition($this->prefix('warmup'))
 			->setFactory(LatteWarmupCommand::class, [
-				1 => $config['warmup'],
-				2 => $config['warmupExclude'],
+				1 => $config->warmup,
+				2 => $config->warmupExclude,
 			]);
 
 		$builder->addDefinition($this->prefix('purge'))
-			->setFactory(LattePurgeCommand::class, [$config['purge']]);
+			->setFactory(LattePurgeCommand::class, [$config->purge]);
 	}
 
 }

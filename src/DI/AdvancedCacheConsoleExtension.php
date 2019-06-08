@@ -4,29 +4,78 @@ namespace Contributte\Console\Extra\DI;
 
 use Contributte\Console\Extra\Command\AdvancedCache\CacheCleanCommand;
 use Contributte\Console\Extra\Command\AdvancedCache\CacheGenerateCommand;
+use Contributte\DI\Helper\ExtensionDefinitionsHelper;
 use Nette\DI\CompilerExtension;
+use Nette\DI\Definitions\Definition;
+use Nette\DI\Definitions\Statement;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
+use stdClass;
 
+/**
+ * @property-read stdClass $config
+ */
 class AdvancedCacheConsoleExtension extends CompilerExtension
 {
 
-	/** @var mixed[] */
-	private $defaults = [
-		'cleaners' => [],
-		'generators' => [],
-	];
+	public static function createSchema(): Schema
+	{
+		return Expect::structure([
+			'cleaners' => Expect::arrayOf(
+				Expect::anyOf(Expect::string(), Expect::array(), Expect::type(Statement::class))
+			),
+			'generators' => Expect::arrayOf(
+				Expect::anyOf(Expect::string(), Expect::array(), Expect::type(Statement::class))
+			),
+		]);
+	}
+
+	public function getConfigSchema(): Schema
+	{
+		return self::createSchema();
+	}
 
 	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
-		$config = $this->validateConfig($this->defaults);
+		$config = $this->config;
+		$definitionsHelper = new ExtensionDefinitionsHelper($this->compiler);
+
+		// Register generators
+		$generatorDefinitions = [];
+
+		foreach ($config->generators as $generatorName => $generatorConfig) {
+			$generatorPrefix = $this->prefix('generator.' . $generatorName);
+			$generatorDefinition = $definitionsHelper->getDefinitionFromConfig($generatorConfig, $generatorPrefix);
+
+			if ($generatorDefinition instanceof Definition) {
+				$generatorDefinition->setAutowired(false);
+			}
+
+			$generatorDefinitions[] = $generatorDefinition;
+		}
 
 		$builder->addDefinition($this->prefix('generatorCommand'))
 			->setFactory(CacheGenerateCommand::class)
-			->setArguments([$config['generators']]);
+			->setArguments([$generatorDefinitions]);
+
+		// Register cleaners
+		$cleanerDefinitions = [];
+
+		foreach ($config->cleaners as $cleanerName => $cleanerConfig) {
+			$cleanerPrefix = $this->prefix('cleaner.' . $cleanerName);
+			$cleanerDefinition = $definitionsHelper->getDefinitionFromConfig($cleanerConfig, $cleanerPrefix);
+
+			if ($cleanerDefinition instanceof Definition) {
+				$cleanerDefinition->setAutowired(false);
+			}
+
+			$cleanerDefinitions[] = $cleanerDefinition;
+		}
 
 		$builder->addDefinition($this->prefix('cleanCommand'))
 			->setFactory(CacheCleanCommand::class)
-			->setArguments([$config['cleaners']]);
+			->setArguments([$cleanerDefinitions]);
 	}
 
 }

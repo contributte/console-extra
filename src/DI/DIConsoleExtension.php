@@ -5,31 +5,40 @@ namespace Contributte\Console\Extra\DI;
 use Contributte\Console\Extra\Command\DI\DIPurgeCommand;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Helpers;
+use Nette\Schema\Expect;
+use Nette\Schema\Schema;
+use stdClass;
 
+/**
+ * @property-read stdClass $config
+ */
 final class DIConsoleExtension extends CompilerExtension
 {
 
-	/** @var mixed[] */
-	private $defaults = [
-		'purge' => [
-			'%tempDir%/cache/Nette.Configurator',
-		],
-	];
+	public static function createSchema(): Schema
+	{
+		return Expect::structure([
+			'purge' => Expect::listOf('string'),
+		]);
+	}
+
+	public function getConfigSchema(): Schema
+	{
+		return self::createSchema();
+	}
 
 	public function loadConfiguration(): void
 	{
 		$builder = $this->getContainerBuilder();
+		$config = $this->config;
 
-		// Don't use predefined default values, if user provide it
-		if (isset($this->config['purge'])) {
-			$this->defaults['purge'] = [];
+		// Default values cannot be in schema, arrays are merged by keys
+		if ($config->purge === []) {
+			$config->purge = Helpers::expand(['%tempDir%/cache/nette.configurator'], $builder->parameters);
 		}
 
-		$config = $this->validateConfig($this->defaults);
-		$config = Helpers::expand($config, $builder->parameters);
-
 		$builder->addDefinition($this->prefix('purge'))
-			->setFactory(DIPurgeCommand::class, [$config['purge']]);
+			->setFactory(DIPurgeCommand::class, [$config->purge]);
 	}
 
 }
