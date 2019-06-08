@@ -1,4 +1,22 @@
-# Console Extra
+# Contributte Console Extra
+
+Nette-based console commands for latte, DIC, security, utils and many others.
+
+## Content
+
+- [Setup](#usage)
+- [Extensions](#extension)
+    - [Cache](#cacheconsole)
+    - [Caching](#cachingconsole)
+    - [DI](#diconsole)
+    - [Latte](#latteconsole)
+    - [Router](#routerconsole)
+    - [Security](#securityconsole)
+    - [Utils](#utilsconsole)
+    - [Database](#database)
+    - [AdvancedCache](#advancedcacheconsole)
+- [Compatibility](#compatibility)
+    - [Kdyby/Console](#kdybyconsole)
 
 ## Setup
 
@@ -44,7 +62,7 @@ extensions:
     console.advancedCache: Contributte\Console\Extra\DI\AdvancedCacheConsoleExtension
 ```
 
-To use these commands you need to setup a **[bin/console entrypoint](https://github.com/contributte/console/blob/master/.docs/README.md#entrypoint)**.
+To use these commands you need to setup a **[bin/console entrypoint](https://github.com/contributte/console/blob/master/#entrypoint)**.
 
 ## Extension
 
