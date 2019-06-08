@@ -20,17 +20,16 @@
     }
   ],
   "require": {
-    "php": ">= 7.1",
-    "nette/di": "~2.4.11|~3.0",
+    "php": "^7.2",
+    "contributte/di": "^0.4.0",
     "symfony/console": "^4.0.0"
   },
   "require-dev": {
-    "latte/latte": "~2.4.7|~2.6",
-    "nette/application": "~2.4.9|~3.0",
-    "nette/bootstrap": "~2.4.6|~3.0",
-    "nette/caching": "~3.0",
-    "nette/security": "~2.4.3|~3.0",
-    "nette/utils": "~2.5.1|~3.0",
+    "latte/latte": "~2.5.1",
+    "nette/application": "~3.0.0",
+    "nette/bootstrap": "~3.0.0",
+    "nette/caching": "~3.0.0",
+    "nette/security": "~3.0.0",
     "ninjify/nunjuck": "^0.2.0",
     "ninjify/qa": "^0.9.0",
     "phpstan/extension-installer": "^1.0",
@@ -59,7 +58,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "0.5.x-dev"
+      "dev-master": "0.6.x-dev"
     }
   }
 }
