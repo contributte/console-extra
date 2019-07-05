@@ -237,12 +237,10 @@ console.advancedCache:
     )
     ```
 
-    You will also need slightly modify `bootstrap.php` to get this generator work.
+    You will also need slightly modify `Bootstrap.php` to get this generator work.
 
     ```php
     $configurator->addServices(['configurator' => $configurator]); // we need Configurator available as a service
-    $container = $configurator->createContainer();
-    return $container;
     ```
 
 ##### Implement your own generator:
