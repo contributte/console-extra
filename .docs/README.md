@@ -80,7 +80,7 @@ At this moment, these bridges are available:
 ### CacheConsole
 
 ```yaml
-cache.console:
+console.cache:
     purge:
         - %tempDir%/cache
 ```
