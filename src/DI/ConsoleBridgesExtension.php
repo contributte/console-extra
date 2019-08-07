@@ -16,14 +16,14 @@ final class ConsoleBridgesExtension extends CompilerExtension
 	public function getConfigSchema(): Schema
 	{
 		return Expect::structure([
-			'advancedCache' => Expect::anyOf(false, AdvancedCacheConsoleExtension::createSchema())->default([]),
-			'cache' => Expect::anyOf(false, CacheConsoleExtension::createSchema())->default([]),
-			'caching' => Expect::anyOf(false)->default([]),
-			'di' => Expect::anyOf(false, DIConsoleExtension::createSchema())->default([]),
-			'latte' => Expect::anyOf(false, LatteConsoleExtension::createSchema())->default([]),
-			'router' => Expect::anyOf(false)->default([]),
-			'security' => Expect::anyOf(false)->default([]),
-			'utils' => Expect::anyOf(false)->default([]),
+			'advancedCache' => Expect::anyOf(false, AdvancedCacheConsoleExtension::createSchema()),
+			'cache' => Expect::anyOf(false, CacheConsoleExtension::createSchema()),
+			'caching' => Expect::anyOf(false),
+			'di' => Expect::anyOf(false, DIConsoleExtension::createSchema()),
+			'latte' => Expect::anyOf(false, LatteConsoleExtension::createSchema()),
+			'router' => Expect::anyOf(false),
+			'security' => Expect::anyOf(false),
+			'utils' => Expect::anyOf(false),
 		])->castTo('array');
 	}
 
