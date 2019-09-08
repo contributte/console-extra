@@ -44,7 +44,7 @@ class AdvancedCacheConsoleExtension extends CompilerExtension
 		// Register generators
 		$generatorDefinitions = [];
 
-		foreach ($config->generators as $generatorName => $generatorConfig) {
+		foreach (($config->generators ?? []) as $generatorName => $generatorConfig) {
 			$generatorPrefix = $this->prefix('generator.' . $generatorName);
 			$generatorDefinition = $definitionsHelper->getDefinitionFromConfig($generatorConfig, $generatorPrefix);
 
@@ -62,7 +62,7 @@ class AdvancedCacheConsoleExtension extends CompilerExtension
 		// Register cleaners
 		$cleanerDefinitions = [];
 
-		foreach ($config->cleaners as $cleanerName => $cleanerConfig) {
+		foreach (($config->cleaners ?? []) as $cleanerName => $cleanerConfig) {
 			$cleanerPrefix = $this->prefix('cleaner.' . $cleanerName);
 			$cleanerDefinition = $definitionsHelper->getDefinitionFromConfig($cleanerConfig, $cleanerPrefix);
 

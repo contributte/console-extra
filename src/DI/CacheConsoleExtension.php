@@ -7,10 +7,9 @@ use Nette\DI\CompilerExtension;
 use Nette\DI\Helpers;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
-use stdClass;
 
 /**
- * @property-read stdClass $config
+ * @property-read mixed[] $config
  */
 final class CacheConsoleExtension extends CompilerExtension
 {
@@ -19,7 +18,7 @@ final class CacheConsoleExtension extends CompilerExtension
 	{
 		return Expect::structure([
 			'purge' => Expect::listOf('string'),
-		]);
+		])->castTo('array');
 	}
 
 	public function getConfigSchema(): Schema
@@ -33,12 +32,12 @@ final class CacheConsoleExtension extends CompilerExtension
 		$config = $this->config;
 
 		// Default values cannot be in schema, arrays are merged by keys
-		if ($config->purge === []) {
-			$config->purge = Helpers::expand(['%tempDir%/cache'], $builder->parameters);
+		if (!isset($config['purge']) || ($config['purge'] === [])) {
+			$config['purge'] = Helpers::expand(['%tempDir%/cache'], $builder->parameters);
 		}
 
 		$builder->addDefinition($this->prefix('purge'))
-			->setFactory(CachePurgeCommand::class, [$config->purge]);
+			->setFactory(CachePurgeCommand::class, [$config['purge']]);
 	}
 
 }
