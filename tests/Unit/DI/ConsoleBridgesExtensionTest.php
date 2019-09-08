@@ -80,8 +80,8 @@ class ConsoleBridgesExtensionTest extends TestCase
 		$config = $processor->process($schema, []);
 		$components = ['advancedCache', 'cache', 'caching', 'di', 'latte', 'router', 'security', 'utils'];
 
-		foreach (array_keys($config) as $component) {
-			Assert::true(in_array($component, $components));
+		foreach (array_keys($config) as $name) {
+			Assert::true(in_array($name, $components));
 		}
 	}
 
