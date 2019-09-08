@@ -25,6 +25,7 @@
     "symfony/console": "^4.0.0"
   },
   "require-dev": {
+    "contributte/console": "~0.7",
     "latte/latte": "~2.5.1",
     "nette/application": "~3.0.0",
     "nette/bootstrap": "~3.0.0",
