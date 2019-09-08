@@ -6,6 +6,7 @@ use Nette\DI\CompilerExtension;
 use Nette\PhpGenerator\ClassType;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
+use stdClass;
 
 /**
  * @property-read mixed[] $config
@@ -16,14 +17,14 @@ final class ConsoleBridgesExtension extends CompilerExtension
 	public function getConfigSchema(): Schema
 	{
 		return Expect::structure([
-			'advancedCache' => Expect::anyOf(false, AdvancedCacheConsoleExtension::createSchema()),
-			'cache' => Expect::anyOf(false, CacheConsoleExtension::createSchema()),
-			'caching' => Expect::anyOf(false),
-			'di' => Expect::anyOf(false, DIConsoleExtension::createSchema()),
-			'latte' => Expect::anyOf(false, LatteConsoleExtension::createSchema()),
-			'router' => Expect::anyOf(false),
-			'security' => Expect::anyOf(false),
-			'utils' => Expect::anyOf(false),
+			'advancedCache' => Expect::anyOf(false, AdvancedCacheConsoleExtension::createSchema())->default(new stdClass()),
+			'cache' => Expect::anyOf(false, CacheConsoleExtension::createSchema())->default(new stdClass()),
+			'caching' => Expect::anyOf(false)->default(new stdClass()),
+			'di' => Expect::anyOf(false, DIConsoleExtension::createSchema())->default(new stdClass()),
+			'latte' => Expect::anyOf(false, LatteConsoleExtension::createSchema())->default(new stdClass()),
+			'router' => Expect::anyOf(false)->default(new stdClass()),
+			'security' => Expect::anyOf(false)->default(new stdClass()),
+			'utils' => Expect::anyOf(false)->default(new stdClass()),
 		])->castTo('array');
 	}
 
