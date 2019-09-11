@@ -232,16 +232,22 @@ console.advancedCache:
             debug: [debugMode: true, consoleMode: false],
             production: [debugMode: false, consoleMode: false],
             console: [debugMode: true, consoleMode: true]
-        ],
-        "?->getService('configurator')"(@container)
+        ]
     )
     ```
 
-    You will also need slightly modify `Bootstrap.php` to get this generator work.
+    You will also need slightly modify `Bootstrap.php` and add Configurator as dynamic (imported) service to neon to get this generator work.
 
     ```php
-    $configurator->addServices(['configurator' => $configurator]); // we need Configurator available as a service
+    $configurator->addServices(['configurator' => $configurator]);
     ```
+
+   ```yaml
+   services:
+       configurator:
+           factory: Nette\Configurator
+           imported: true
+   ```
 
 ##### Implement your own generator:
 
