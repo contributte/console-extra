@@ -33,7 +33,7 @@ final class CacheConsoleExtension extends CompilerExtension
 		$config = $this->config;
 
 		// Default values cannot be in schema, arrays are merged by keys
-		if (!isset($config->purge) || ($config->purge === [])) {
+		if ($config->purge === []) {
 			$config->purge = Helpers::expand(['%tempDir%/cache'], $builder->parameters);
 		}
 
