@@ -36,18 +36,18 @@ final class LatteConsoleExtension extends CompilerExtension
 		$config = $this->config;
 
 		// Default values cannot be in schema, arrays are merged by keys
-		if (!isset($config->warmup) || ($config->warmup === [])) {
+		if ($config->warmup === []) {
 			$config->warmup = Helpers::expand(['%appDir%'], $builder->parameters);
 		}
 
-		if (!isset($config->purge) || ($config->purge === [])) {
+		if ($config->purge === []) {
 			$config->purge = Helpers::expand(['%tempDir%/cache/latte'], $builder->parameters);
 		}
 
 		$builder->addDefinition($this->prefix('warmup'))
 			->setFactory(LatteWarmupCommand::class, [
 				1 => $config->warmup,
-				2 => $config->warmupExclude ?? [],
+				2 => $config->warmupExclude,
 			]);
 
 		$builder->addDefinition($this->prefix('purge'))
