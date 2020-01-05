@@ -35,7 +35,7 @@ final class RouterDumpCommand extends Command
 		$this->setDescription('Display all defined routes');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): void
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$table = new Table($output);
 		$table
@@ -43,6 +43,8 @@ final class RouterDumpCommand extends Command
 			->setRows($this->createRows());
 
 		$table->render();
+
+		return 0;
 	}
 
 	/**

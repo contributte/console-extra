@@ -34,7 +34,7 @@ class CachingClearCommand extends Command
 		$this->addOption('priority', 'p', InputOption::VALUE_OPTIONAL, 'Clear by priority');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): void
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Caching Clear');
@@ -53,8 +53,10 @@ class CachingClearCommand extends Command
 		} else {
 			$style->warning('Specify clearing strategy.');
 
-			return;
+			return 1;
 		}
+
+		return 0;
 	}
 
 }

@@ -32,7 +32,7 @@ class CachePurgeCommand extends Command
 		$this->setDescription('Clear temp folders and others');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): void
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Cache Purge');
@@ -43,6 +43,8 @@ class CachePurgeCommand extends Command
 		}
 
 		$style->success(sprintf('Purging done. Total %d folders purged.', count($this->dirs)));
+
+		return 0;
 	}
 
 }

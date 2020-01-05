@@ -32,7 +32,7 @@ class LattePurgeCommand extends Command
 		$this->setDescription('Clear temp/latte folder');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): void
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Latte Purge');
@@ -43,6 +43,8 @@ class LattePurgeCommand extends Command
 		}
 
 		$style->success(sprintf('Purging done. Total %d folders purged.', count($this->dirs)));
+
+		return 0;
 	}
 
 }
