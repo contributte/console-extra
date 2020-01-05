@@ -24,7 +24,7 @@ class UtilsRandomCommand extends Command
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): void
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Nette Random');
@@ -42,6 +42,8 @@ class UtilsRandomCommand extends Command
 
 		$table->render();
 		$style->success(sprintf('Total generated strings %d.', $input->getOption('count')));
+
+		return 0;
 	}
 
 }

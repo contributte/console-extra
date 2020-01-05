@@ -45,7 +45,7 @@ class LatteWarmupCommand extends Command
 		$this->setDescription('Warmup Latte templates (*.latte)');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): void
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Latte Warmup');
@@ -90,6 +90,8 @@ class LatteWarmupCommand extends Command
 		} else {
 			$style->success(sprintf('Warmup done. Total %d files.', $stats['ok']));
 		}
+
+		return 0;
 	}
 
 }

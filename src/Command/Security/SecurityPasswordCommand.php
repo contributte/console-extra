@@ -36,7 +36,7 @@ class SecurityPasswordCommand extends Command
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): void
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Security Password');
@@ -62,6 +62,8 @@ class SecurityPasswordCommand extends Command
 
 			$table->render();
 			$style->success(sprintf('Total generated and hashed passwords %d.', $input->getOption('count')));
+
+			return 0;
 		}
 	}
 
