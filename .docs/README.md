@@ -245,7 +245,7 @@ console.advancedCache:
    ```yaml
    services:
        configurator:
-           class: Nette\Configurator
+           type: Nette\Configurator
            imported: true
    ```
 
