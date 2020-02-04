@@ -47,6 +47,8 @@ class SecurityPasswordCommand extends Command
 			$style->comment('Password given');
 			$encrypted = $this->passwords->hash($password);
 			$style->success(sprintf('Hashed password: %s', $encrypted));
+
+			return 0;
 		} else {
 			// Generate more passwords
 			$table = new Table($output);
