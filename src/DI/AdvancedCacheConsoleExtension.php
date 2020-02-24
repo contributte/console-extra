@@ -70,7 +70,7 @@ class AdvancedCacheConsoleExtension extends CompilerExtension
 				$cleanerDefinition->setAutowired(false);
 			}
 
-			$cleanerDefinitions[] = $cleanerDefinition;
+			$cleanerDefinitions[$cleanerName] = $cleanerDefinition;
 		}
 
 		$builder->addDefinition($this->prefix('cleanCommand'))
