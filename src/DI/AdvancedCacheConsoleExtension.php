@@ -52,7 +52,7 @@ class AdvancedCacheConsoleExtension extends CompilerExtension
 				$generatorDefinition->setAutowired(false);
 			}
 
-			$generatorDefinitions[] = $generatorDefinition;
+			$generatorDefinitions[$generatorName] = $generatorDefinition;
 		}
 
 		$builder->addDefinition($this->prefix('generatorCommand'))
