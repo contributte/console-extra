@@ -62,7 +62,7 @@ extensions:
     console.advancedCache: Contributte\Console\Extra\DI\AdvancedCacheConsoleExtension
 ```
 
-To use these commands you need to setup a **[bin/console entrypoint](https://github.com/contributte/console/blob/master/#entrypoint)**.
+To use these commands you need to setup a **[bin/console entrypoint](https://github.com/contributte/console/tree/master/.docs#entrypoint)**.
 
 ## Extension
 
