@@ -2,9 +2,3 @@ parameters:
 	ignoreErrors:
 		- '#Accessing property $arguments on possibly null value of type Nette\DI\Statement|null#'
 		- '#Method Contributte\\Console\\Extra\\Command\\Router\\RouterDumpCommand::createRows\(\) should return array but returns array\|object\.#'
-		- '#Property Contributte\\Console\\Extra\\Cache\\Cleaners\\MemcachedCleaner::\$memcaches has unknown class Memcache as its type\.#'
-		- '#Property Contributte\\Console\\Extra\\Cache\\Cleaners\\MemcachedCleaner::\$memcaches has unknown class Memcached as its type\.#'
-		- '#Parameter \$memcaches of method Contributte\\Console\\Extra\\Cache\\Cleaners\\MemcachedCleaner::__construct\(\) has invalid typehint type Memcache\.#'
-		- '#Parameter \$memcaches of method Contributte\\Console\\Extra\\Cache\\Cleaners\\MemcachedCleaner::__construct\(\) has invalid typehint type Memcached\.#'
-		- '#Call to method flush\(\) on an unknown class Memcache\.#'
-		- '#Call to method flush\(\) on an unknown class Memcached\.#'
