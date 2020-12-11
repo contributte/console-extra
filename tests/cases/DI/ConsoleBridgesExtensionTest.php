@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Contributte\Console\Extra\Unit\DI;
+namespace Tests\DI;
 
 use Contributte\Console\DI\ConsoleExtension;
 use Contributte\Console\Extra\Command\AdvancedCache\CacheCleanCommand;
