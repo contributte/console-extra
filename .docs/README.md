@@ -60,6 +60,7 @@ extensions:
     console.security: Contributte\Console\Extra\DI\SecurityConsoleExtension
     console.utils: Contributte\Console\Extra\DI\UtilsConsoleExtension
     console.advancedCache: Contributte\Console\Extra\DI\AdvancedCacheConsoleExtension
+    console.database: Contributte\Console\Extra\DI\DatabaseConsoleExtension
 ```
 
 To use these commands you need to setup a **[bin/console entrypoint](https://github.com/contributte/console/tree/master/.docs#entrypoint)**.
@@ -162,10 +163,7 @@ Available commands:
 ### Database
 
 ```yaml
-extensions:
-    databaseBackup: Contributte\Console\Extra\Database\DI\DatabaseBackupConsoleExtension
-
-databaseBackup:
+console.database:
     backupPath: %appDir%/../backups/database
     consoleMode: %consoleMode%
 ```
@@ -360,7 +358,7 @@ How to make this extension work with other Symfony/Console implementations.
 
 ### Kdyby/Console
 
-`Kdyby` packages use the `kdyby.console.command` tag to mark its `Command` classes in order to find them. So it won't recognize commands from other packages which don't tag them this way. 
+`Kdyby` packages use the `kdyby.console.command` tag to mark its `Command` classes in order to find them. So it won't recognize commands from other packages which don't tag them this way.
 
 This is where the decorator extension comes into play:
 
