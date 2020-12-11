@@ -2,10 +2,10 @@
 
 namespace Contributte\Console\Extra\Command\Router;
 
-use Nette\Application\IRouter;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
 use Nette\Application\Routers\SimpleRouter;
+use Nette\Routing\Router;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,10 +17,10 @@ final class RouterDumpCommand extends Command
 	/** @var string */
 	protected static $defaultName = 'nette:router:dump';
 
-	/** @var IRouter */
+	/** @var Router */
 	private $router;
 
-	public function __construct(IRouter $router)
+	public function __construct(Router $router)
 	{
 		parent::__construct();
 		$this->router = $router;
@@ -58,7 +58,7 @@ final class RouterDumpCommand extends Command
 	/**
 	 * @return mixed[]|object
 	 */
-	protected function analyse(IRouter $router, ?string $module = null)
+	protected function analyse(Router $router, ?string $module = null)
 	{
 		if ($router instanceof RouteList) {
 			$routes = [];
@@ -77,7 +77,7 @@ final class RouterDumpCommand extends Command
 		} else {
 			return (object) [
 				'mask' => $router instanceof Route ? $router->getMask() : null,
-				'module' => rtrim($module, ':'),
+				'module' => rtrim((string) $module, ':'),
 				'defaults' => $router instanceof Route || $router instanceof SimpleRouter ? $this->analyseDefaults($router->getDefaults()) : null,
 				'class' => get_class($router),
 			];

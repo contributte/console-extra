@@ -4,6 +4,7 @@ namespace Contributte\Console\Extra\Command\AdvancedCache;
 
 use Contributte\Console\Extra\Cache\Generators\IGenerator;
 use Contributte\Console\Extra\Exception\Logical\InvalidArgumentException;
+use Contributte\Console\Extra\Utils\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -37,7 +38,7 @@ class CacheGenerateCommand extends Command
 		$this->addOption('generator', 'g', InputOption::VALUE_REQUIRED, 'Use only one generator');
 	}
 
-	protected function execute(InputInterface $input, OutputInterface $output): ?int
+	protected function execute(InputInterface $input, OutputInterface $output): int
 	{
 		//todo - vypsat co failnulo a co se podařilo
 		$style = new SymfonyStyle($input, $output);
@@ -60,7 +61,7 @@ class CacheGenerateCommand extends Command
 
 		if (($generatorName = $input->getOption('generator')) !== null) {
 			if (!is_string($generatorName) || !isset($this->generators[$generatorName])) {
-				throw new InvalidArgumentException(sprintf('Cannot run undefined generator "%s"', $generatorName));
+				throw new InvalidArgumentException(sprintf('Cannot run undefined generator "%s"', Utils::stringify($generatorName)));
 			}
 
 			$this->generators[$generatorName]->generate($input, $output);

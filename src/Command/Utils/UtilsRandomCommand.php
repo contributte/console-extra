@@ -35,13 +35,13 @@ class UtilsRandomCommand extends Command
 		for ($i = 1; $i <= $input->getOption('count'); $i++) {
 			$table->addRow([$i, Random::generate(50)]);
 
-			if ($i !== $input->getOption('count')) {
+			if ($i !== intval($input->getOption('count'))) {
 				$table->addRow(new TableSeparator());
 			}
 		}
 
 		$table->render();
-		$style->success(sprintf('Total generated strings %d.', $input->getOption('count')));
+		$style->success(sprintf('Total generated strings %d.', intval($input->getOption('count'))));
 
 		return 0;
 	}

@@ -1,8 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Contributte\Console\Extra\Database;
+namespace Contributte\Console\Extra\Utils;
 
-class Helpers
+class Database
 {
 
 	public const PLATFORM_POSTGRES = 'postgresql';
@@ -13,7 +13,7 @@ class Helpers
 	 */
 	public static function normalizeBinPath(?string $binPath, array $libs): string
 	{
-		return $binPath ? rtrim(str_replace($libs, '', $binPath), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR : '';
+		return $binPath !== null ? rtrim(str_replace($libs, '', $binPath), DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR : '';
 	}
 
 	public static function isSql(string $fileName): bool

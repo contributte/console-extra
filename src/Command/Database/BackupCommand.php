@@ -1,8 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Contributte\Console\Extra\Database\Command;
+namespace Contributte\Console\Extra\Command\Database;
 
-use Contributte\Console\Extra\Database\Helpers;
+use Contributte\Console\Extra\Utils\Database;
+use Contributte\Console\Extra\Utils\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -62,11 +63,11 @@ class BackupCommand extends Command
 
 		if ($filename === null || $filename === '') {
 			$filename = $database . '.backup.' . date('d-m-Y-h-i') . (!$gzip ? '.sql' : '.gz');
-		} elseif ($gzip && !Helpers::isGz($filename)) {
+		} elseif ($gzip && !Database::isGz($filename)) {
 			$output->writeln('<error>Error: expected ".gz" filename extension</error>');
 
 			return 1;
-		} elseif (!$gzip && !Helpers::isSql($filename)) {
+		} elseif (!$gzip && !Database::isSql($filename)) {
 			$output->writeln('<error>Error: expected ".sql" filename extension</error>');
 
 			return 1;
@@ -90,8 +91,8 @@ class BackupCommand extends Command
 		$backupDestination = escapeshellarg($path . DIRECTORY_SEPARATOR . $filename);
 
 		// Normalize bin-path
-		$binPath = $input->getOption('bin-path');
-		$binPath = Helpers::normalizeBinPath($binPath, ['mysqldump', 'pg_dump']);
+		$binPath = Utils::stringify($input->getOption('bin-path'));
+		$binPath = Database::normalizeBinPath($binPath, ['mysqldump', 'pg_dump']);
 
 		// Create command
 		/** @var string $platform */
@@ -105,7 +106,7 @@ class BackupCommand extends Command
 		/** @var string $host */
 		$host = $input->getArgument('host');
 
-		if ($platform === Helpers::PLATFORM_MYSQL) {
+		if ($platform === Database::PLATFORM_MYSQL) {
 			$port = $port !== '' ? '--port ' . $port : '';
 			$command = $binPath . sprintf(
 				'mysqldump --user %s --password=\'%s\' --host %s %s --opt %s',
@@ -115,7 +116,7 @@ class BackupCommand extends Command
 				$port,
 				$database
 			);
-		} elseif ($platform === Helpers::PLATFORM_POSTGRES) {
+		} elseif ($platform === Database::PLATFORM_POSTGRES) {
 			$port = $port !== '' ? ':' . $port : '';
 			$command = $binPath . sprintf(
 				'pg_dump --dbname=postgresql://%s:%s@%s%s/%s --blobs --no-owner',

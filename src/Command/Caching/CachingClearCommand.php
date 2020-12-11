@@ -2,6 +2,7 @@
 
 namespace Contributte\Console\Extra\Command\Caching;
 
+use Contributte\Console\Extra\Utils\Utils;
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
 use Symfony\Component\Console\Command\Command;
@@ -42,13 +43,13 @@ class CachingClearCommand extends Command
 		if ($input->getOption('all') === null) {
 			$this->storage->clean([Cache::ALL => true]);
 			$style->success('Clearing whole storage done.');
-		} elseif ($input->getOption('tag')) {
+		} elseif ($input->getOption('tag') !== null) {
 			$this->storage->clean([Cache::TAGS => $input->getOption('tag')]);
-			$style->listing($input->getOption('tag'));
+			$style->listing((array) $input->getOption('tag'));
 			$style->success('Clearing by tags done.');
-		} elseif ($input->getOption('priority')) {
+		} elseif ($input->getOption('priority') !== null) {
 			$this->storage->clean([Cache::PRIORITY => $input->getOption('priority')]);
-			$style->comment($input->getOption('priority'));
+			$style->comment(Utils::stringify($input->getOption('priority')));
 			$style->success('Clearing by priority done.');
 		} else {
 			$style->warning('Specify clearing strategy.');

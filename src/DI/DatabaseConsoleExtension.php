@@ -1,9 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Contributte\Console\Extra\Database\DI;
+namespace Contributte\Console\Extra\DI;
 
-use Contributte\Console\Extra\Database\Command\BackupCommand;
-use Contributte\Console\Extra\Database\Command\LoadCommand;
+use Contributte\Console\Extra\Command\Database\BackupCommand;
+use Contributte\Console\Extra\Command\Database\LoadCommand;
 use Nette\DI\CompilerExtension;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
@@ -12,7 +12,7 @@ use stdClass;
 /**
  * @property-read stdClass $config
  */
-class DatabaseBackupConsoleExtension extends CompilerExtension
+class DatabaseConsoleExtension extends CompilerExtension
 {
 
 	public function getConfigSchema(): Schema

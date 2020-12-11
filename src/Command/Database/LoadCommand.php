@@ -1,8 +1,9 @@
 <?php declare(strict_types = 1);
 
-namespace Contributte\Console\Extra\Database\Command;
+namespace Contributte\Console\Extra\Command\Database;
 
-use Contributte\Console\Extra\Database\Helpers;
+use Contributte\Console\Extra\Utils\Database;
+use Contributte\Console\Extra\Utils\Utils;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -43,9 +44,9 @@ class LoadCommand extends Command
 		}
 
 		// Setup gunzip
-		if (Helpers::isSql($filename)) {
+		if (Database::isSql($filename)) {
 			$packed = false;
-		} elseif (Helpers::isGz($filename)) {
+		} elseif (Database::isGz($filename)) {
 			$packed = true;
 
 			if (!$this->isGunzipEnabled()) {
@@ -63,8 +64,8 @@ class LoadCommand extends Command
 		$filename = escapeshellarg($filename);
 
 		// Normalize binPath
-		$binPath = $input->getOption('bin-path');
-		$binPath = Helpers::normalizeBinPath($binPath, ['mysql', 'psql']);
+		$binPath = Utils::stringify($input->getOption('bin-path'));
+		$binPath = Database::normalizeBinPath($binPath, ['mysql', 'psql']);
 
 		// Create command
 		/** @var string $platform */
@@ -80,7 +81,7 @@ class LoadCommand extends Command
 		/** @var string $host */
 		$host = $input->getArgument('host');
 
-		if ($platform === Helpers::PLATFORM_MYSQL) {
+		if ($platform === Database::PLATFORM_MYSQL) {
 			$port = $port !== '' ? '--port ' . $port : '';
 			$command = $binPath . sprintf(
 				'mysql --user %s --password=\'%s\' --host %s %s %s',
@@ -90,7 +91,7 @@ class LoadCommand extends Command
 				$port,
 				$database
 			);
-		} elseif ($platform === Helpers::PLATFORM_POSTGRES) {
+		} elseif ($platform === Database::PLATFORM_POSTGRES) {
 			$port = $port !== '' ? ':' . $port : '';
 			$command = $binPath . sprintf(
 				'psql --dbname=postgresql://%s:%s@%s%s/%s',

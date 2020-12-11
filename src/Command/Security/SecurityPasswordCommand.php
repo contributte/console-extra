@@ -41,11 +41,11 @@ class SecurityPasswordCommand extends Command
 		$style = new SymfonyStyle($input, $output);
 		$style->title('Security Password');
 
-		if ($input->getArgument('password')) {
+		if ($input->getArgument('password') !== null) {
 			// Generate one password
 			$password = $input->getArgument('password');
 			$style->comment('Password given');
-			$encrypted = $this->passwords->hash($password);
+			$encrypted = $this->passwords->hash(strval($password));
 			$style->success(sprintf('Hashed password: %s', $encrypted));
 
 			return 0;
@@ -57,13 +57,13 @@ class SecurityPasswordCommand extends Command
 			for ($i = 1; $i <= $input->getOption('count'); $i++) {
 				$table->addRow([$i, $this->passwords->hash(sha1(Random::generate(50) . time() . random_bytes(20)))]);
 
-				if ($i !== $input->getOption('count')) {
+				if ($i !== intval($input->getOption('count'))) {
 					$table->addRow(new TableSeparator());
 				}
 			}
 
 			$table->render();
-			$style->success(sprintf('Total generated and hashed passwords %d.', $input->getOption('count')));
+			$style->success(sprintf('Total generated and hashed passwords %d.', intval($input->getOption('count'))));
 
 			return 0;
 		}
