@@ -1,17 +1,16 @@
 <?xml version="1.0"?>
 <ruleset>
-	<rule ref="./vendor/ninjify/coding-standard/contributte.xml">
-		<exclude name="SlevomatCodingStandard.ControlStructures.RequireMultiLineTernaryOperator"/>
+	<!-- Specific rules -->
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<properties>
+			<property name="rootNamespaces" type="array">
+				<element key="src" value="Contributte\Console\Extra"/>
+				<element key="tests/cases" value="Tests"/>
+			</property>
+		</properties>
 	</rule>
 
-	<!-- Package specific rules -->
-	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
-        <properties>
-            <property name="rootNamespaces" type="array" value="
-                src=>Contributte\Console\Extra,
-                tests=>Tests\Contributte\Console\Extra,
-            "/>
-			<property name="extensions" type="array" value="php, phpt"/>
-        </properties>
-    </rule>
+	<!--Exclude folders -->
+	<exclude-pattern>/tests/tmp</exclude-pattern>
 </ruleset>
+
