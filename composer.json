@@ -34,6 +34,9 @@
     "phpstan/phpstan-nette": "^0.12",
     "phpstan/phpstan-strict-rules": "^0.12"
   },
+  "conflict": {
+    "nette/schema": "<1.0.1"
+  },
   "suggest": {
     "contributte/console": "Symfony\\Console for Nette"
   },
