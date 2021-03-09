@@ -362,7 +362,7 @@ How to make this extension work with other Symfony/Console implementations.
 
 This is where the decorator extension comes into play:
 
-``` yaml
+```yaml
 decorator:
     Symfony\Component\Console\Command\Command:
         tags: [kdyby.console.command]
