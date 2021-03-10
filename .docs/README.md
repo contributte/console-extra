@@ -6,17 +6,17 @@ Nette-based console commands for latte, DIC, security, utils and many others.
 
 - [Setup](#usage)
 - [Extensions](#extension)
-    - [Cache](#cacheconsole)
-    - [Caching](#cachingconsole)
-    - [DI](#diconsole)
-    - [Latte](#latteconsole)
-    - [Router](#routerconsole)
-    - [Security](#securityconsole)
-    - [Utils](#utilsconsole)
-    - [Database](#database)
-    - [AdvancedCache](#advancedcacheconsole)
+	- [Cache](#cacheconsole)
+	- [Caching](#cachingconsole)
+	- [DI](#diconsole)
+	- [Latte](#latteconsole)
+	- [Router](#routerconsole)
+	- [Security](#securityconsole)
+	- [Utils](#utilsconsole)
+	- [Database](#database)
+	- [AdvancedCache](#advancedcacheconsole)
 - [Compatibility](#compatibility)
-    - [Kdyby/Console](#kdybyconsole)
+	- [Kdyby/Console](#kdybyconsole)
 
 ## Setup
 
@@ -28,39 +28,39 @@ composer require contributte/console-extra
 
 Register all commands
 
-```yaml
+```neon
 extensions:
-    console: Contributte\Console\DI\DIConsoleExtension
+	console: Contributte\Console\DI\DIConsoleExtension
 
-    # register all console bridges
-    console.extra: Contributte\Console\Extra\DI\ConsoleBridgesExtension
+	# register all console bridges
+	console.extra: Contributte\Console\Extra\DI\ConsoleBridgesExtension
 
 console.extra:
-    # optionally disable these bridges
-    cache: false
-    caching: false
-    di: false
-    latte: false
-    router: false
-    security: false
-    utils: false
-    advancedCache: false
+	# optionally disable these bridges
+	cache: false
+	caching: false
+	di: false
+	latte: false
+	router: false
+	security: false
+	utils: false
+	advancedCache: false
 ```
 
 You can also register bridges one by one
 
-```yaml
+```neon
 extensions:
-    # register only bridges of your choice
-    console.cache: Contributte\Console\Extra\DI\CacheConsoleExtension
-    console.caching: Contributte\Console\Extra\DI\CachingConsoleExtension
-    console.di: Contributte\Console\Extra\DI\DIConsoleExtension
-    console.latte: Contributte\Console\Extra\DI\LatteConsoleExtension
-    console.router: Contributte\Console\Extra\DI\RouterConsoleExtension
-    console.security: Contributte\Console\Extra\DI\SecurityConsoleExtension
-    console.utils: Contributte\Console\Extra\DI\UtilsConsoleExtension
-    console.advancedCache: Contributte\Console\Extra\DI\AdvancedCacheConsoleExtension
-    console.database: Contributte\Console\Extra\DI\DatabaseConsoleExtension
+	# register only bridges of your choice
+	console.cache: Contributte\Console\Extra\DI\CacheConsoleExtension
+	console.caching: Contributte\Console\Extra\DI\CachingConsoleExtension
+	console.di: Contributte\Console\Extra\DI\DIConsoleExtension
+	console.latte: Contributte\Console\Extra\DI\LatteConsoleExtension
+	console.router: Contributte\Console\Extra\DI\RouterConsoleExtension
+	console.security: Contributte\Console\Extra\DI\SecurityConsoleExtension
+	console.utils: Contributte\Console\Extra\DI\UtilsConsoleExtension
+	console.advancedCache: Contributte\Console\Extra\DI\AdvancedCacheConsoleExtension
+	console.database: Contributte\Console\Extra\DI\DatabaseConsoleExtension
 ```
 
 To use these commands you need to setup a **[bin/console entrypoint](https://github.com/contributte/console/tree/master/.docs#entrypoint)**.
@@ -80,10 +80,10 @@ At this moment, these bridges are available:
 
 ### CacheConsole
 
-```yaml
+```neon
 console.cache:
-    purge:
-        - %tempDir%/cache
+	purge:
+		- %tempDir%/cache
 ```
 
 The `purge` parameter expects an array of dirs.
@@ -98,22 +98,22 @@ Available commands:
 
 - `nette:caching:clear`
 
-    This command requires to specify the **cleaning strategy**.
+This command requires to specify the **cleaning strategy**.
 
-    The cleaning strategy options are:
+The cleaning strategy options are:
 
     - `--all` or `-a` shortcut
     - `--tag <tag>` or `-t <tag>` shortcut
     - `--priority <priority>` or `-p <priority>` shortcut
 
-    ***NOTE:** Only one tag can be used at the time.*
+***NOTE:** Only one tag can be used at the time.*
 
 ### DIConsole
 
-```yaml
+```neon
 console.di:
-    purge:
-        - %tempDir%/cache/Nette.Configurator
+	purge:
+		- %tempDir%/cache/Nette.Configurator
 ```
 
 The `purge` parameter expects an array of dirs.
@@ -124,13 +124,13 @@ Available commands:
 
 ### LatteConsole
 
-```yaml
+```neon
 console.latte:
-    warmup:
-         - %appDir%
-    warmupExclude: []
-    purge:
-         - %tempDir%/cache/latte
+	warmup:
+		 - %appDir%
+	warmupExclude: []
+	purge:
+		 - %tempDir%/cache/latte
 ```
 
 The `warmup`, `warmupExclude` and `purge` parameters are expecting an array of dirs.
@@ -158,14 +158,14 @@ Available commands:
 
 - `nette:utils:random`
 
-    This command supports count parameter (`--count <count>` or `-c <count>` shortcut), to change the count of random strings. Default count is **10**.
+This command supports count parameter (`--count <count>` or `-c <count>` shortcut), to change the count of random strings. Default count is **10**.
 
 ### Database
 
-```yaml
+```neon
 console.database:
-    backupPath: %appDir%/../backups/database
-    consoleMode: %consoleMode%
+	backupPath: %appDir%/../backups/database
+	consoleMode: %consoleMode%
 ```
 
 Backup database
@@ -197,55 +197,55 @@ Generate application cache with a single command
 
 ##### Register generators you want to use:
 
-```yaml
+```neon
 console.advancedCache:
-    generators:
-        latte: Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
-            @Nette\Application\UI\ITemplateFactory,
-            [%appDir%],
-            [],
-            ::realpath(%appDir%/..)
-        )
+	generators:
+		latte: Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
+			@Nette\Application\UI\ITemplateFactory,
+			[%appDir%],
+			[],
+			::realpath(%appDir%/..)
+		)
 ```
 
 ##### Available generators:
 
 - Latte templates cache generator
 
-    ```yaml
-    Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
-        [%appDir%],
-        @Nette\Bridges\ApplicationLatte\ILatteFactory::create()
-    )
-    ```
+```neon
+Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
+	[%appDir%],
+	@Nette\Bridges\ApplicationLatte\ILatteFactory::create()
+)
+```
 
 - DI containers generator
 
     - This example is configured to generate 3 containers - 1 for production mode, 1 for debug mode and 1 for console (should be enough for every application)
     - You don't need to add the `productionMode` parameter for Nette BC, it is done automatically.
 
-    ```yaml
-    Contributte\Console\Extra\Cache\Generators\DiContainersCacheGenerator(
-        [
-            debug: [debugMode: true, consoleMode: false],
-            production: [debugMode: false, consoleMode: false],
-            console: [debugMode: true, consoleMode: true]
-        ]
-    )
-    ```
+```neon
+Contributte\Console\Extra\Cache\Generators\DiContainersCacheGenerator(
+	[
+		debug: [debugMode: true, consoleMode: false],
+		production: [debugMode: false, consoleMode: false],
+		console: [debugMode: true, consoleMode: true]
+	]
+)
+```
 
-    You will also need slightly modify `Bootstrap.php` and add Configurator as dynamic (imported) service to neon to get this generator work.
+You will also need slightly modify `Bootstrap.php` and add Configurator as dynamic (imported) service to neon to get this generator work.
 
-    ```php
-    $configurator->addServices(['configurator' => $configurator]);
-    ```
+```php
+$configurator->addServices(['configurator' => $configurator]);
+```
 
-   ```yaml
-   services:
-       configurator:
-           type: Nette\Configurator
-           imported: true
-   ```
+ ```neon
+services:
+	configurator:
+		type: Nette\Configurator
+		imported: true
+ ```
 
 ##### Implement your own generator:
 
@@ -257,17 +257,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 class YourGenerator implements IGenerator
 {
 
-    public function getDescription(): string
-    {
-        return 'description which is shown in console when you run `contributte:cache:generate --list`'
-    }
+	public function getDescription(): string
+	{
+		return 'description which is shown in console when you run `contributte:cache:generate --list`'
+	}
 
-    public function generate(InputInterface $input, OutputInterface $output): bool
-    {
-        // generate cache
-        // inform about it in console
-        // return true if generating was successful, false otherwise
-    }
+	public function generate(InputInterface $input, OutputInterface $output): bool
+	{
+		// generate cache
+		// inform about it in console
+		// return true if generating was successful, false otherwise
+	}
 
 }
 ```
@@ -284,49 +284,49 @@ Clean application cache with a single command
 
 ##### Register cleaners you want to use:
 
-```yaml
+```neon
 console.advancedCache:
-    cleaners:
-        localFs: Contributte\Console\Extra\Cache\Cleaners\LocalFilesystemCleaner([%tempDir%])
+	cleaners:
+		localFs: Contributte\Console\Extra\Cache\Cleaners\LocalFilesystemCleaner([%tempDir%])
 ```
 
 ##### Available cleaners:
 
  - APC cleaner
 
-    ```yaml
-    Contributte\Console\Extra\Cache\Cleaners\ApcCleaner()
-    ```
+```neon
+Contributte\Console\Extra\Cache\Cleaners\ApcCleaner()
+```
 
 - APCu cleaner
 
-    ```yaml
-    Contributte\Console\Extra\Cache\Cleaners\ApcuCleaner()
-    ```
+```neon
+Contributte\Console\Extra\Cache\Cleaners\ApcuCleaner()
+```
 
 - Local filesystem cleaner
 
-    ```yaml
-    Contributte\Console\Extra\Cache\Cleaners\LocalFilesystemCleaner([%tempDir%], [%tempDir%/ignored/])
-    ```
+```neon
+Contributte\Console\Extra\Cache\Cleaners\LocalFilesystemCleaner([%tempDir%], [%tempDir%/ignored/])
+```
 
 - Memcache(d) cleaner
 
-    ```yaml
-    Contributte\Console\Extra\Cache\Cleaners\MemcachedCleaner([@memcache1, @memcache2])
-    ```
+```neon
+Contributte\Console\Extra\Cache\Cleaners\MemcachedCleaner([@memcache1, @memcache2])
+```
 
 - Nette\Caching\IStorage cleaner
 
-    ```yaml
-    Contributte\Console\Extra\Cache\Cleaners\NetteCachingStorageCleaner([@storage1, @storage2])
-    ```
+```neon
+Contributte\Console\Extra\Cache\Cleaners\NetteCachingStorageCleaner([@storage1, @storage2])
+```
 
 - Opcode cleaner
 
-    ```yaml
-    Contributte\Console\Extra\Cache\Cleaners\OpcodeCleaner()
-    ```
+```neon
+Contributte\Console\Extra\Cache\Cleaners\OpcodeCleaner()
+```
 
 ##### Implement your own cleaner:
 
@@ -338,17 +338,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 class YourCleaner implements ICleaner
 {
 
-    public function getDescription(): string
-    {
-        return 'description which is shown in console when you run `contributte:cache:clean --list`'
-    }
+	public function getDescription(): string
+	{
+		return 'description which is shown in console when you run `contributte:cache:clean --list`'
+	}
 
-    public function clean(InputInterface $input, OutputInterface $output): bool
-    {
-        // clean cache
-        // inform about it in console
-        // return true if cleaning was successful, false otherwise
-    }
+	public function clean(InputInterface $input, OutputInterface $output): bool
+	{
+		// clean cache
+		// inform about it in console
+		// return true if cleaning was successful, false otherwise
+	}
 
 }
 ```
@@ -362,10 +362,10 @@ How to make this extension work with other Symfony/Console implementations.
 
 This is where the decorator extension comes into play:
 
-```yaml
+```neon
 decorator:
-    Symfony\Component\Console\Command\Command:
-        tags: [kdyby.console.command]
+	Symfony\Component\Console\Command\Command:
+		tags: [kdyby.console.command]
 ```
 
 Now `kdyby.console` will be able to recognize all available commands added by this extension.
