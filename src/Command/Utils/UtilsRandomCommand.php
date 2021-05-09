@@ -21,7 +21,7 @@ class UtilsRandomCommand extends Command
 	{
 		$this->setName(static::$defaultName);
 		$this->setDescription('Generates random string(s) using Nette Random');
-		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);
+		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', '10');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int

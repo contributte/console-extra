@@ -33,7 +33,7 @@ class SecurityPasswordCommand extends Command
 		$this->setName(static::$defaultName);
 		$this->setDescription('Generates password (s) using Nette Passwords');
 		$this->addArgument('password', InputArgument::OPTIONAL, 'Given password');
-		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', 10);
+		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', '10');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int
