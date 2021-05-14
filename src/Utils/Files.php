@@ -23,6 +23,8 @@ class Files
 			new RecursiveDirectoryIterator($dir, RecursiveDirectoryIterator::SKIP_DOTS),
 			RecursiveIteratorIterator::CHILD_FIRST
 		);
+		
+		$ignored = array_map(function(string $path) {return realpath($path);}, $ignored);
 
 		/** @var SplFileObject $entry */
 		foreach ($iterator as $entry) {
