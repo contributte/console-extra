@@ -4,6 +4,7 @@ namespace Contributte\Console\Extra\Command\Latte;
 
 use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
+use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Utils\Finder;
 use SplFileInfo;
 use Symfony\Component\Console\Command\Command;
@@ -31,7 +32,7 @@ class LatteWarmupCommand extends Command
 	 * @param string[] $dirs
 	 * @param string[] $excludeDirs
 	 */
-	public function __construct(ITemplateFactory $templateFactory, array $dirs, array $excludeDirs = [])
+	public function __construct(TemplateFactory $templateFactory, array $dirs, array $excludeDirs = [])
 	{
 		parent::__construct();
 		$this->templateFactory = $templateFactory;
