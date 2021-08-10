@@ -5,6 +5,7 @@ namespace Contributte\Console\Extra\Command\Caching;
 use Contributte\Console\Extra\Utils\Utils;
 use Nette\Caching\Cache;
 use Nette\Caching\IStorage;
+use Nette\Caching\Storage;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -20,7 +21,7 @@ class CachingClearCommand extends Command
 	/** @var IStorage */
 	private $storage;
 
-	public function __construct(IStorage $storage)
+	public function __construct(Storage $storage)
 	{
 		parent::__construct();
 		$this->storage = $storage;
