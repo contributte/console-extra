@@ -6,17 +6,17 @@ Nette-based console commands for latte, DIC, security, utils and many others.
 
 - [Setup](#usage)
 - [Extensions](#extension)
-	- [Cache](#cacheconsole)
-	- [Caching](#cachingconsole)
-	- [DI](#diconsole)
-	- [Latte](#latteconsole)
-	- [Router](#routerconsole)
-	- [Security](#securityconsole)
-	- [Utils](#utilsconsole)
-	- [Database](#database)
-	- [AdvancedCache](#advancedcacheconsole)
+  - [Cache](#cacheconsole)
+  - [Caching](#cachingconsole)
+  - [DI](#diconsole)
+  - [Latte](#latteconsole)
+  - [Router](#routerconsole)
+  - [Security](#securityconsole)
+  - [Utils](#utilsconsole)
+  - [Database](#database)
+  - [AdvancedCache](#advancedcacheconsole)
 - [Compatibility](#compatibility)
-	- [Kdyby/Console](#kdybyconsole)
+  - [Kdyby/Console](#kdybyconsole)
 - [Examples](#examples)
 
 ## Setup
@@ -103,9 +103,9 @@ This command requires to specify the **cleaning strategy**.
 
 The cleaning strategy options are:
 
-	- `--all` or `-a` shortcut
-	- `--tag <tag>` or `-t <tag>` shortcut
-	- `--priority <priority>` or `-p <priority>` shortcut
+  - `--all` or `-a` shortcut
+  - `--tag <tag>` or `-t <tag>` shortcut
+  - `--priority <priority>` or `-p <priority>` shortcut
 
 ***NOTE:** Only one tag can be used at the time.*
 
@@ -172,16 +172,16 @@ Backup database
 
 `contributte:database:backup mysql 127.0.0.1 3306 username password database path/to file.sql`
 
-- Path could be omitted (if defined in configuration)
-- Filename could be omitted (will be generated)
-- `--no-gzip` (`-g`) - disables gzip compression
-- `--bin-path` (`-b`) - path to mysql/psql binary
+  - Path could be omitted (if defined in configuration)
+  - Filename could be omitted (will be generated)
+  - `--no-gzip` (`-g`) - disables gzip compression
+  - `--bin-path` (`-b`) - path to mysql/psql binary
 
 Load database from backup
 
 `contributte:database:load mysql 127.0.0.1 3306 username password database path/to/file.sql`
 
-- `--bin-path` (`-b`) - path to mysql/psql binary
+  - `--bin-path` (`-b`) - path to mysql/psql binary
 
 ### AdvancedCacheConsole
 
@@ -191,9 +191,9 @@ Generate application cache with a single command
 
 - `contributte:cache:generate`
 
-	`--list` show list of available generators
+  `--list` show list of available generators
 
-	`--generator GENERATOR` use only specified generator
+  `--generator GENERATOR` use only specified generator
 
 ##### Register generators you want to use:
 
@@ -221,8 +221,8 @@ Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
 
 - DI containers generator
 
-	- This example is configured to generate 3 containers - 1 for production mode, 1 for debug mode and 1 for console (should be enough for every application)
-	- You don't need to add the `productionMode` parameter for Nette BC, it is done automatically.
+  - This example is configured to generate 3 containers - 1 for production mode, 1 for debug mode and 1 for console (should be enough for every application)
+  - You don't need to add the `productionMode` parameter for Nette BC, it is done automatically.
 
 ```neon
 Contributte\Console\Extra\Cache\Generators\DiContainersCacheGenerator(
@@ -278,9 +278,9 @@ Clean application cache with a single command
 
 - `contributte:cache:clean`
 
-	`--list` show list of available cleaners
+  `--list` show list of available cleaners
 
-	`--cleaner CLEANER` use only specified cleaner
+  `--cleaner CLEANER` use only specified cleaner
 
 ##### Register cleaners you want to use:
 
