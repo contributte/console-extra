@@ -9,10 +9,7 @@ use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use stdClass;
 
-/**
- * @property-read stdClass $config
- */
-class DatabaseConsoleExtension extends CompilerExtension
+class DatabaseConsoleExtension extends AbstractCompilerExtension
 {
 
 	public function getConfigSchema(): Schema
@@ -25,13 +22,13 @@ class DatabaseConsoleExtension extends CompilerExtension
 
 	public function loadConfiguration(): void
 	{
-		$builder = $this->getContainerBuilder();
-		$config = $this->config;
-
-		// Skip if it's not CLI mode
-		if (!$config->consoleMode) {
+		// Skip if isn't CLI
+		if ($this->cliMode !== true) {
 			return;
 		}
+
+		$builder = $this->getContainerBuilder();
+		$config = $this->config;
 
 		$builder->addDefinition($this->prefix('backupCommand'))
 			->setFactory(BackupCommand::class, [$config->backupPath])

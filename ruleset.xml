@@ -5,7 +5,7 @@
 		<properties>
 			<property name="rootNamespaces" type="array">
 				<element key="src" value="Contributte\Console\Extra"/>
-				<element key="tests/cases" value="Tests"/>
+				<element key="tests" value="Tests"/>
 			</property>
 		</properties>
 	</rule>

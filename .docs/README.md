@@ -17,6 +17,7 @@ Nette-based console commands for latte, DIC, security, utils and many others.
 	- [AdvancedCache](#advancedcacheconsole)
 - [Compatibility](#compatibility)
 	- [Kdyby/Console](#kdybyconsole)
+- [Examples](#examples)
 
 ## Setup
 
@@ -30,10 +31,10 @@ Register all commands
 
 ```neon
 extensions:
-	console: Contributte\Console\DI\DIConsoleExtension
+	console: Contributte\Console\DI\DIConsoleExtension(%consoleMode%)
 
 	# register all console bridges
-	console.extra: Contributte\Console\Extra\DI\ConsoleBridgesExtension
+	console.extra: Contributte\Console\Extra\DI\ConsoleBridgesExtension(%consoleMode%)
 
 console.extra:
 	# optionally disable these bridges
@@ -52,15 +53,15 @@ You can also register bridges one by one
 ```neon
 extensions:
 	# register only bridges of your choice
-	console.cache: Contributte\Console\Extra\DI\CacheConsoleExtension
-	console.caching: Contributte\Console\Extra\DI\CachingConsoleExtension
-	console.di: Contributte\Console\Extra\DI\DIConsoleExtension
-	console.latte: Contributte\Console\Extra\DI\LatteConsoleExtension
-	console.router: Contributte\Console\Extra\DI\RouterConsoleExtension
-	console.security: Contributte\Console\Extra\DI\SecurityConsoleExtension
-	console.utils: Contributte\Console\Extra\DI\UtilsConsoleExtension
-	console.advancedCache: Contributte\Console\Extra\DI\AdvancedCacheConsoleExtension
-	console.database: Contributte\Console\Extra\DI\DatabaseConsoleExtension
+	console.cache: Contributte\Console\Extra\DI\CacheConsoleExtension(%consoleMode%)
+	console.caching: Contributte\Console\Extra\DI\CachingConsoleExtension(%consoleMode%)
+	console.di: Contributte\Console\Extra\DI\DIConsoleExtension(%consoleMode%)
+	console.latte: Contributte\Console\Extra\DI\LatteConsoleExtension(%consoleMode%)
+	console.router: Contributte\Console\Extra\DI\RouterConsoleExtension(%consoleMode%)
+	console.security: Contributte\Console\Extra\DI\SecurityConsoleExtension(%consoleMode%)
+	console.utils: Contributte\Console\Extra\DI\UtilsConsoleExtension(%consoleMode%)
+	console.advancedCache: Contributte\Console\Extra\DI\AdvancedCacheConsoleExtension(%consoleMode%)
+	console.database: Contributte\Console\Extra\DI\DatabaseConsoleExtension(%consoleMode%)
 ```
 
 To use these commands you need to setup a **[bin/console entrypoint](https://github.com/contributte/console/tree/master/.docs#entrypoint)**.
@@ -102,9 +103,9 @@ This command requires to specify the **cleaning strategy**.
 
 The cleaning strategy options are:
 
-    - `--all` or `-a` shortcut
-    - `--tag <tag>` or `-t <tag>` shortcut
-    - `--priority <priority>` or `-p <priority>` shortcut
+	- `--all` or `-a` shortcut
+	- `--tag <tag>` or `-t <tag>` shortcut
+	- `--priority <priority>` or `-p <priority>` shortcut
 
 ***NOTE:** Only one tag can be used at the time.*
 
@@ -127,10 +128,10 @@ Available commands:
 ```neon
 console.latte:
 	warmup:
-		 - %appDir%
+		- %appDir%
 	warmupExclude: []
 	purge:
-		 - %tempDir%/cache/latte
+		- %tempDir%/cache/latte
 ```
 
 The `warmup`, `warmupExclude` and `purge` parameters are expecting an array of dirs.
@@ -165,7 +166,6 @@ This command supports count parameter (`--count <count>` or `-c <count>` shortcu
 ```neon
 console.database:
 	backupPath: %appDir%/../backups/database
-	consoleMode: %consoleMode%
 ```
 
 Backup database
@@ -191,9 +191,9 @@ Generate application cache with a single command
 
 - `contributte:cache:generate`
 
-    `--list` show list of available generators
+	`--list` show list of available generators
 
-    `--generator GENERATOR` use only specified generator
+	`--generator GENERATOR` use only specified generator
 
 ##### Register generators you want to use:
 
@@ -221,8 +221,8 @@ Contributte\Console\Extra\Cache\Generators\LatteTemplatesCacheGenerator(
 
 - DI containers generator
 
-    - This example is configured to generate 3 containers - 1 for production mode, 1 for debug mode and 1 for console (should be enough for every application)
-    - You don't need to add the `productionMode` parameter for Nette BC, it is done automatically.
+	- This example is configured to generate 3 containers - 1 for production mode, 1 for debug mode and 1 for console (should be enough for every application)
+	- You don't need to add the `productionMode` parameter for Nette BC, it is done automatically.
 
 ```neon
 Contributte\Console\Extra\Cache\Generators\DiContainersCacheGenerator(
@@ -278,9 +278,9 @@ Clean application cache with a single command
 
 - `contributte:cache:clean`
 
-    `--list` show list of available cleaners
+	`--list` show list of available cleaners
 
-    `--cleaner CLEANER` use only specified cleaner
+	`--cleaner CLEANER` use only specified cleaner
 
 ##### Register cleaners you want to use:
 
@@ -369,3 +369,17 @@ decorator:
 ```
 
 Now `kdyby.console` will be able to recognize all available commands added by this extension.
+
+## Examples
+
+### 1. Example projects
+
+We've made a few skeletons with preconfigured Contributte packages.
+
+- https://github.com/contributte/webapp-skeleton
+- https://github.com/contributte/apitte-skeleton
+
+### 2. Example playground
+
+- https://github.com/contributte/playground (playground)
+- https://contributte.org/examples.html (more examples)
