@@ -5,11 +5,16 @@ namespace Contributte\Console\Extra\DI;
 use Contributte\Console\Extra\Command\Router\RouterDumpCommand;
 use Nette\DI\CompilerExtension;
 
-final class RouterConsoleExtension extends CompilerExtension
+final class RouterConsoleExtension extends AbstractCompilerExtension
 {
 
 	public function loadConfiguration(): void
 	{
+		// Skip if isn't CLI
+		if ($this->cliMode !== true) {
+			return;
+		}
+
 		$builder = $this->getContainerBuilder();
 
 		$builder->addDefinition($this->prefix('dump'))

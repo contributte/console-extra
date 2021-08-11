@@ -7,10 +7,7 @@ use Nette\PhpGenerator\ClassType;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 
-/**
- * @property-read mixed[] $config
- */
-final class ConsoleBridgesExtension extends CompilerExtension
+final class ConsoleBridgesExtension extends AbstractCompilerExtension
 {
 
 	public function getConfigSchema(): Schema
@@ -49,6 +46,11 @@ final class ConsoleBridgesExtension extends CompilerExtension
 
 	public function loadConfiguration(): void
 	{
+		// Skip if isn't CLI
+		if ($this->cliMode !== true) {
+			return;
+		}
+
 		$config = $this->config;
 
 		foreach ($config as $bridge => $bridgeConfig) {
@@ -59,7 +61,7 @@ final class ConsoleBridgesExtension extends CompilerExtension
 			}
 
 			// Register sub extension a.k.a CompilerPass
-			$this->passes[$bridge] = new $this->map[$bridge]();
+			$this->passes[$bridge] = new $this->map[$bridge]($this->cliMode);
 			$this->passes[$bridge]->setCompiler($this->compiler, $this->prefix($bridge));
 
 			if ($bridgeConfig !== null) {
@@ -72,6 +74,11 @@ final class ConsoleBridgesExtension extends CompilerExtension
 
 	public function beforeCompile(): void
 	{
+		// Skip if isn't CLI
+		if ($this->cliMode !== true) {
+			return;
+		}
+
 		foreach ($this->passes as $pass) {
 			$pass->beforeCompile();
 		}
@@ -79,6 +86,11 @@ final class ConsoleBridgesExtension extends CompilerExtension
 
 	public function afterCompile(ClassType $class): void
 	{
+		// Skip if isn't CLI
+		if ($this->cliMode !== true) {
+			return;
+		}
+
 		foreach ($this->passes as $pass) {
 			$pass->afterCompile($class);
 		}

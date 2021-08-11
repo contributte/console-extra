@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Tests\Utils;
+namespace Tests\Cases\Utils;
 
 use Contributte\Console\Extra\Utils\Files;
 use Tester\Assert;

@@ -12,10 +12,7 @@ use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 use stdClass;
 
-/**
- * @property-read stdClass $config
- */
-class AdvancedCacheConsoleExtension extends CompilerExtension
+class AdvancedCacheConsoleExtension extends AbstractCompilerExtension
 {
 
 	public static function createSchema(): Schema
@@ -37,6 +34,11 @@ class AdvancedCacheConsoleExtension extends CompilerExtension
 
 	public function loadConfiguration(): void
 	{
+		// Skip if isn't CLI
+		if ($this->cliMode !== true) {
+			return;
+		}
+
 		$builder = $this->getContainerBuilder();
 		$config = $this->config;
 		$definitionsHelper = new ExtensionDefinitionsHelper($this->compiler);
