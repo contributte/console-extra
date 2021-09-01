@@ -159,7 +159,9 @@ Available commands:
 
 - `nette:utils:random`
 
-This command supports count parameter (`--count <count>` or `-c <count>` shortcut), to change the count of random strings. Default count is **10**.
+This command supports:
+ - count parameter (`--count <count>` or `-c <count>` shortcut), to change the count of random strings. Default count is **10**.
+ - length parameter (`--length <length>` or `-l <length>` shortcut), to change the length of random strings. Default count is **50**.
 
 ### Database
 
