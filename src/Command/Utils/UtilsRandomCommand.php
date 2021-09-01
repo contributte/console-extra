@@ -22,6 +22,7 @@ class UtilsRandomCommand extends Command
 		$this->setName(static::$defaultName);
 		$this->setDescription('Generates random string(s) using Nette Random');
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', '10');
+		$this->addOption('length', 'l', InputOption::VALUE_OPTIONAL, '', '50');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int
@@ -33,8 +34,9 @@ class UtilsRandomCommand extends Command
 		$table->setHeaders(['ID', 'Generated strings']);
 
 		$count = min((int) $input->getOption('count'), 1);
+		$length = min((int) $input->getOption('length'), 1);
 		for ($i = 1; $i <= $count; $i++) {
-			$table->addRow([$i, Random::generate(50)]);
+			$table->addRow([$i, Random::generate($length)]);
 
 			if ($i !== $count) {
 				$table->addRow(new TableSeparator());
