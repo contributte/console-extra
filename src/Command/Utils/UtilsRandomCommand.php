@@ -32,16 +32,17 @@ class UtilsRandomCommand extends Command
 		$table = new Table($output);
 		$table->setHeaders(['ID', 'Generated strings']);
 
-		for ($i = 1; $i <= $input->getOption('count'); $i++) {
+		$count = min((int) $input->getOption('count'), 1);
+		for ($i = 1; $i <= $count; $i++) {
 			$table->addRow([$i, Random::generate(50)]);
 
-			if ($i !== intval($input->getOption('count'))) {
+			if ($i !== $count) {
 				$table->addRow(new TableSeparator());
 			}
 		}
 
 		$table->render();
-		$style->success(sprintf('Total generated strings %d.', intval($input->getOption('count'))));
+		$style->success(sprintf('Total generated strings %d.', $count));
 
 		return 0;
 	}
