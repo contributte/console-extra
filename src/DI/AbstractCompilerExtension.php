@@ -4,9 +4,10 @@ namespace Contributte\Console\Extra\DI;
 
 use Contributte\Console\Extra\Exception\Logical\InvalidArgumentException;
 use Nette\DI\CompilerExtension;
+use stdClass;
 
 /**
- * @property-read mixed $config
+ * @property-read stdClass $config
  */
 abstract class AbstractCompilerExtension extends CompilerExtension
 {

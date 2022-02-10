@@ -3,11 +3,9 @@
 namespace Contributte\Console\Extra\DI;
 
 use Contributte\Console\Extra\Command\DI\DIPurgeCommand;
-use Nette\DI\CompilerExtension;
 use Nette\DI\Helpers;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
-use stdClass;
 
 final class DIConsoleExtension extends AbstractCompilerExtension
 {

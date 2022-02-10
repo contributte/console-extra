@@ -3,7 +3,6 @@
 namespace Contributte\Console\Extra\DI;
 
 use Contributte\Console\Extra\Command\Router\RouterDumpCommand;
-use Nette\DI\CompilerExtension;
 
 final class RouterConsoleExtension extends AbstractCompilerExtension
 {

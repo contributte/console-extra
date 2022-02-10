@@ -5,12 +5,10 @@ namespace Contributte\Console\Extra\DI;
 use Contributte\Console\Extra\Command\AdvancedCache\CacheCleanCommand;
 use Contributte\Console\Extra\Command\AdvancedCache\CacheGenerateCommand;
 use Contributte\DI\Helper\ExtensionDefinitionsHelper;
-use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\Definition;
 use Nette\DI\Definitions\Statement;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
-use stdClass;
 
 class AdvancedCacheConsoleExtension extends AbstractCompilerExtension
 {

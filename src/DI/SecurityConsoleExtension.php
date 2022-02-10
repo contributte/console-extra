@@ -3,7 +3,6 @@
 namespace Contributte\Console\Extra\DI;
 
 use Contributte\Console\Extra\Command\Security\SecurityPasswordCommand;
-use Nette\DI\CompilerExtension;
 
 final class SecurityConsoleExtension extends AbstractCompilerExtension
 {

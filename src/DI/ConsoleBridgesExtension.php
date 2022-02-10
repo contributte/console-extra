@@ -29,7 +29,7 @@ final class ConsoleBridgesExtension extends AbstractCompilerExtension
 		])->castTo('array');
 	}
 
-	/** @var string[] */
+	/** @var array<string, class-string<CompilerExtension>> */
 	private $map = [
 		'advancedCache' => AdvancedCacheConsoleExtension::class,
 		'cache' => CacheConsoleExtension::class,
@@ -51,8 +51,10 @@ final class ConsoleBridgesExtension extends AbstractCompilerExtension
 			return;
 		}
 
+		/** @var mixed[] $config */
 		$config = $this->config;
 
+		/** @var false|array<mixed>|object|null $bridgeConfig */
 		foreach ($config as $bridge => $bridgeConfig) {
 			// Don't register sub extension
 
@@ -60,15 +62,18 @@ final class ConsoleBridgesExtension extends AbstractCompilerExtension
 				continue;
 			}
 
-			// Register sub extension a.k.a CompilerPass
-			$this->passes[$bridge] = new $this->map[$bridge]($this->cliMode);
-			$this->passes[$bridge]->setCompiler($this->compiler, $this->prefix($bridge));
+			/** @var CompilerExtension $pass */
+			$pass = new $this->map[$bridge]($this->cliMode);
+			$pass->setCompiler($this->compiler, $this->prefix($bridge));
 
 			if ($bridgeConfig !== null) {
-				$this->passes[$bridge]->setConfig($bridgeConfig);
+				$pass->setConfig($bridgeConfig);
 			}
 
-			$this->passes[$bridge]->loadConfiguration();
+			$pass->loadConfiguration();
+
+			// Register sub extension a.k.a CompilerPass
+			$this->passes[$bridge] = $pass;
 		}
 	}
 

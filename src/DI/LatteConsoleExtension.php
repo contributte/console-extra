@@ -4,11 +4,9 @@ namespace Contributte\Console\Extra\DI;
 
 use Contributte\Console\Extra\Command\Latte\LattePurgeCommand;
 use Contributte\Console\Extra\Command\Latte\LatteWarmupCommand;
-use Nette\DI\CompilerExtension;
 use Nette\DI\Helpers;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
-use stdClass;
 
 final class LatteConsoleExtension extends AbstractCompilerExtension
 {

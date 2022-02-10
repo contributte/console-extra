@@ -39,9 +39,10 @@ class DiContainersCacheGenerator implements IGenerator
 
 		$output->writeln('<comment>Compiling DI containers</comment>');
 
+		/** @var mixed[] $parameters */
 		foreach ($this->config as $container => $parameters) {
 			if (isset($parameters['debugMode'])) { // Nette BC
-				$parameters['productionMode'] = !$parameters['debugMode'];
+				$parameters['productionMode'] = !boolval($parameters['debugMode']);
 			}
 
 			$output->writeln(sprintf(

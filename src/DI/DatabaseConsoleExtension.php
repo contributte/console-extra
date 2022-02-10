@@ -4,10 +4,8 @@ namespace Contributte\Console\Extra\DI;
 
 use Contributte\Console\Extra\Command\Database\BackupCommand;
 use Contributte\Console\Extra\Command\Database\LoadCommand;
-use Nette\DI\CompilerExtension;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
-use stdClass;
 
 class DatabaseConsoleExtension extends AbstractCompilerExtension
 {

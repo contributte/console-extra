@@ -5,5 +5,13 @@ includes:
 	- vendor/phpstan/phpstan-strict-rules/rules.neon
 
 parameters:
+	level: 9
+	phpVersion: 70200
+
+	paths:
+		- src
+
+	reportMaybesInPropertyPhpDocTypes: false
+
 	ignoreErrors:
 		- '#Method Contributte\\Console\\Extra\\Command\\Router\\RouterDumpCommand::createRows\(\) should return array but returns array\|object\.#'
