@@ -18,7 +18,7 @@ abstract class AbstractCompilerExtension extends CompilerExtension
 	public function __construct(bool $cliMode = false)
 	{
 		if (func_num_args() <= 0) {
-			throw new InvalidArgumentException(sprintf('Provide CLI mode, e.q. %s(%%consoleMode%%).', self::class));
+			throw new InvalidArgumentException(sprintf('Provide CLI mode, e.q. %s(%%consoleMode%%).', static::class));
 		}
 
 		$this->cliMode = $cliMode;
