@@ -34,7 +34,7 @@ class UtilsRandomCommand extends Command
 		$table->setHeaders(['ID', 'Generated strings']);
 
 		$count = max(intval($input->getOption('count')), 1);
-		$length = min(intval($input->getOption('length')), 1);
+		$length = max(intval($input->getOption('length')), 1);
 		for ($i = 1; $i <= $count; $i++) {
 			$table->addRow([$i, Random::generate($length)]);
 
