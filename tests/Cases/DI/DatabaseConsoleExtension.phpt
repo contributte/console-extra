@@ -5,19 +5,20 @@ namespace Tests\DI;
 use Contributte\Console\Extra\Command\Database\BackupCommand;
 use Contributte\Console\Extra\Command\Database\LoadCommand;
 use Contributte\Console\Extra\DI\DatabaseConsoleExtension;
+use Contributte\Tester\Environment;
+use Contributte\Tester\Toolkit;
+use Contributte\Tester\Utils\ContainerBuilder;
 use Nette\DI\Compiler;
-use Ninjify\Nunjuck\Toolkit;
 use Tester\Assert;
-use Tests\Toolkit\Container;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
 Toolkit::test(function (): void {
-	$container = Container::of()
+	$container = ContainerBuilder::of()
 		->withCompiler(function (Compiler $compiler): void {
 			$compiler->addConfig([
 				'databaseBackup' => [
-					'backupPath' => TEMP_DIR . '/backup',
+					'backupPath' => Environment::getTestDir() . '/backup',
 					'consoleMode' => true,
 				],
 			]);

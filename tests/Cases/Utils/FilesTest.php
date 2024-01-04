@@ -3,25 +3,18 @@
 namespace Tests\Cases\Utils;
 
 use Contributte\Console\Extra\Utils\Files;
+use Contributte\Tester\Environment;
+use Contributte\Tester\Toolkit;
 use Tester\Assert;
-use Tester\TestCase;
 
 require_once __DIR__ . '/../../bootstrap.php';
 
-class FilesTest extends TestCase
-{
+Toolkit::test(function (): void {
+	file_put_contents(Environment::getTestDir() . '/foo.txt', 'foo');
+	file_put_contents(Environment::getTestDir() . '/bar.txt', 'bar');
 
-	public function testOk(): void
-	{
-		file_put_contents(TEMP_DIR . '/foo.txt', 'foo');
-		file_put_contents(TEMP_DIR . '/bar.txt', 'bar');
+	Assert::equal(['.', '..', 'bar.txt', 'foo.txt'], scandir(Environment::getTestDir()));
 
-		Assert::equal(['.', '..', 'bar.txt', 'foo.txt'], scandir(TEMP_DIR));
-
-		Files::purge(TEMP_DIR);
-		Assert::equal(['.', '..'], scandir(TEMP_DIR));
-	}
-
-}
-
-(new FilesTest())->run();
+	Files::purge(Environment::getTestDir());
+	Assert::equal(['.', '..'], scandir(Environment::getTestDir()));
+});
