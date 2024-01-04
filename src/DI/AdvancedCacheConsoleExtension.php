@@ -4,7 +4,6 @@ namespace Contributte\Console\Extra\DI;
 
 use Contributte\Console\Extra\Command\AdvancedCache\CacheCleanCommand;
 use Contributte\Console\Extra\Command\AdvancedCache\CacheGenerateCommand;
-use Contributte\DI\Helper\ExtensionDefinitionsHelper;
 use Nette\DI\Definitions\Definition;
 use Nette\DI\Definitions\Statement;
 use Nette\Schema\Expect;
@@ -39,20 +38,16 @@ class AdvancedCacheConsoleExtension extends AbstractCompilerExtension
 
 		$builder = $this->getContainerBuilder();
 		$config = $this->config;
-		$definitionsHelper = new ExtensionDefinitionsHelper($this->compiler);
 
 		// Register generators
 		$generatorDefinitions = [];
 
 		foreach ($config->generators as $generatorName => $generatorConfig) {
-			$generatorPrefix = $this->prefix('generator.' . $generatorName);
-			$generatorDefinition = $definitionsHelper->getDefinitionFromConfig($generatorConfig, $generatorPrefix);
+			$generatorDef = $builder->addDefinition($this->prefix('generator.' . $generatorName))
+				->setFactory($generatorConfig)
+				->setAutowired(false);
 
-			if ($generatorDefinition instanceof Definition) {
-				$generatorDefinition->setAutowired(false);
-			}
-
-			$generatorDefinitions[$generatorName] = $generatorDefinition;
+			$generatorDefinitions[$generatorName] = $generatorDef;
 		}
 
 		$builder->addDefinition($this->prefix('generatorCommand'))
@@ -63,14 +58,11 @@ class AdvancedCacheConsoleExtension extends AbstractCompilerExtension
 		$cleanerDefinitions = [];
 
 		foreach ($config->cleaners as $cleanerName => $cleanerConfig) {
-			$cleanerPrefix = $this->prefix('cleaner.' . $cleanerName);
-			$cleanerDefinition = $definitionsHelper->getDefinitionFromConfig($cleanerConfig, $cleanerPrefix);
+			$cleanerDef = $builder->addDefinition($this->prefix('cleaner.' . $cleanerName))
+				->setFactory($cleanerConfig)
+				->setAutowired(false);
 
-			if ($cleanerDefinition instanceof Definition) {
-				$cleanerDefinition->setAutowired(false);
-			}
-
-			$cleanerDefinitions[$cleanerName] = $cleanerDefinition;
+			$cleanerDefinitions[$cleanerName] = $cleanerDef;
 		}
 
 		$builder->addDefinition($this->prefix('cleanCommand'))
