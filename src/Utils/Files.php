@@ -2,6 +2,7 @@
 
 namespace Contributte\Console\Extra\Utils;
 
+use Contributte\Console\Extra\Exception\LogicalException;
 use Contributte\Console\Extra\Exception\RuntimeException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
@@ -9,6 +10,13 @@ use SplFileObject;
 
 class Files
 {
+
+	public static function mkdir(string $dir, int $mode = 0777): void
+	{
+		if (!is_dir($dir) && !@mkdir($dir, $mode, recursive: true) && !is_dir($dir)) { // @ - dir may already exist
+			throw new LogicalException(sprintf('Directory "%s" was not created with mode %s', $dir, $mode));
+		}
+	}
 
 	/**
 	 * @param string[] $ignored

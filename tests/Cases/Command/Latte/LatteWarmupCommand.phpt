@@ -17,6 +17,7 @@ require_once __DIR__ . '/../../../bootstrap.php';
 Toolkit::test(function (): void {
 	$templateFactory = new TemplateFactory(
 		new class implements LatteFactory {
+
 			public function create(): Engine
 			{
 				$latte = new Engine();
@@ -24,6 +25,7 @@ Toolkit::test(function (): void {
 
 				return $latte;
 			}
+
 		}
 	);
 

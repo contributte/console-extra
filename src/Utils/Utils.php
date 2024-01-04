@@ -29,4 +29,13 @@ class Utils
 		throw new LogicalException(sprintf('Cannot numerize %s', gettype($input)));
 	}
 
+	public static function boolenize(mixed $input): bool
+	{
+		if (is_scalar($input)) {
+			return filter_var($input, FILTER_VALIDATE_BOOLEAN);
+		}
+
+		throw new LogicalException(sprintf('Cannot boolenize %s', gettype($input)));
+	}
+
 }
