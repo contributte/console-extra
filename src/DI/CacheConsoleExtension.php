@@ -30,7 +30,7 @@ final class CacheConsoleExtension extends AbstractCompilerExtension
 		}
 
 		$builder = $this->getContainerBuilder();
-		$config = $this->config;
+		$config = $this->getConfig();
 
 		// Default values cannot be in schema, arrays are merged by keys
 		if ($config->purge === []) {

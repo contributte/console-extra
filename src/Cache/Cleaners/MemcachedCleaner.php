@@ -11,7 +11,7 @@ class MemcachedCleaner implements ICleaner
 {
 
 	/** @var Memcached[]|Memcache[] */
-	private $memcaches;
+	private array $memcaches;
 
 	/**
 	 * @param Memcached[]|Memcache[] $memcaches

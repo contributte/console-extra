@@ -13,17 +13,15 @@ use Throwable;
 class LatteTemplatesCacheGenerator implements IGenerator
 {
 
-	/** @var ITemplateFactory */
-	private $templateFactory;
+	private ITemplateFactory $templateFactory;
 
 	/** @var string[] */
-	private $dirs;
+	private array $dirs;
 
 	/** @var string[] */
-	private $excludeDirs;
+	private array $excludeDirs;
 
-	/** @var string|null */
-	private $rootDir;
+	private ?string $rootDir = null;
 
 	/**
 	 * @param string[] $dirs

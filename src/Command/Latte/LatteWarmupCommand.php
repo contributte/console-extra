@@ -2,31 +2,31 @@
 
 namespace Contributte\Console\Extra\Command\Latte;
 
-use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Utils\Finder;
 use SplFileInfo;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Throwable;
 
+#[AsCommand(
+	name: 'nette:latte:warmup',
+	description: 'Warmup Latte templates (*.latte)',
+)]
 class LatteWarmupCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'nette:latte:warmup';
-
-	/** @var ITemplateFactory */
-	private $templateFactory;
+	private TemplateFactory $templateFactory;
 
 	/** @var string[] */
-	private $dirs;
+	private array $dirs;
 
 	/** @var string[] */
-	private $excludeDirs;
+	private array $excludeDirs;
 
 	/**
 	 * @param string[] $dirs
@@ -35,15 +35,10 @@ class LatteWarmupCommand extends Command
 	public function __construct(TemplateFactory $templateFactory, array $dirs, array $excludeDirs = [])
 	{
 		parent::__construct();
+
 		$this->templateFactory = $templateFactory;
 		$this->dirs = $dirs;
 		$this->excludeDirs = $excludeDirs;
-	}
-
-	protected function configure(): void
-	{
-		$this->setName(static::$defaultName);
-		$this->setDescription('Warmup Latte templates (*.latte)');
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int
@@ -64,7 +59,7 @@ class LatteWarmupCommand extends Command
 		$stats = ['ok' => 0, 'error' => 0];
 
 		/** @var SplFileInfo $file */
-		foreach ($finder as $path => $file) {
+		foreach ($finder as $file) {
 			try {
 				$latte->warmupCache($file->getPathname());
 				$stats['ok']++;

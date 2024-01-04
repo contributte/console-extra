@@ -10,10 +10,10 @@ class LocalFilesystemCleaner implements ICleaner
 {
 
 	/** @var string[] */
-	private $directories;
+	private array $directories;
 
 	/** @var string[] */
-	private $ignored;
+	private array $ignored;
 
 	/**
 	 * @param string[] $directories

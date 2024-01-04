@@ -26,7 +26,7 @@ class DatabaseConsoleExtension extends AbstractCompilerExtension
 		}
 
 		$builder = $this->getContainerBuilder();
-		$config = $this->config;
+		$config = $this->getConfig();
 
 		$builder->addDefinition($this->prefix('backupCommand'))
 			->setFactory(BackupCommand::class, [$config->backupPath])

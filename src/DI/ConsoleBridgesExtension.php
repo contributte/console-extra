@@ -10,6 +10,21 @@ use Nette\Schema\Schema;
 final class ConsoleBridgesExtension extends AbstractCompilerExtension
 {
 
+	/** @var array<string, class-string<CompilerExtension>> */
+	private array $map = [
+		'advancedCache' => AdvancedCacheConsoleExtension::class,
+		'cache' => CacheConsoleExtension::class,
+		'caching' => CachingConsoleExtension::class,
+		'di' => DIConsoleExtension::class,
+		'latte' => LatteConsoleExtension::class,
+		'router' => RouterConsoleExtension::class,
+		'security' => SecurityConsoleExtension::class,
+		'utils' => UtilsConsoleExtension::class,
+	];
+
+	/** @var CompilerExtension[] */
+	private array $passes = [];
+
 	public function getConfigSchema(): Schema
 	{
 		$advancedCache = AdvancedCacheConsoleExtension::createSchema();
@@ -28,21 +43,6 @@ final class ConsoleBridgesExtension extends AbstractCompilerExtension
 			'utils' => Expect::anyOf(false),
 		])->castTo('array');
 	}
-
-	/** @var array<string, class-string<CompilerExtension>> */
-	private $map = [
-		'advancedCache' => AdvancedCacheConsoleExtension::class,
-		'cache' => CacheConsoleExtension::class,
-		'caching' => CachingConsoleExtension::class,
-		'di' => DIConsoleExtension::class,
-		'latte' => LatteConsoleExtension::class,
-		'router' => RouterConsoleExtension::class,
-		'security' => SecurityConsoleExtension::class,
-		'utils' => UtilsConsoleExtension::class,
-	];
-
-	/** @var CompilerExtension[] */
-	private $passes = [];
 
 	public function loadConfiguration(): void
 	{

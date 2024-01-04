@@ -3,6 +3,7 @@
 namespace Contributte\Console\Extra\Command\Utils;
 
 use Nette\Utils\Random;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
@@ -11,16 +12,15 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+	name: 'nette:utils:random',
+	description: 'Generates random string(s) using Nette Random',
+)]
 class UtilsRandomCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'nette:utils:random';
-
 	protected function configure(): void
 	{
-		$this->setName(static::$defaultName);
-		$this->setDescription('Generates random string(s) using Nette Random');
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', '10');
 		$this->addOption('length', 'l', InputOption::VALUE_OPTIONAL, '', '50');
 	}

@@ -48,7 +48,7 @@ Toolkit::test(function (): void {
 	$components = ['advancedCache', 'cache', 'caching', 'di', 'latte', 'router', 'security', 'utils'];
 
 	foreach (array_keys($config) as $name) {
-		Assert::true(in_array($name, $components));
+		Assert::contains($name, $components);
 	}
 });
 

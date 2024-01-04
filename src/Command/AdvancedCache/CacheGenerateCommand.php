@@ -5,6 +5,7 @@ namespace Contributte\Console\Extra\Command\AdvancedCache;
 use Contributte\Console\Extra\Cache\Generators\IGenerator;
 use Contributte\Console\Extra\Exception\Logical\InvalidArgumentException;
 use Contributte\Console\Extra\Utils\Utils;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,14 +13,15 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+	name: 'contributte:cache:generate',
+	description: 'Generate cache',
+)]
 class CacheGenerateCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'contributte:cache:generate';
-
 	/** @var IGenerator[] */
-	private $generators = [];
+	private array $generators = [];
 
 	/**
 	 * @param IGenerator[] $generators
@@ -27,13 +29,12 @@ class CacheGenerateCommand extends Command
 	public function __construct(array $generators)
 	{
 		parent::__construct();
+
 		$this->generators = $generators;
 	}
 
 	protected function configure(): void
 	{
-		$this->setName(static::$defaultName);
-		$this->setDescription('Generate cache');
 		$this->addOption('list', 'l', InputOption::VALUE_NONE, 'List all available generators');
 		$this->addOption('generator', 'g', InputOption::VALUE_REQUIRED, 'Use only one generator');
 	}

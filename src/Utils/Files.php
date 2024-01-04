@@ -24,9 +24,7 @@ class Files
 			RecursiveIteratorIterator::CHILD_FIRST
 		);
 
-		$ignored = array_map(function (string $path) {
-			return realpath($path);
-		}, $ignored);
+		$ignored = array_map(fn (string $path) => realpath($path), $ignored);
 
 		/** @var SplFileObject $entry */
 		foreach ($iterator as $entry) {

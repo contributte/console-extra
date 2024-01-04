@@ -4,23 +4,22 @@ namespace Contributte\Console\Extra\Command\Database;
 
 use Contributte\Console\Extra\Utils\Database;
 use Contributte\Console\Extra\Utils\Utils;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+	name: 'contributte:database:load',
+	description: "Import given .sql or .gz file into database, this command internally use 'mysql' or 'psql' and 'gunzip' and can not work without these installed binaries",
+)]
 class LoadCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'contributte:database:load';
-
 	protected function configure(): void
 	{
-		$this->setName(self::$defaultName)
-			->setDescription('Import given .sql or .gz file into database, this command internally use \'mysql\' or \'psql\' and \'gunzip\' and can not work without these installed binaries');
-
 		$this->addArgument('platform', InputArgument::REQUIRED, 'mysql|postgresql')
 			->addArgument('host', InputArgument::REQUIRED, 'SQL server IP')
 			->addArgument('port', InputArgument::REQUIRED, 'SQL server port')
@@ -126,7 +125,7 @@ class LoadCommand extends Command
 		return 1;
 	}
 
-	public function isGunzipEnabled(): bool
+	protected function isGunzipEnabled(): bool
 	{
 		exec('which gunzip > /dev/null', $retParams, $retVal);
 

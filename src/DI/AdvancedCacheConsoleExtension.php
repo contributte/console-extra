@@ -4,7 +4,6 @@ namespace Contributte\Console\Extra\DI;
 
 use Contributte\Console\Extra\Command\AdvancedCache\CacheCleanCommand;
 use Contributte\Console\Extra\Command\AdvancedCache\CacheGenerateCommand;
-use Nette\DI\Definitions\Definition;
 use Nette\DI\Definitions\Statement;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
@@ -37,7 +36,7 @@ class AdvancedCacheConsoleExtension extends AbstractCompilerExtension
 		}
 
 		$builder = $this->getContainerBuilder();
-		$config = $this->config;
+		$config = $this->getConfig();
 
 		// Register generators
 		$generatorDefinitions = [];

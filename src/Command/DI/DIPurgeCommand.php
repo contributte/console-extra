@@ -3,19 +3,21 @@
 namespace Contributte\Console\Extra\Command\DI;
 
 use Contributte\Console\Extra\Utils\Files;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+	name: 'nette:di:purge',
+	description: 'Clear temp/cache/Nette.Configurator folder',
+)]
 class DIPurgeCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'nette:di:purge';
-
 	/** @var string[] */
-	private $dirs;
+	private array $dirs;
 
 	/**
 	 * @param string[] $dirs
@@ -23,13 +25,8 @@ class DIPurgeCommand extends Command
 	public function __construct(array $dirs)
 	{
 		parent::__construct();
-		$this->dirs = $dirs;
-	}
 
-	protected function configure(): void
-	{
-		$this->setName(static::$defaultName);
-		$this->setDescription('Clear temp/cache/Nette.Configurator folder');
+		$this->dirs = $dirs;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int

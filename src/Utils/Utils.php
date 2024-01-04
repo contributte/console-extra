@@ -5,10 +5,7 @@ namespace Contributte\Console\Extra\Utils;
 class Utils
 {
 
-	/**
-	 * @param mixed $input
-	 */
-	public static function stringify($input): string
+	public static function stringify(mixed $input): string
 	{
 		if (is_array($input)) {
 			return implode('|', $input);

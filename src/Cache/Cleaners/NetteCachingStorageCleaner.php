@@ -11,7 +11,7 @@ class NetteCachingStorageCleaner implements ICleaner
 {
 
 	/** @var IStorage[] */
-	private $storages;
+	private array $storages;
 
 	/**
 	 * @param IStorage[] $storages

@@ -4,33 +4,32 @@ namespace Contributte\Console\Extra\Command\Caching;
 
 use Contributte\Console\Extra\Utils\Utils;
 use Nette\Caching\Cache;
-use Nette\Caching\IStorage;
 use Nette\Caching\Storage;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+	name: 'nette:caching:clear',
+	description: 'Clear Nette Caching Storage',
+)]
 class CachingClearCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'nette:caching:clear';
-
-	/** @var IStorage */
-	private $storage;
+	private Storage $storage;
 
 	public function __construct(Storage $storage)
 	{
 		parent::__construct();
+
 		$this->storage = $storage;
 	}
 
 	protected function configure(): void
 	{
-		$this->setName(static::$defaultName);
-		$this->setDescription('Clear Nette Caching Storage');
 		$this->addOption('all', null, InputOption::VALUE_OPTIONAL, 'Clear whole storage', false);
 		$this->addOption('tag', 't', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'Clear by tag(s)', []);
 		$this->addOption('priority', 'p', InputOption::VALUE_OPTIONAL, 'Clear by priority');

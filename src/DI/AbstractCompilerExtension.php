@@ -8,12 +8,12 @@ use stdClass;
 
 /**
  * @property-read stdClass $config
+ * @method stdClass getConfig()
  */
 abstract class AbstractCompilerExtension extends CompilerExtension
 {
 
-	/** @var bool */
-	protected $cliMode;
+	protected bool $cliMode;
 
 	public function __construct(bool $cliMode = false)
 	{

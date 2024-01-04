@@ -3,19 +3,21 @@
 namespace Contributte\Console\Extra\Command\Cache;
 
 use Contributte\Console\Extra\Utils\Files;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+	name: 'nette:cache:purge',
+	description: 'Clear temp folders and others',
+)]
 class CachePurgeCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'nette:cache:purge';
-
 	/** @var string[] */
-	private $dirs;
+	private array $dirs;
 
 	/**
 	 * @param string[] $dirs
@@ -23,13 +25,8 @@ class CachePurgeCommand extends Command
 	public function __construct(array $dirs)
 	{
 		parent::__construct();
-		$this->dirs = $dirs;
-	}
 
-	protected function configure(): void
-	{
-		$this->setName(static::$defaultName);
-		$this->setDescription('Clear temp folders and others');
+		$this->dirs = $dirs;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int

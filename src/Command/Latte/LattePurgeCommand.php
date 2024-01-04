@@ -3,19 +3,21 @@
 namespace Contributte\Console\Extra\Command\Latte;
 
 use Contributte\Console\Extra\Utils\Files;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+	name: 'nette:latte:purge',
+	description: 'Clear temp/latte folder',
+)]
 class LattePurgeCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'nette:latte:purge';
-
 	/** @var string[] */
-	private $dirs;
+	private array $dirs;
 
 	/**
 	 * @param string[] $dirs
@@ -23,13 +25,8 @@ class LattePurgeCommand extends Command
 	public function __construct(array $dirs)
 	{
 		parent::__construct();
-		$this->dirs = $dirs;
-	}
 
-	protected function configure(): void
-	{
-		$this->setName(static::$defaultName);
-		$this->setDescription('Clear temp/latte folder');
+		$this->dirs = $dirs;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int

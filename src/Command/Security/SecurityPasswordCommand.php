@@ -4,6 +4,7 @@ namespace Contributte\Console\Extra\Command\Security;
 
 use Nette\Security\Passwords;
 use Nette\Utils\Random;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableSeparator;
@@ -13,25 +14,24 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+	name: 'nette:security:password',
+	description: 'Generates password (s) using Nette Passwords',
+)]
 class SecurityPasswordCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'nette:security:password';
-
-	/** @var Passwords */
-	private $passwords;
+	private Passwords $passwords;
 
 	public function __construct(Passwords $passwords)
 	{
 		parent::__construct();
+
 		$this->passwords = $passwords;
 	}
 
 	protected function configure(): void
 	{
-		$this->setName(static::$defaultName);
-		$this->setDescription('Generates password (s) using Nette Passwords');
 		$this->addArgument('password', InputArgument::OPTIONAL, 'Given password');
 		$this->addOption('count', 'c', InputOption::VALUE_OPTIONAL, '', '10');
 	}

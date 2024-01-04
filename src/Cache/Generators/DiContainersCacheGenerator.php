@@ -10,10 +10,9 @@ class DiContainersCacheGenerator implements IGenerator
 {
 
 	/** @var mixed[] */
-	private $config;
+	private array $config;
 
-	/** @var Configurator */
-	private $configurator;
+	private Configurator $configurator;
 
 	/**
 	 * @param mixed[] $config

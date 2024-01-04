@@ -6,33 +6,26 @@ use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
 use Nette\Application\Routers\SimpleRouter;
 use Nette\Routing\Router;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(
+	name: 'nette:router:dump',
+	description: 'Display all defined routes',
+)]
 final class RouterDumpCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'nette:router:dump';
-
-	/** @var Router */
-	private $router;
+	private Router $router;
 
 	public function __construct(Router $router)
 	{
 		parent::__construct();
-		$this->router = $router;
-	}
 
-	/**
-	 * Configure command
-	 */
-	protected function configure(): void
-	{
-		$this->setName(self::$defaultName);
-		$this->setDescription('Display all defined routes');
+		$this->router = $router;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int
@@ -58,7 +51,7 @@ final class RouterDumpCommand extends Command
 	/**
 	 * @return mixed[]|object
 	 */
-	protected function analyse(Router $router, ?string $module = null)
+	protected function analyse(Router $router, ?string $module = null): array|object
 	{
 		if ($router instanceof RouteList) {
 			$routes = [];
@@ -79,7 +72,7 @@ final class RouterDumpCommand extends Command
 				'mask' => $router instanceof Route ? $router->getMask() : null,
 				'module' => rtrim((string) $module, ':'),
 				'defaults' => $router instanceof Route || $router instanceof SimpleRouter ? $this->analyseDefaults($router->getDefaults()) : null,
-				'class' => get_class($router),
+				'class' => $router::class,
 			];
 		}
 	}

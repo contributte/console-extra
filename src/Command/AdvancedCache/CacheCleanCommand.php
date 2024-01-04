@@ -5,6 +5,7 @@ namespace Contributte\Console\Extra\Command\AdvancedCache;
 use Contributte\Console\Extra\Cache\Cleaners\ICleaner;
 use Contributte\Console\Extra\Exception\Logical\InvalidArgumentException;
 use Contributte\Console\Extra\Utils\Utils;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,14 +13,15 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
+#[AsCommand(
+	name: 'contributte:cache:clean',
+	description: 'Clean cache',
+)]
 class CacheCleanCommand extends Command
 {
 
-	/** @var string */
-	protected static $defaultName = 'contributte:cache:clean';
-
 	/** @var ICleaner[] */
-	private $cleaners = [];
+	private array $cleaners = [];
 
 	/**
 	 * @param ICleaner[] $cleaners
@@ -27,13 +29,12 @@ class CacheCleanCommand extends Command
 	public function __construct(array $cleaners)
 	{
 		parent::__construct();
+
 		$this->cleaners = $cleaners;
 	}
 
 	protected function configure(): void
 	{
-		$this->setName(static::$defaultName);
-		$this->setDescription('Clean cache');
 		$this->addOption('list', 'l', InputOption::VALUE_NONE, 'List all available cleaners');
 		$this->addOption('cleaner', 'c', InputOption::VALUE_REQUIRED, 'Use only one cleaner');
 	}
