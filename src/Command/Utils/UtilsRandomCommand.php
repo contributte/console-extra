@@ -2,6 +2,7 @@
 
 namespace Contributte\Console\Extra\Command\Utils;
 
+use Contributte\Console\Extra\Utils\Utils;
 use Nette\Utils\Random;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -33,8 +34,8 @@ class UtilsRandomCommand extends Command
 		$table = new Table($output);
 		$table->setHeaders(['ID', 'Generated strings']);
 
-		$count = max(intval($input->getOption('count')), 1);
-		$length = max(intval($input->getOption('length')), 1);
+		$count = max(Utils::numerize($input->getOption('count')), 1);
+		$length = max(Utils::numerize($input->getOption('length')), 1);
 		for ($i = 1; $i <= $count; $i++) {
 			$table->addRow([$i, Random::generate($length)]);
 

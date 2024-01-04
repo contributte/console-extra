@@ -3,7 +3,7 @@
 namespace Contributte\Console\Extra\Command\AdvancedCache;
 
 use Contributte\Console\Extra\Cache\Generators\IGenerator;
-use Contributte\Console\Extra\Exception\Logical\InvalidArgumentException;
+use Contributte\Console\Extra\Exception\LogicalException;
 use Contributte\Console\Extra\Utils\Utils;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -62,7 +62,7 @@ class CacheGenerateCommand extends Command
 
 		if (($generatorName = $input->getOption('generator')) !== null) {
 			if (!is_string($generatorName) || !isset($this->generators[$generatorName])) {
-				throw new InvalidArgumentException(sprintf('Cannot run undefined generator "%s"', Utils::stringify($generatorName)));
+				throw new LogicalException(sprintf('Cannot run undefined generator "%s"', Utils::stringify($generatorName)));
 			}
 
 			$this->generators[$generatorName]->generate($input, $output);

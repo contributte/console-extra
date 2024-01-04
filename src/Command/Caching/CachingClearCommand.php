@@ -41,14 +41,14 @@ class CachingClearCommand extends Command
 		$style->title('Caching Clear');
 
 		if ($input->getOption('all') === null) {
-			$this->storage->clean([Cache::ALL => true]);
+			$this->storage->clean([Cache::All => true]);
 			$style->success('Clearing whole storage done.');
 		} elseif ($input->getOption('tag') !== null) {
-			$this->storage->clean([Cache::TAGS => $input->getOption('tag')]);
+			$this->storage->clean([Cache::Tags => $input->getOption('tag')]);
 			$style->listing((array) $input->getOption('tag'));
 			$style->success('Clearing by tags done.');
 		} elseif ($input->getOption('priority') !== null) {
-			$this->storage->clean([Cache::PRIORITY => $input->getOption('priority')]);
+			$this->storage->clean([Cache::Priority => $input->getOption('priority')]);
 			$style->comment(Utils::stringify($input->getOption('priority')));
 			$style->success('Clearing by priority done.');
 		} else {

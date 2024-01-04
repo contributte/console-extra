@@ -2,10 +2,9 @@
 
 namespace Contributte\Console\Extra\Cache\Generators;
 
-use Nette\Application\UI\ITemplateFactory;
 use Nette\Bridges\ApplicationLatte\Template;
+use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Utils\Finder;
-use Nette\Utils\Strings;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Throwable;
@@ -13,7 +12,7 @@ use Throwable;
 class LatteTemplatesCacheGenerator implements IGenerator
 {
 
-	private ITemplateFactory $templateFactory;
+	private TemplateFactory $templateFactory;
 
 	/** @var string[] */
 	private array $dirs;
@@ -27,7 +26,7 @@ class LatteTemplatesCacheGenerator implements IGenerator
 	 * @param string[] $dirs
 	 * @param string[] $excludeDirs
 	 */
-	public function __construct(ITemplateFactory $templateFactory, array $dirs, array $excludeDirs = [], ?string $rootDir = null)
+	public function __construct(TemplateFactory $templateFactory, array $dirs, array $excludeDirs = [], ?string $rootDir = null)
 	{
 		$this->templateFactory = $templateFactory;
 		$this->dirs = $dirs;
@@ -65,7 +64,7 @@ class LatteTemplatesCacheGenerator implements IGenerator
 
 		foreach ($finder as $path => $file) {
 			$path = (string) realpath($path);
-			$outputPath = $this->rootDir !== null && Strings::startsWith($path, $this->rootDir)
+			$outputPath = $this->rootDir !== null && str_starts_with($path, $this->rootDir)
 				? substr($path, mb_strlen($this->rootDir))
 				: $path;
 

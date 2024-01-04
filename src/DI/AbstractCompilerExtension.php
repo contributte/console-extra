@@ -2,7 +2,7 @@
 
 namespace Contributte\Console\Extra\DI;
 
-use Contributte\Console\Extra\Exception\Logical\InvalidArgumentException;
+use Contributte\Console\Extra\Exception\LogicalException;
 use Nette\DI\CompilerExtension;
 use stdClass;
 
@@ -18,7 +18,7 @@ abstract class AbstractCompilerExtension extends CompilerExtension
 	public function __construct(bool $cliMode = false)
 	{
 		if (func_num_args() <= 0) {
-			throw new InvalidArgumentException(sprintf('Provide CLI mode, e.q. %s(%%consoleMode%%).', static::class));
+			throw new LogicalException(sprintf('Provide CLI mode, e.q. %s(%%consoleMode%%).', static::class));
 		}
 
 		$this->cliMode = $cliMode;

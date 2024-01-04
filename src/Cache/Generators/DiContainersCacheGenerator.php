@@ -2,7 +2,7 @@
 
 namespace Contributte\Console\Extra\Cache\Generators;
 
-use Nette\Configurator;
+use Nette\Bootstrap\Configurator;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -50,7 +50,7 @@ class DiContainersCacheGenerator implements IGenerator
 			));
 
 			$configurator = clone $this->configurator;
-			$configurator->addParameters($parameters);
+			$configurator->addStaticParameters($parameters);
 			$configurator->loadContainer();
 		}
 

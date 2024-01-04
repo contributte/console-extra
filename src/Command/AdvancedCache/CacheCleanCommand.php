@@ -3,7 +3,7 @@
 namespace Contributte\Console\Extra\Command\AdvancedCache;
 
 use Contributte\Console\Extra\Cache\Cleaners\ICleaner;
-use Contributte\Console\Extra\Exception\Logical\InvalidArgumentException;
+use Contributte\Console\Extra\Exception\LogicalException;
 use Contributte\Console\Extra\Utils\Utils;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -61,7 +61,7 @@ class CacheCleanCommand extends Command
 
 		if (($cleanerName = $input->getOption('cleaner')) !== null) {
 			if (!is_string($cleanerName) || !isset($this->cleaners[$cleanerName])) {
-				throw new InvalidArgumentException(sprintf('Cannot run undefined cleaner "%s"', Utils::stringify($cleanerName)));
+				throw new LogicalException(sprintf('Cannot run undefined cleaner "%s"', Utils::stringify($cleanerName)));
 			}
 
 			$this->cleaners[$cleanerName]->clean($input, $output);

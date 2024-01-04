@@ -2,10 +2,11 @@
 
 namespace Contributte\Console\Extra\Command\Router;
 
+use Contributte\Console\Extra\Exception\LogicalException;
 use Nette\Application\Routers\Route;
 use Nette\Application\Routers\RouteList;
-use Nette\Application\Routers\SimpleRouter;
 use Nette\Routing\Router;
+use stdClass;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\Table;
@@ -41,7 +42,7 @@ final class RouterDumpCommand extends Command
 	}
 
 	/**
-	 * @return mixed[]
+	 * @return array<mixed>
 	 */
 	protected function createRows(): array
 	{
@@ -49,32 +50,58 @@ final class RouterDumpCommand extends Command
 	}
 
 	/**
-	 * @return mixed[]|object
+	 * @return array<mixed>
 	 */
-	protected function analyse(Router $router, ?string $module = null): array|object
+	protected function analyse(Router $router, ?string $module = null): array
 	{
 		if ($router instanceof RouteList) {
-			$routes = [];
-
-			foreach ($router as $subRouter) {
-				$route = $this->analyse($subRouter, $module . $router->getModule());
-
-				if (is_array($route)) {
-					$routes = array_merge($routes, $route);
-				} else {
-					$routes[] = (array) $route;
-				}
-			}
-
-			return $routes;
+			$routes = $this->analyseRouteList($router, $module);
+		} elseif ($router instanceof Route) {
+			$routes = [(array) $this->analyseRoute($router, $module)];
 		} else {
-			return (object) [
-				'mask' => $router instanceof Route ? $router->getMask() : null,
-				'module' => rtrim((string) $module, ':'),
-				'defaults' => $router instanceof Route || $router instanceof SimpleRouter ? $this->analyseDefaults($router->getDefaults()) : null,
-				'class' => $router::class,
-			];
+			throw new LogicalException(sprintf('Router "%s" is not supported', $router::class));
 		}
+
+		return $routes;
+	}
+
+	/**
+	 * @return array<mixed>
+	 */
+	protected function analyseRouteList(RouteList $router, ?string $module = null): array
+	{
+		$routes = [];
+
+		foreach ($router->getRouters() as $subRouter) {
+			if ($subRouter instanceof RouteList) {
+				$routes = array_merge(
+					$routes,
+					$this->analyseRouteList($subRouter, $module . $router->getModule())
+				);
+			} elseif ($subRouter instanceof Route) {
+				$routes = array_merge(
+					$routes,
+					[(array) $this->analyseRoute($subRouter, $module . $router->getModule())]
+				);
+			} else {
+				throw new LogicalException(sprintf('Router "%s" is not supported', $router::class));
+			}
+		}
+
+		return $routes;
+	}
+
+	/**
+	 * @return stdClass
+	 */
+	protected function analyseRoute(Route $router, ?string $module = null): object
+	{
+		return (object) [
+			'mask' => $router->getMask(),
+			'module' => rtrim((string) $module, ':'),
+			'defaults' => $this->analyseDefaults($router->getDefaults()),
+			'class' => $router::class,
+		];
 	}
 
 	/**

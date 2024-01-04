@@ -2,6 +2,7 @@
 
 namespace Contributte\Console\Extra\Command\Security;
 
+use Contributte\Console\Extra\Utils\Utils;
 use Nette\Security\Passwords;
 use Nette\Utils\Random;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -43,9 +44,9 @@ class SecurityPasswordCommand extends Command
 
 		if ($input->getArgument('password') !== null) {
 			// Generate one password
-			$password = $input->getArgument('password');
+			$password = Utils::stringify($input->getArgument('password'));
 			$style->comment('Password given');
-			$encrypted = $this->passwords->hash(strval($password));
+			$encrypted = $this->passwords->hash($password);
 			$style->success(sprintf('Hashed password: %s', $encrypted));
 
 			return 0;
@@ -53,17 +54,18 @@ class SecurityPasswordCommand extends Command
 			// Generate more passwords
 			$table = new Table($output);
 			$table->setHeaders(['ID', 'Generated random password']);
+			$count = Utils::numerize($input->getOption('count'));
 
-			for ($i = 1; $i <= $input->getOption('count'); $i++) {
+			for ($i = 1; $i <= $count; $i++) {
 				$table->addRow([$i, $this->passwords->hash(sha1(Random::generate(50) . time() . random_bytes(20)))]);
 
-				if ($i !== intval($input->getOption('count'))) {
+				if ($i !== $count) {
 					$table->addRow(new TableSeparator());
 				}
 			}
 
 			$table->render();
-			$style->success(sprintf('Total generated and hashed passwords %d.', intval($input->getOption('count'))));
+			$style->success(sprintf('Total generated and hashed passwords %d.', $count));
 
 			return 0;
 		}

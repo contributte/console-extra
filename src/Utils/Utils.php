@@ -2,6 +2,8 @@
 
 namespace Contributte\Console\Extra\Utils;
 
+use Contributte\Console\Extra\Exception\LogicalException;
+
 class Utils
 {
 
@@ -11,7 +13,20 @@ class Utils
 			return implode('|', $input);
 		}
 
-		return strval($input);
+		if (is_scalar($input)) {
+			return (string) $input;
+		}
+
+		throw new LogicalException(sprintf('Cannot stringify %s', gettype($input)));
+	}
+
+	public static function numerize(mixed $input): int
+	{
+		if (is_scalar($input)) {
+			return (int) $input;
+		}
+
+		throw new LogicalException(sprintf('Cannot numerize %s', gettype($input)));
 	}
 
 }
