@@ -18,13 +18,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 class BackupCommand extends Command
 {
 
-	private string $backupPath;
-
-	public function __construct(string $backupPath = '')
+	public function __construct(
+		private readonly string $backupPath = '',
+	)
 	{
 		parent::__construct();
-
-		$this->backupPath = $backupPath;
 	}
 
 	protected function configure(): void

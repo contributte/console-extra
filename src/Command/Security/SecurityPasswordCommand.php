@@ -22,13 +22,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class SecurityPasswordCommand extends Command
 {
 
-	private Passwords $passwords;
-
-	public function __construct(Passwords $passwords)
+	public function __construct(
+		private readonly Passwords $passwords,
+	)
 	{
 		parent::__construct();
-
-		$this->passwords = $passwords;
 	}
 
 	protected function configure(): void

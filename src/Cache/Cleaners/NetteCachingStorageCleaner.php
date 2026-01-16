@@ -10,15 +10,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class NetteCachingStorageCleaner implements ICleaner
 {
 
-	/** @var Storage[] */
-	private array $storages;
-
 	/**
 	 * @param Storage[] $storages
 	 */
-	public function __construct(array $storages)
+	public function __construct(
+		private readonly array $storages,
+	)
 	{
-		$this->storages = $storages;
 	}
 
 	public function getDescription(): string

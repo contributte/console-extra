@@ -20,13 +20,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class RouterDumpCommand extends Command
 {
 
-	private Router $router;
-
-	public function __construct(Router $router)
+	public function __construct(
+		private readonly Router $router,
+	)
 	{
 		parent::__construct();
-
-		$this->router = $router;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int

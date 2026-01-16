@@ -13,15 +13,13 @@ use stdClass;
 abstract class AbstractCompilerExtension extends CompilerExtension
 {
 
-	protected bool $cliMode;
-
-	public function __construct(bool $cliMode = false)
+	public function __construct(
+		protected bool $cliMode = false,
+	)
 	{
 		if (func_num_args() <= 0) {
 			throw new LogicalException(sprintf('Provide CLI mode, e.q. %s(%%consoleMode%%).', static::class));
 		}
-
-		$this->cliMode = $cliMode;
 	}
 
 }

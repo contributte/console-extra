@@ -9,20 +9,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 class LocalFilesystemCleaner implements ICleaner
 {
 
-	/** @var string[] */
-	private array $directories;
-
-	/** @var string[] */
-	private array $ignored;
-
 	/**
 	 * @param string[] $directories
 	 * @param string[] $ignored
 	 */
-	public function __construct(array $directories, array $ignored = [])
+	public function __construct(
+		private readonly array $directories,
+		private readonly array $ignored = [],
+	)
 	{
-		$this->directories = $directories;
-		$this->ignored = $ignored;
 	}
 
 	public function getDescription(): string

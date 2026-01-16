@@ -7,6 +7,10 @@ use Nette\PhpGenerator\ClassType;
 use Nette\Schema\Expect;
 use Nette\Schema\Schema;
 
+/**
+ * @property-read array<string, false|array<mixed>|object|null> $config
+ * @method array<string, false|array<mixed>|object|null> getConfig()
+ */
 final class ConsoleBridgesExtension extends AbstractCompilerExtension
 {
 
@@ -51,7 +55,6 @@ final class ConsoleBridgesExtension extends AbstractCompilerExtension
 			return;
 		}
 
-		/** @var mixed[] $config */
 		$config = $this->config;
 
 		/** @var false|array<mixed>|object|null $bridgeConfig */

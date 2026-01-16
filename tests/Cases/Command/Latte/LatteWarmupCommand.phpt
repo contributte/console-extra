@@ -30,7 +30,7 @@ Toolkit::test(function (): void {
 	);
 
 	$application = new Application();
-	$application->add(new LatteWarmupCommand(
+	$application->addCommand(new LatteWarmupCommand(
 		$templateFactory,
 		[__DIR__ . '/../../../Fixtures/Latte']
 	));

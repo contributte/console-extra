@@ -12,26 +12,17 @@ use Throwable;
 class LatteTemplatesCacheGenerator implements IGenerator
 {
 
-	private TemplateFactory $templateFactory;
-
-	/** @var string[] */
-	private array $dirs;
-
-	/** @var string[] */
-	private array $excludeDirs;
-
-	private ?string $rootDir = null;
-
 	/**
 	 * @param string[] $dirs
 	 * @param string[] $excludeDirs
 	 */
-	public function __construct(TemplateFactory $templateFactory, array $dirs, array $excludeDirs = [], ?string $rootDir = null)
+	public function __construct(
+		private readonly TemplateFactory $templateFactory,
+		private readonly array $dirs,
+		private readonly array $excludeDirs = [],
+		private readonly ?string $rootDir = null,
+	)
 	{
-		$this->templateFactory = $templateFactory;
-		$this->dirs = $dirs;
-		$this->excludeDirs = $excludeDirs;
-		$this->rootDir = $rootDir;
 	}
 
 	public function getDescription(): string

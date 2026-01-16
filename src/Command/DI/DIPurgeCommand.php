@@ -16,17 +16,14 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class DIPurgeCommand extends Command
 {
 
-	/** @var string[] */
-	private array $dirs;
-
 	/**
 	 * @param string[] $dirs
 	 */
-	public function __construct(array $dirs)
+	public function __construct(
+		private readonly array $dirs,
+	)
 	{
 		parent::__construct();
-
-		$this->dirs = $dirs;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int

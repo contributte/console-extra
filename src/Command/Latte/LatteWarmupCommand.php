@@ -5,7 +5,6 @@ namespace Contributte\Console\Extra\Command\Latte;
 use Nette\Bridges\ApplicationLatte\Template;
 use Nette\Bridges\ApplicationLatte\TemplateFactory;
 use Nette\Utils\Finder;
-use SplFileInfo;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,25 +19,17 @@ use Throwable;
 class LatteWarmupCommand extends Command
 {
 
-	private TemplateFactory $templateFactory;
-
-	/** @var string[] */
-	private array $dirs;
-
-	/** @var string[] */
-	private array $excludeDirs;
-
 	/**
 	 * @param string[] $dirs
 	 * @param string[] $excludeDirs
 	 */
-	public function __construct(TemplateFactory $templateFactory, array $dirs, array $excludeDirs = [])
+	public function __construct(
+		private readonly TemplateFactory $templateFactory,
+		private readonly array $dirs,
+		private readonly array $excludeDirs = [],
+	)
 	{
 		parent::__construct();
-
-		$this->templateFactory = $templateFactory;
-		$this->dirs = $dirs;
-		$this->excludeDirs = $excludeDirs;
 	}
 
 	protected function execute(InputInterface $input, OutputInterface $output): int
@@ -58,7 +49,6 @@ class LatteWarmupCommand extends Command
 
 		$stats = ['ok' => 0, 'error' => 0];
 
-		/** @var SplFileInfo $file */
 		foreach ($finder as $file) {
 			try {
 				$latte->warmupCache($file->getPathname());
