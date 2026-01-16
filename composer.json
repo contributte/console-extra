@@ -22,7 +22,7 @@
   },
   "require-dev": {
     "contributte/console": "^0.11.0 || ^0.12.0",
-    "contributte/phpstan": "^0.1.0",
+    "contributte/phpstan": "^0.3.1",
     "contributte/qa": "^0.4.0",
     "contributte/tester": "^0.4.0",
     "latte/latte": "^3.0.12",

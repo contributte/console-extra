@@ -20,17 +20,14 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CacheCleanCommand extends Command
 {
 
-	/** @var ICleaner[] */
-	private array $cleaners = [];
-
 	/**
 	 * @param ICleaner[] $cleaners
 	 */
-	public function __construct(array $cleaners)
+	public function __construct(
+		private readonly array $cleaners = [],
+	)
 	{
 		parent::__construct();
-
-		$this->cleaners = $cleaners;
 	}
 
 	protected function configure(): void

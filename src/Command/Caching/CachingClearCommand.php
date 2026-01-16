@@ -19,13 +19,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CachingClearCommand extends Command
 {
 
-	private Storage $storage;
-
-	public function __construct(Storage $storage)
+	public function __construct(
+		private readonly Storage $storage,
+	)
 	{
 		parent::__construct();
-
-		$this->storage = $storage;
 	}
 
 	protected function configure(): void

@@ -18,17 +18,14 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 class CachePurgeCommand extends Command
 {
 
-	/** @var string[] */
-	private array $dirs;
-
 	/**
 	 * @param string[] $dirs
 	 */
-	public function __construct(array $dirs)
+	public function __construct(
+		private readonly array $dirs,
+	)
 	{
 		parent::__construct();
-
-		$this->dirs = $dirs;
 	}
 
 	protected function configure(): void

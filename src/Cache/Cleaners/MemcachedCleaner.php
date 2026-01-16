@@ -10,15 +10,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MemcachedCleaner implements ICleaner
 {
 
-	/** @var Memcached[]|Memcache[] */
-	private array $memcaches;
-
 	/**
 	 * @param Memcached[]|Memcache[] $memcaches
 	 */
-	public function __construct(array $memcaches)
+	public function __construct(
+		private readonly array $memcaches,
+	)
 	{
-		$this->memcaches = $memcaches;
 	}
 
 	public function getDescription(): string

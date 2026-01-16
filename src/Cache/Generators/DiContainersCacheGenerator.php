@@ -9,18 +9,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DiContainersCacheGenerator implements IGenerator
 {
 
-	/** @var mixed[] */
-	private array $config;
-
-	private Configurator $configurator;
-
 	/**
 	 * @param mixed[] $config
 	 */
-	public function __construct(array $config, Configurator $configurator)
+	public function __construct(
+		private readonly array $config,
+		private readonly Configurator $configurator,
+	)
 	{
-		$this->config = $config;
-		$this->configurator = $configurator;
 	}
 
 	public function getDescription(): string
