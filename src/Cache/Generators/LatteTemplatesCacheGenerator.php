@@ -13,8 +13,8 @@ class LatteTemplatesCacheGenerator implements IGenerator
 {
 
 	/**
-	 * @param string[] $dirs
-	 * @param string[] $excludeDirs
+	 * @param list<string> $dirs
+	 * @param list<string> $excludeDirs
 	 */
 	public function __construct(
 		private readonly TemplateFactory $templateFactory,
