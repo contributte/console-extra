@@ -103,31 +103,31 @@ final class RouterDumpCommand extends Command
 	}
 
 	/**
-	 * @param string[] $defaults
+	 * @param array<string, mixed> $defaults
 	 */
 	protected function analyseDefaults(array $defaults): string
 	{
 		$primary = [];
 
 		if (isset($defaults['presenter'])) {
-			$primary[] = $defaults['presenter'];
+			$primary[] = $this->stringifyDefault($defaults['presenter']);
 			unset($defaults['presenter']);
 		}
 
 		if (isset($defaults['action'])) {
-			$primary[] = $defaults['action'];
+			$primary[] = $this->stringifyDefault($defaults['action']);
 			unset($defaults['action']);
 		}
 
 		if (isset($defaults['id'])) {
-			$primary[] = $defaults['id'];
+			$primary[] = $this->stringifyDefault($defaults['id']);
 			unset($defaults['id']);
 		}
 
 		$secondary = [];
 
 		foreach ($defaults as $key => $value) {
-			$secondary[] = sprintf('%s=>%s', $key, $value);
+			$secondary[] = sprintf('%s=>%s', $key, $this->stringifyDefault($value));
 		}
 
 		if ($secondary !== []) {
@@ -135,6 +135,19 @@ final class RouterDumpCommand extends Command
 		}
 
 		return implode(':', $primary);
+	}
+
+	protected function stringifyDefault(mixed $value): string
+	{
+		if (is_string($value)) {
+			return $value;
+		}
+
+		if (is_scalar($value) || $value === null) {
+			return var_export($value, true);
+		}
+
+		return get_debug_type($value);
 	}
 
 }
