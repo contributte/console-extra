@@ -2,7 +2,7 @@
 
 <p align=center>
   <a href="https://github.com/contributte/console-extra/actions"><img src="https://badgen.net/github/checks/contributte/console-extra/master?cache=300"></a>
-  <a href="https://coveralls.io/r/contributte/console-extra"><img src="https://badgen.net/coveralls/c/github/contributte/console-extra?cache=300"></a>
+  <a href="https://codecov.io/gh/contributte/console-extra"><img src="https://badgen.net/codecov/c/github/contributte/console-extra"></a>
   <a href="https://packagist.org/packages/contributte/console-extra"><img src="https://badgen.net/packagist/dm/contributte/console-extra"></a>
   <a href="https://packagist.org/packages/contributte/console-extra"><img src="https://badgen.net/packagist/v/contributte/console-extra"></a>
 </p>
